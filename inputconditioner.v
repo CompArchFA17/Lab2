@@ -21,8 +21,9 @@ output reg  negativeedge    // 1 clk pulse at falling edge of conditioned
     reg[counterwidth-1:0] counter = 0;
     reg synchronizer0 = 0;
     reg synchronizer1 = 0;		// you need 2 synchronizers so you can calculate + and - edge 
-    
+  
 always @(posedge clk ) begin
+//$display ("began");
     if(conditioned == synchronizer1)
         counter <= 0;
     else begin
@@ -31,19 +32,27 @@ always @(posedge clk ) begin
             conditioned <= synchronizer1;
 			if(conditioned == 0 & synchronizer1 ==1) begin
 				positiveedge <= 1;	
+				$display("positive edge gotten"); 
 			end	
 			if(conditioned == 1 & synchronizer1 ==0) begin
 				negativeedge <= 1; 
+				$display("negative edge gotten"); 
 			end 			
         end
         else 
             counter <= counter+1;
+			$display("counter iterated"); 
     end
+	
+	if(positiveedge == 1)
+		positiveedge <= 0;	
+	if(negativeedge == 1)
+		negativeedge <= 0;	
 
     synchronizer0 <= noisysignal;  		// these happen every time there's a + clk edge 
     synchronizer1 <= synchronizer0;
-	positiveedge <= 0;	
-	negativeedge <= 0;	
+	//positiveedge <= 0;	
+	//negativeedge <= 0;	
 end
 
 endmodule
