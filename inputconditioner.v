@@ -20,13 +20,13 @@ output reg  negativeedge    // 1 clk pulse at falling edge of conditioned
     
     reg[counterwidth-1:0] counter = 0;
     reg synchronizer0 = 0;
-    reg synchronizer1 = 0;
+    reg synchronizer1 = 0;		// you need 2 synchronizers so you can calculate + and - edge 
     
 always @(posedge clk ) begin
     if(conditioned == synchronizer1)
         counter <= 0;
     else begin
-        if( counter == waittime) begin
+        if( counter == waittime) begin 
             counter <= 0;
             conditioned <= synchronizer1;
 			if(conditioned == 0 & synchronizer1 ==1) begin
