@@ -1,0 +1,40 @@
+﻿Prava Dhulipalla, Ariana Olson
+Lab 2 Work Plan
+October 23, 2017
+
+
+Input Conditioning (6 hours - Finish by 10/24/17)
+* Complete inputconditioner.v        (1 hour)
+* Test bench demonstrates the 3 functions of the input conditioner (2.5 hours)
+* Test script executes testbench and makes gtkwave file (0.75 hours)
+* Circuit diagram (1 hour)
+* Analysis of max input glitch length at 50MHz that will be suppressed by a waittime of 10 (0.75 hours)
+Shift Register (4.25 hours - Finish by 10/24/17)
+* Complete shiftregister.v (1.5 hours)
+* Test bench demonstrating both modes of operation for shift register (2 hours)
+* Description of test bench strategy (0.75 hours)
+Midpoint Check-in (4 hours - Finish by 10/24/17)
+* Top-level module of given structure (0.5 hours)
+* Loading to FPGA (0.75 hours)
+   * Writing wrapper class (0.75 hours)
+* Design a test sequence demonstrating successful operation of this portion of lab (1 hour)
+   * Write a short, written description (0.75 hours)
+* Demonstrate to a Ninja (0.25 hours)
+SPI Memory (3.5 hours - Finish by 10/27/17)
+* Design and implement Finite State Machine (2.5 hours)
+* Implement SPI memory meeting specifications defined by waveform (1 hour)
+SPI Memory Testing (3.5 hours - Finish by 10/28/17)
+* Create a test bench (2 hours)
+* Have detailed analysis of testing strategy in report (1.5 hours)
+* External testing with Arduino (optional) (+ 1.5 hours if we decide to pursue)
+Debugging (4+ hours - Finish by 11/1/17)
+* Make appointments with Ben and/or NINJAS
+Make it Pretty (1.5 hours - Finish by 11/1/17)
+* Makefile, run test script (0.5 hours)
+* Clean code and comments (1 hours)
+Final Report (0.25 hours - Finish by 11/2/17)
+* All analysis and information requested in previous sections (should already be done)
+* Reflection of work plan vs reality (0.25 hours)
+
+
+Total time spent: 27.5 hours
