@@ -24,12 +24,17 @@ reg [width-1:0]      shiftregistermem;
 // and then use the idea behind the behavioral flip flop below  
 // so that you can pass things along as needed. 
 
+// confusion points: I don't know what the peripheral clock edge does. 
+// The assignement says that the bits advance when the periperal clock 
+// has an edge, but I don't know why you don't use the normal clock? 
+
 // from the assignment: 
 // " Each of these four behaviors can be implemented in one or two lines of behavioral Verilog. 
 // You may want to look at Verilog's {} concatenate syntax for implementing the serial behavior. "
 
 always @(posedge clk) begin
-    // Your Code Here
+    peripheralCLkEdge <= clk; 
+
 end
 
 always @(posedge periperalClkEdge)
