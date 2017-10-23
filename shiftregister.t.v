@@ -2,6 +2,8 @@
 // Shift Register test bench
 //------------------------------------------------------------------------
 
+`include "shiftregister.v"
+
 module testshiftregister();
 
     reg             clk;
@@ -11,7 +13,7 @@ module testshiftregister();
     wire            serialDataOut;
     reg[7:0]        parallelDataIn;
     reg             serialDataIn; 
-    
+
     // Instantiate with parameter width = 8
     shiftregister #(8) dut(.clk(clk), 
     		           .peripheralClkEdge(peripheralClkEdge),
@@ -20,6 +22,10 @@ module testshiftregister();
     		           .serialDataIn(serialDataIn), 
     		           .parallelDataOut(parallelDataOut), 
     		           .serialDataOut(serialDataOut));
+
+
+    initial clk=0;
+    always #10 clk=!clk;    // 50MHz Clock  
     
     initial begin
     	// Your Test Code
