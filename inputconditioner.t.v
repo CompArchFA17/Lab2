@@ -9,7 +9,7 @@ module testConditioner();
     wire conditioned;
     wire rising;
     wire falling;
-    
+
     inputconditioner dut(.clk(clk),
     			 .noisysignal(pin),
 			 .conditioned(conditioned),
@@ -20,10 +20,14 @@ module testConditioner();
     // Generate clock (50MHz)
     initial clk=0;
     always #10 clk=!clk;    // 50MHz Clock
-    
+
     initial begin
     // Your Test Code
     // Be sure to test each of the three conditioner functions:
     // Synchronization, Debouncing, Edge Detection
+
     
+
+    end
+
 endmodule
