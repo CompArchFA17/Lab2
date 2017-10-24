@@ -1,0 +1,143 @@
+$date
+	Tue Oct 24 18:10:09 2017
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module flipflop $end
+$var wire 1 ! clk $end
+$var wire 1 " d $end
+$var wire 1 # wrenable $end
+$var reg 1 $ q $end
+$upscope $end
+$scope module testshiftregister $end
+$var wire 8 % parallelDataOut [7:0] $end
+$var wire 1 & serialDataOut $end
+$var reg 1 ' clk $end
+$var reg 8 ( parallelDataIn [7:0] $end
+$var reg 1 ) parallelLoad $end
+$var reg 1 * peripheralClkEdge $end
+$var reg 1 + serialDataIn $end
+$scope module dut $end
+$var wire 1 , clk $end
+$var wire 8 - parallelDataIn [7:0] $end
+$var wire 1 . parallelLoad $end
+$var wire 1 / peripheralClkEdge $end
+$var wire 1 0 serialDataIn $end
+$var reg 8 1 parallelDataOut [7:0] $end
+$var reg 1 2 serialDataOut $end
+$var reg 8 3 shiftregistermem [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx 3
+x2
+bx 1
+x0
+x/
+1.
+b11111 -
+0,
+x+
+x*
+1)
+b11111 (
+0'
+x&
+bx %
+x$
+z#
+z"
+z!
+$end
+#10
+b11111 3
+1'
+1,
+#20
+0'
+0,
+b111101 (
+b111101 -
+#30
+b11111 1
+b11111 %
+02
+0&
+b111101 3
+1'
+1,
+#40
+0'
+0,
+b10011110 (
+b10011110 -
+#50
+b111101 1
+b111101 %
+b10011110 3
+1'
+1,
+#60
+0'
+0,
+1+
+10
+1*
+1/
+0)
+0.
+#70
+b10011110 1
+b10011110 %
+b111101 3
+1'
+1,
+#80
+0'
+0,
+0*
+0/
+#90
+b111101 1
+b111101 %
+1'
+1,
+#100
+0'
+0,
+0+
+00
+1*
+1/
+#110
+b1111010 3
+1'
+1,
+#120
+0'
+0,
+0*
+0/
+#130
+b1111010 1
+b1111010 %
+1'
+1,
+#140
+0'
+0,
+1*
+1/
+#150
+b11110100 3
+1'
+1,
+#160
+0'
+0,

@@ -14,29 +14,40 @@ input               peripheralClkEdge,  // Edge indicator
 input               parallelLoad,       // 1 = Load shift reg with parallelDataIn
 input  [width-1:0]  parallelDataIn,     // Load shift reg in parallel
 input               serialDataIn,       // Load shift reg serially
-output [width-1:0]  parallelDataOut,    // Shift reg data contents
-output              serialDataOut       // Positive edge synchronized
+output reg [width-1:0]  parallelDataOut,    // Shift reg data contents
+output reg          serialDataOut       // Positive edge synchronized
 );
 
 reg [width-1:0]      shiftregistermem;
 
+//wire serialDataOut;
+
 always @(posedge clk) begin
     
-if(parallelLoad ==1) begin  // do thisfor parallel data in
-	serialDataOut <= parallelDataIn[8];
-	serialDataOut <= parallelDataIn[7];
-	serialDataOut <= parallelDataIn[6];
-	serialDataOut <= parallelDataIn[5];
-	serialDataOut <= parallelDataIn[4];
-	serialDataOut <= parallelDataIn[3];
-	serialDataOut <= parallelDataIn[2];
-	serialDataOut <= parallelDataIn[1];
-	serialDataOut <= parallelDataIn[0];
-end
+	if(parallelLoad ==1) begin  // do thisfor parallel data in
 
-else begin    // do this for serial data in
-	// serial stuff goes here 
-end
+		shiftregistermem <= parallelDataIn;
+		serialDataOut <= shiftregistermem[width-1];
+		parallelDataOut <= shiftregistermem;
+
+	end
+
+	if(parallelLoad ==0) begin   // We are deciding that parallelLoad will win. This takes priority over serial shift - peripheralClkEdge only matters if parallelLoad = 0.
+		if (peripheralClkEdge == 1) begin
+
+			shiftregistermem[1] <= shiftregistermem[0];
+			shiftregistermem[2] <= shiftregistermem[1];
+			shiftregistermem[3] <= shiftregistermem[2];
+			shiftregistermem[4] <= shiftregistermem[3];
+			shiftregistermem[5] <= shiftregistermem[4];
+			shiftregistermem[6] <= shiftregistermem[5];
+			shiftregistermem[7] <= shiftregistermem[6];
+			shiftregistermem[0] <= serialDataIn;
+			//shiftregistermem <= {{shiftregistermem[width-2:0]}, {serialDataIn}};
+		end
+		parallelDataOut <= shiftregistermem;
+
+	end
 
 end
 
