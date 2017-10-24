@@ -1,4 +1,4 @@
-all: input
+all: inputconditioner
 
-input: inputconditioner.t.v inputconditioner.v
-	iverilog -Wall -o input inputconditioner.t.v
+inputconditioner: inputconditioner.t.v inputconditioner.v
+	iverilog -Wall -o inputconditioner inputconditioner.t.v
