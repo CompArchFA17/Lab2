@@ -11,7 +11,7 @@ module midpoint
 	input 				switch0,
 	input				switch1,
 	input [7:0]			parallelIn,
-	output [7:0]		ledState
+	output [7:0]			ledState
 );
 
 	// Input Conditioner for Button 0
