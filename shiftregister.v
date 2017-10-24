@@ -28,8 +28,10 @@ module shiftregister #(parameter width = 8) (
 
 	// when peripheral clock has an edge, shift register advances one position and serialIn is loaded into LSB
 	always @(peripheralClkEdge) begin
-		shiftregistermem <= parallelDataOut;
-		parallelDataOut <= {shiftregistermem[width-2:0], serialDataIn};
+		if (!parallelLoad) begin
+			shiftregistermem <= parallelDataOut;
+			parallelDataOut <= {shiftregistermem[width-2:0], serialDataIn};
+		end
 	end
 
 endmodule

@@ -40,7 +40,7 @@ module testshiftregister();
         serialDataIn = 1;   #50
         peripheralClkEdge = 1; #10
         peripheralClkEdge = 0;
-        serialDataIn = 1;   #50
+        serialDataIn = 0;   #50
         peripheralClkEdge = 1; #10
         peripheralClkEdge = 0;
         serialDataIn = 1;   #50
@@ -57,18 +57,63 @@ module testshiftregister();
         peripheralClkEdge = 0;
         serialDataIn = 1;   #50
 
-        $displayb(parallelDataOut);
+        if (parallelDataOut != 8'b01010101) begin
+            $display("Test case 1 failed: parallel out does not match serial in at time %t", $time);
+            $display("parallelDataOut: %b", parallelDataOut);
+        end
+
+        parallelLoad = 1; 
+        parallelDataIn = 8'b00000000;
+        peripheralClkEdge = 0;
+        serialDataIn = 0;   #50
+        peripheralClkEdge = 1; #10
+        peripheralClkEdge = 0;
+        serialDataIn = 1;   #50
+        peripheralClkEdge = 1; #10
+        peripheralClkEdge = 0;
+        serialDataIn = 0;   #50
+        peripheralClkEdge = 1; #10
+        peripheralClkEdge = 0;
+        serialDataIn = 1;   #50
+        peripheralClkEdge = 1; #10
+        peripheralClkEdge = 0;
+        serialDataIn = 0;   #50 
+        peripheralClkEdge = 1; #10
+        peripheralClkEdge = 0;      
+        serialDataIn = 1;   #50 
+        peripheralClkEdge = 1; #10
+        peripheralClkEdge = 0;       
+        serialDataIn = 0;   #50
+        peripheralClkEdge = 1; #10
+        peripheralClkEdge = 0;
+        serialDataIn = 1;   #50
+
+        if (parallelDataOut != parallelDataIn) begin
+            $display("Test case 2 failed: parallelDataIn does not match parallelDataOut despite enabled parallelLoad %t", $time);
+            $display("parallelDataOut: %b", parallelDataOut);
+        end
 
         $finish();
     end
 
-    // Basic test for Parallel In, Serial Out
+    // Basic test for Parallel In, Serial Out.
     initial begin
 
         parallelLoad = 1;
         parallelDataIn = 8'b01010101; #50
 
-        $display(serialDataOut);
+        if (serialDataOut != 0) begin
+            $display("Test case 3 failed: serial out does not match parallel in at time %t", $time);
+            $display("serialDataOut: %b", serialDataOut);
+        end
+
+        parallelLoad = 0;
+        parallelDataIn = 8'b11010101; #50
+
+        if (serialDataOut == 1) begin
+            $display("Test case 4 failed: serialDataOut changed without parallelLoad enabled %t", $time);
+            $display("serialDataOut: %b", serialDataOut);
+        end
 
     end
 
