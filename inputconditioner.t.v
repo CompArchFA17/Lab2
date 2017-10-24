@@ -33,10 +33,29 @@ module testConditioner();
         pin=0; #10
         pin=1; #10
         pin=1; #10
-        pin=1;
+        pin=1; #10
+        pin=1; #10
+        pin=1; #10
+        pin=1; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        pin=0; #10
+        $finish;
     end
 
-    $finish
     // Your Test Code
     // Be sure to test each of the three conditioner functions:
     // Synchronization, Debouncing, Edge Detection
