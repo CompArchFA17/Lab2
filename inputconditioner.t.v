@@ -25,8 +25,28 @@ module testConditioner();
     always #10 clk = !clk;    // 50MHz Clock
 
     initial begin
-        // Input Debouncing Tests
-        // Test Case 1: Noisy high input signal
+    //Test case 1: Input Synchronization (synchronizes signal with the internal clock)
+        pin = 0; #5
+        if (conditioned == 0 && clk == 0)
+            $display("Test Case 1a failed: pin changed outside of clock cycle %b", clk);
+
+        pin = 1; #5
+        if (conditioned == 1 && clk == 0)
+            $display("Test Case 1a failed: pin changed outside of clock cycle");
+    
+        pin = 0; #15
+        if (conditioned != 0 && clk == 1) 
+            $display("Test Case 1b failed: pin not changed inside of clock cycle");
+  
+        pin = 1; #15
+        if (conditioned != 1 && clk == 1)
+            $display("Test Case 1c failed: pin not changed inside of clock cycle");
+    end
+
+
+    // Test Case 2 + 3: Debouncing
+    initial begin
+        // Test Case 2: Noisy high input signal
         pin = 0; #300
         pin = 1; #5
         pin = 0; #5
@@ -45,7 +65,7 @@ module testConditioner();
             $display("Test Case X failed. conditioned output is not high");
         end
 
-        // Test Case 2: Noisy low input signal
+        // Test Case 3: Noisy low input signal
         pin = 0; #5
         pin = 1; #5
         pin = 0; #5
@@ -63,8 +83,8 @@ module testConditioner();
             $display("Test Case X failed. conditioned output is not low");
         end
     end
-    
-    // Edge Detection Tests
+
+    // Test Case 4 + 5: Edge Detection
     initial begin
         $dumpfile("input_conditioner.vcd");
         $dumpvars();
@@ -79,16 +99,18 @@ module testConditioner();
         $finish();
     end
 
-    // Test Case 3: Positive Edge Detection
+    // Test Case 4: Positive Edge Detection
+
     always @(posedge conditioned) begin
         #5;
-        if (rising != 1) begin
+        if (rising != 1 && $time > 100) begin
             $display("Test Case 3 failed: rising edge not detected at time %t", $time);
             $display("rising: %b", rising);
         end
     end
     
-    // Test Case 4: Negative Edge Detection
+    // Test Case 5: Negative Edge Detection
+
     always @(negedge conditioned) begin
         #5;
         if (falling != 1 && $time > 100) begin
@@ -96,4 +118,5 @@ module testConditioner();
             $display("falling: %b", falling);
         end
     end
+
 endmodule
