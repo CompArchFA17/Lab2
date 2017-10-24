@@ -24,9 +24,10 @@ module testshiftregister();
     		           .serialDataOut(serialDataOut));
 
 
-    initial clk=0;
-    always #10 clk=!clk;    // 50MHz Clock  
-    
+initial clk=0;
+always #10 clk=!clk;    // 50MHz Clock  
+
+
     initial begin
 	
 $dumpfile("shiftregister.vcd");
