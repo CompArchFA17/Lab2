@@ -1,0 +1,8 @@
+# Ignore compiled binaries
+*
+!/**/
+!*.*
+!makefile
+
+# Ignore gtkwave files
+*.vcd
