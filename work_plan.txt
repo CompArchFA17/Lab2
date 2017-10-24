@@ -1,0 +1,7 @@
+Input Conditioner First Pass - done 10/24 - 2 hours
+Shift Register First Pass - done 10/24 - 2 hours
+Implement Midpoint on FPGA - done 10/24 - 2 hours
+Test Benches for Input Conditioner and Shift Register - done 10/27 - 2 hours
+SPI Memory First Pass - done 10/29 - 1 hour
+Final SPI Memory Testing - done 10/30 - 1.5 hours
+Final Report - done 10/31 - 2 hours
