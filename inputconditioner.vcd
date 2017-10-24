@@ -1,0 +1,92 @@
+$date
+	Tue Oct 24 16:26:27 2017
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module testConditioner $end
+$var wire 1 ! conditioned $end
+$var wire 1 " falling $end
+$var wire 1 # rising $end
+$var reg 1 $ clk $end
+$var reg 1 % pin $end
+$scope module dut $end
+$var wire 1 & clk $end
+$var wire 1 ' noisysignal $end
+$var reg 1 ( conditioned $end
+$var reg 3 ) counter [2:0] $end
+$var reg 1 * negativeedge $end
+$var reg 1 + positiveedge $end
+$var reg 1 , prevconditioned $end
+$var reg 1 - synchronizer0 $end
+$var reg 1 . synchronizer1 $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0.
+0-
+0,
+x+
+x*
+b0 )
+x(
+0'
+0&
+0%
+0$
+x#
+x"
+x!
+$end
+#10
+0*
+0"
+0+
+0#
+x,
+b1 )
+1$
+1&
+#20
+0$
+0&
+#30
+b10 )
+1$
+1&
+#40
+1%
+1'
+0$
+0&
+#50
+b11 )
+0%
+0'
+1$
+1&
+#60
+1%
+1'
+0$
+0&
+#70
+1-
+0(
+0!
+b0 )
+1$
+1&
+#80
+0$
+0&
+#90
+0,
+1.
+1$
+1&
