@@ -1,3 +1,4 @@
+
 //------------------------------------------------------------------------
 // Input Conditioner test bench
 //------------------------------------------------------------------------
@@ -13,16 +14,75 @@ module testConditioner();
     wire falling;
     
     inputconditioner dut(.clk(clk),
-    		 .noisysignal(pin),
-			 .conditioned(conditioned),
-			 .positiveedge(rising),
-			 .negativeedge(falling));
+             .noisysignal(pin),
+             .conditioned(conditioned),
+             .positiveedge(rising),
+             .negativeedge(falling));
 
 
     // Generate clock (50MHz)
     initial clk = 0;
     always #10 clk =! clk;    // 50MHz Clock
+
+    // Input Debouncing Tests
+    // Test Case X: ___
+    initial begin
+        pin = 0; #300
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #300
+
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #2
+        pin = 1; #2
+        pin = 0; #300
+        $display("writing something so this compiles :P");
+    end
     
+    // Edge Detection Tests
     initial begin
         $dumpfile("input_conditioner.vcd");
         $dumpvars();
