@@ -72,7 +72,7 @@ module lab0_wrapper
 (
     input        clk,
     input  [1:0] sw,
-    input  [1:0] btn,
+    input  [2:0] btn,
     output [3:0] led
 );
 
