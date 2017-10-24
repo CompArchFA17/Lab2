@@ -27,19 +27,18 @@ output reg  negativeedge    // 1 clk pulse at falling edge of conditioned
 	    negativeedge = 1;
 	end else if (conditioned == 1 && conditioned1 == 0) begin
 	    positiveedge = 1;
-        end else if (positiveedge == 1 || negativeedge == 1) begin
+    end else if (positiveedge == 1 || negativeedge == 1) begin
             positiveedge = 0;
             negativeedge = 0;
-        end
-        if(conditioned == synchronizer1)
+    end
+    if(conditioned == synchronizer1)
             counter <= 0;
-        else begin
-            if( counter == waittime) begin
-                counter <= 0;
-                conditioned <= synchronizer1;
-            end
-            else 
-                counter <= counter+1;
+    else begin
+        if( counter == waittime) begin
+            counter <= 0;
+            conditioned <= synchronizer1;
+        end else begin
+            counter <= counter+1;
         end
         synchronizer0 <= noisysignal;
         synchronizer1 <= synchronizer0;
