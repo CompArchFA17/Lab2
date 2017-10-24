@@ -22,64 +22,46 @@ module testConditioner();
 
     // Generate clock (50MHz)
     initial clk = 0;
-    always #10 clk =! clk;    // 50MHz Clock
+    always #10 clk = !clk;    // 50MHz Clock
 
-    // Input Debouncing Tests
-    // Test Case X: ___
     initial begin
+        // Input Debouncing Tests
+        // Test Case 1: Noisy high input signal
         pin = 0; #300
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #300
+        pin = 1; #5
+        pin = 0; #5
+        pin = 1; #5
+        pin = 0; #5
+        pin = 1; #5
+        pin = 0; #5
+        pin = 1; #5
+        pin = 0; #5
+        pin = 1; #5
+        pin = 0; #5
+        pin = 1; #250
 
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #2
-        pin = 1; #2
-        pin = 0; #300
-        $display("writing something so this compiles :P");
+        // Expect the conditioned output to be high when the pin input has stabilized.
+        if (conditioned != 1) begin
+            $display("Test Case X failed. conditioned output is not high");
+        end
+
+        // Test Case 2: Noisy low input signal
+        pin = 0; #5
+        pin = 1; #5
+        pin = 0; #5
+        pin = 1; #5
+        pin = 0; #5
+        pin = 1; #5
+        pin = 0; #5
+        pin = 1; #5
+        pin = 0; #5
+        pin = 1; #5
+        pin = 0; #250
+
+        // Expect the conditioned output to be low when the pin input has stabilized.
+        if (conditioned != 0) begin
+            $display("Test Case X failed. conditioned output is not low");
+        end
     end
     
     // Edge Detection Tests
@@ -99,6 +81,7 @@ module testConditioner();
 
     // Test Case 3: Positive Edge Detection
     always @(posedge conditioned) begin
+        #5;
         if (rising != 1) begin
             $display("Test Case 3 failed: rising edge not detected at time %t", $time);
             $display("rising: %b", rising);
@@ -107,6 +90,7 @@ module testConditioner();
     
     // Test Case 4: Negative Edge Detection
     always @(negedge conditioned) begin
+        #5;
         if (falling != 1 && $time > 100) begin
             $display("Test Case 4 failed: falling edge not detected at time %t", $time);
             $display("falling: %b", falling);
