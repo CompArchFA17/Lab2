@@ -21,8 +21,21 @@ output              serialDataOut       // Positive edge synchronized
 reg [width-1:0]		shiftregistermem;
 
 always @(posedge clk) begin
-    
-if(parallelLoad == 1) begin  // do thisfor parallel data in
+// idea for serial in to parallel out: 
+// use a lookup table to send 1s to the correct flip flop, they control write enable 
+// send wrenable for the entire time that the relevant data piece is visible on the wire
+
+// idea for parallal in to serial out: 
+// us a mux to decide in order which one to output
+// mux is connected to all of the parallel data in, 
+// only outputs the one you ask for based on clock
+
+
+
+flipflop ff0(q, d, shiftregistermem, clk)
+
+
+//if(parallelLoad == 1) begin  // do thisfor parallel data in
 	shiftregistermem[1] <= parallelDataIn[1]; 
 //	shiftregistermem[2] <= parallelDataIn[1]; 
 //	parallelDataIn[3] <= parallelDataIn[2]; 
