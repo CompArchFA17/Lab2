@@ -20,6 +20,28 @@ output              serialDataOut       // Positive edge synchronized
 
 reg [width-1:0]      shiftregistermem;
 
+always @(posedge clk) begin
+    
+if(parallelLoad ==1) begin  // do thisfor parallel data in
+	serialDataOut <= parallelDataIn[8];
+	serialDataOut <= parallelDataIn[7];
+	serialDataOut <= parallelDataIn[6];
+	serialDataOut <= parallelDataIn[5];
+	serialDataOut <= parallelDataIn[4];
+	serialDataOut <= parallelDataIn[3];
+	serialDataOut <= parallelDataIn[2];
+	serialDataOut <= parallelDataIn[1];
+	serialDataOut <= parallelDataIn[0];
+end
+
+else begin    // do this for serial data in
+	// serial stuff goes here 
+end
+
+end
+
+endmodule
+
 // general thoughts: make a loop that happens width # of times, 
 // and then use the idea behind the behavioral flip flop below  
 // so that you can pass things along as needed. 
@@ -27,18 +49,6 @@ reg [width-1:0]      shiftregistermem;
 // from the assignment: 
 // " Each of these four behaviors can be implemented in one or two lines of behavioral Verilog. 
 // You may want to look at Verilog's {} concatenate syntax for implementing the serial behavior. "
-
-always @(posedge clk) begin
-    // Your Code Here
-end
-
-always @(posedge periperalClkEdge)
-
-end
-
-
-
-endmodule
 
 
 
