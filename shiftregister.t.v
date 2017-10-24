@@ -24,12 +24,21 @@ module testshiftregister();
     		           .serialDataOut(serialDataOut));
 
 
-    initial clk=0;
-    always #10 clk=!clk;    // 50MHz Clock  
+initial clk=0;
+always #10 clk=!clk;    // 50MHz Clock  
     
-    initial begin
-    	// Your Test Code
-    end
+initial begin
+
+$dumpfile("shift.vcd");
+$dumpvars();
+   
+$display(" test stuff here "); 
+parallelLoad = 1; parallelDataIn = 00001110; #400
+$display("%b | %b | %b | %b ", clk, parallelLoad, parallelDataIn, serialDataOut );
+
+
+ 	
+end
 
 endmodule
 

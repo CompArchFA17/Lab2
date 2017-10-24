@@ -18,20 +18,20 @@ output [width-1:0]  parallelDataOut,    // Shift reg data contents
 output              serialDataOut       // Positive edge synchronized
 );
 
-reg [width-1:0]      shiftregistermem;
+reg [width-1:0]		shiftregistermem;
 
 always @(posedge clk) begin
     
-if(parallelLoad ==1) begin  // do thisfor parallel data in
-	serialDataOut <= parallelDataIn[8];
-	serialDataOut <= parallelDataIn[7];
-	serialDataOut <= parallelDataIn[6];
-	serialDataOut <= parallelDataIn[5];
-	serialDataOut <= parallelDataIn[4];
-	serialDataOut <= parallelDataIn[3];
-	serialDataOut <= parallelDataIn[2];
-	serialDataOut <= parallelDataIn[1];
-	serialDataOut <= parallelDataIn[0];
+if(parallelLoad == 1) begin  // do thisfor parallel data in
+	shiftregistermem[1] <= parallelDataIn[1]; 
+//	shiftregistermem[2] <= parallelDataIn[1]; 
+//	parallelDataIn[3] <= parallelDataIn[2]; 
+//	parallelDataIn[4] <= parallelDataIn[3]; 
+//	parallelDataIn[5] <= parallelDataIn[4]; 
+//	parallelDataIn[6] <= parallelDataIn[5]; 
+//	parallelDataIn[7] <= parallelDataIn[6];
+//	serialDataOut <= parallelDataIn[7];  
+	
 end
 
 else begin    // do this for serial data in
