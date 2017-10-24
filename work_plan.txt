@@ -1,0 +1,26 @@
+Input Conditioning (4.5 hrs) ~10/28
+- draw circuit diagram (0.5 hrs)
+- complete module in inputconditioner.v (1.5 hrs)
+- make test bench (1 hr)
+- waveform (0.5 hrs)
+- revise code (1 hr)
+
+Shift Register (3.5 hrs) ~10/29
+- complete module in shiftregister.v (1.5 hrs)
+- make test bench (1 hr)
+- revise code (1 hr)
+
+
+Midpoint Check In (1.5 hrs) ~10/25
+- make test (0.5 hts)
+- load to FPGA and test (1 hr)
+
+
+SPI Memory (3.5 hrs) ~10/30
+- complete SPI memory (1.5 hrs)
+- make test sequence (1 hrs)
+- revise code (1 hrs)
+
+Write Report (1.5 hrs) ~11/1
+
+Total 14.5 hrs
