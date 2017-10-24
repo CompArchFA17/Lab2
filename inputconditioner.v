@@ -23,7 +23,6 @@ output reg  negativeedge    // 1 clk pulse at falling edge of conditioned
     reg synchronizer1 = 0;	// you need 2 synchronizers so you can calculate + and - edge 
   
 always @(posedge clk ) begin
-//$display ("began");
     
 if(conditioned == synchronizer1)
 	counter <= 0;
@@ -47,9 +46,7 @@ if(negativeedge == 1)
 
 synchronizer0 <= noisysignal;  		// these happen every time there's a clk edge 
 synchronizer1 <= synchronizer0;
-
 end
 
 endmodule
-
 

@@ -5,7 +5,6 @@
 
 module testConditioner();
 
-
     reg clk;
     reg pin;
     wire conditioned;
