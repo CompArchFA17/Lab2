@@ -1,5 +1,5 @@
 $date
-	Tue Oct 24 11:28:11 2017
+	Tue Oct 24 11:37:56 2017
 $end
 $version
 	Icarus Verilog
@@ -34,7 +34,7 @@ bx +
 bx *
 bx )
 x(
-x'
+1'
 x&
 bx %
 1$

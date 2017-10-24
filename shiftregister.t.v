@@ -28,6 +28,7 @@ module testshiftregister();
       $dumpvars(0, testshiftregister);
       //initialize
       dutpassed = 1;
+      peripheralClkEdge = 1;
       clk = 0; #5;
     	parallelDataIn = 8'd0;
       parallelLoad   = 1;
