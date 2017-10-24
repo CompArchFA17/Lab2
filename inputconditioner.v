@@ -41,7 +41,7 @@ always @(posedge clk ) begin
         end
         else 
             counter <= counter+1;
-			$display("counter iterated"); 
+		$display("counter iterated"); 
     end
 	
 	if(positiveedge == 1)
