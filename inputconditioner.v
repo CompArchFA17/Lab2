@@ -34,5 +34,6 @@ output reg  negativeedge    // 1 clk pulse at falling edge of conditioned
         end
         synchronizer0 <= noisysignal;
         synchronizer1 <= synchronizer0;
+        // just have to write positiveedge and negativeedge
     end
 endmodule
