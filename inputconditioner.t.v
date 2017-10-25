@@ -11,8 +11,6 @@ module testConditioner();
     wire conditioned;
     wire rising;
     wire falling;
-
-    integer currenttime = 0;
     
     inputconditioner dut(.clk(clk),
     			 .noisysignal(pin),
@@ -32,7 +30,7 @@ module testConditioner();
     $dumpvars(0, clk, pin, conditioned, rising, falling);
 
     //Testing Synchronization and edge detection
-    pin = 0; #22
+    pin = 0; #150
     pin = 1; #133
     pin = 0; #231
     pin = 1; #52
@@ -54,8 +52,13 @@ module testConditioner();
     pin = 0; #3
     pin = 1; #1
     pin = 0; #5
-    pin = 1; #100;
+    pin = 1; #160
     //Check that conditioned = 0 and then switches to 1 after pin has settled
-    currenttime = 800;
+
+    //Check delay for even clock cycle changes
+    pin = 0; #120
+    pin = 1; #120
+    pin = 0; #120
+    $finish;
     end
 endmodule
