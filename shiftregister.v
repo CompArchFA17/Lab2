@@ -19,7 +19,23 @@ output              serialDataOut       // Positive edge synchronized
 );
 
     reg [width-1:0]      shiftregistermem;
+
     always @(posedge clk) begin
-        // Your Code Here
+
+        if(parallelLoad==1) begin
+        // load the register with parallelDataIn
+        	shiftregistermem <= parallelDataIn;
+        end
+
+        else if(parallelLoad==0) begin
+        	if(peripheralClkEdge==1) begin
+        	//grab the MSB as SDO and then shift everything over 1 place
+        	    serialDataOut <= shiftregistermem[width-1];
+        		shiftregistermem<={shiftregistermem[width-2:0],serialDataIn};
+        	end	
+        end
+        //parallelDataOut is just the current state of the register
+        parallelDataOut <= shiftregistermem;
+
     end
 endmodule
