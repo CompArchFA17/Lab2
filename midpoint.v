@@ -102,7 +102,7 @@ module lab0_wrapper
   
   midpoint mid(LEDout[7:0],btn[0], sw[0],sw[1],10100101,clk);
   
-  assign res0[3:0]= LEDout[4:7]; //least significant
+  assign res0[3:0]= LEDout[7:4]; //least significant
   assign res1[3:0]=LEDout[3:0]; //most significant
   
 endmodule
