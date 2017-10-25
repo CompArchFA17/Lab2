@@ -12,15 +12,16 @@ input switch0;
 input switch1;
 input xA5;
 input clk;
-output LEDs;
+output [3:0] LEDs;
 )
 wire sout;
+reg xA5=10100101; //constant for hte purposes of this lab
 
 inputconditioner IR0(condit0,posedge0,negedge0,clk,butn0); //parallel in
 inputconditioner IR1(condit1,posedge1,negedge1,clk,switch0); //MOSI
 inputconditioner IR2(condit2,posedge2,negedge2,clk,switch1); //sclock
 
-shiftregister SR(LEDs,sout,clk,posedge2,negedge0,xA5,condit1);
+shiftregister SR(LEDs[3:0],sout,clk,posedge2,negedge0,xA5,condit1);
 
 
 endmodule
