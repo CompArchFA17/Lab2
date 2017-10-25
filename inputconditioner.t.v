@@ -35,6 +35,10 @@ module testConditioner();
         pin=1; #10
         pin=0; #10
         pin=1; #10
+        pin=0; #50
+        pin=1; #10
+        pin=0; #10
+        pin=1; #10
         pin=0; #10
         pin=1; #80
         pin=0;
