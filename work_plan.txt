@@ -1,0 +1,28 @@
+Work plan for Lab 2
+Shift Register - ~2 hours
+Shiftregister.v - 10/22
+Shiftregister.t.v - tentatively 10/22
+Loading to FPGA - 10/24
+Input Conditioning - ~3 hours
+Inputconditioner.v - 10/24
+Inputconditioner.t.v - 10/24
+Test script/waveforms - 10/24
+Circuit diagram - 10/24
+Time analysis - 10/24
+
+Midpoint Deliverables - ~2 hours, 10/24
+Create module
+Testbench for module
+Test on FPGA
+Debug
+Complete SPI Memory - ~5 hours
+Schematic - 10/28
+Design FSM - 10/28
+Implement FSM - 10/29
+Verilog - 10/29
+Testbench/debug - 10/29
+FPGA - 10/29
+SPI Memory Testing - ~3 hours
+Design testing strategy - 10/30
+Implement test sequences - 10/30
+Final Report - 3 hours, 11/1
