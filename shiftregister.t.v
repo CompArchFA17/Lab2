@@ -21,7 +21,6 @@ module testshiftregister();
     		           .serialDataIn(serialDataIn),
     		           .parallelDataOut(parallelDataOut),
     		           .serialDataOut(serialDataOut));
-
     initial clk = 0;
     always #5 clk=!clk;
     initial begin
@@ -67,13 +66,43 @@ module testshiftregister();
         else begin
             $display("Test Case 4 Passed");
         end
+        $finish;
 
-        // Test serial loads
-        parallelLoad = 1;
-        parallelDataIn = 8'b00000000; #100
+        // Manual clock
+        parallelLoad = 0;
+        serialDataIn = 1;
         peripheralClkEdge = 1;
 
-        serialDataIn = 1; #10
+        clk = 0; clk = 1; clk = 0;
+        if (parallelDataOut == 8'b00000001) begin
+            $display("passed ----");
+        end
+        else begin
+            $display("failed -----");
+            $display("%8b", parallelDataOut);
+        end
+        serialDataIn = 0;
+
+        clk = 1; clk = 0;
+        if (parallelDataOut == 8'b00000010) begin
+            $display("passed ----");
+        end
+        else begin
+            $display("failed -----");
+            $display("%8b", parallelDataOut);
+        end
+
+        /*if (parallelDataOut == 8'b00000010) begin
+            $display("passed ----");
+        end
+        else begin
+            $display("failed -----");
+            $display("%8b", parallelDataOut);
+        end*/
+
+        //peripheralClkEdge = 1;
+
+        /*serialDataIn = 1; #10
         if (serialDataOut == 0) begin
             $display("Passed Test Case 1");
         end
@@ -94,8 +123,8 @@ module testshiftregister();
         end
         if (parallelDataOut != 8) begin
             $display("Failed Test Case 4");
-        end
-        #50
+        end*/
+
         /*if (parallelLoad == 0) begin
             $display("Failed!");
         end
@@ -105,7 +134,7 @@ module testshiftregister();
         serialDataIn = 1;
         #100*/
 
-        $finish;
+        //$finish;
     end
 
 endmodule
