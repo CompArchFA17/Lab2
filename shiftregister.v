@@ -20,12 +20,11 @@ output              serialDataOut       // Positive edge synchronized
 
     reg [width-1:0]      shiftregistermem;
     always @(posedge clk) begin
-      if(peripheralClkEdge) begin
-        if(parallelLoad)
-    	     shiftregistermem <= parallelDataIn;
-      	else begin
-      	   shiftregistermem <= {shiftregistermem[width-2:0],serialDataIn};
-      	end
+      if(parallelLoad) begin
+        shiftregistermem <= parallelDataIn;
+      end
+      else if(peripheralClkEdge) begin
+      	shiftregistermem <= {shiftregistermem[width-2:0],serialDataIn};
       end
     end
 
