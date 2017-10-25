@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------
 // Shift Register test bench
 //------------------------------------------------------------------------
+`include "shiftregister.v"
 
 module testshiftregister();
 
@@ -14,16 +15,22 @@ module testshiftregister();
     
     // Instantiate with parameter width = 8
     shiftregister #(8) dut(.clk(clk), 
-    		           .peripheralClkEdge(peripheralClkEdge),
-    		           .parallelLoad(parallelLoad), 
-    		           .parallelDataIn(parallelDataIn), 
-    		           .serialDataIn(serialDataIn), 
-    		           .parallelDataOut(parallelDataOut), 
-    		           .serialDataOut(serialDataOut));
-    
+                       .peripheralClkEdge(peripheralClkEdge),
+                       .parallelLoad(parallelLoad), 
+                       .parallelDataIn(parallelDataIn), 
+                       .serialDataIn(serialDataIn), 
+                       .parallelDataOut(parallelDataOut), 
+                       .serialDataOut(serialDataOut));
+        initial clk=0;
+    always #10 clk=!clk;    // 50MHz Clock
+
     initial begin
-    	// Your Test Code
+        $display("Tests of parallel in, serial out");
+        $display("parallelLoad | parallelDataIn | serialDataOut|");
+        // test of parallelLoad = 1
+        parallelLoad = 1; parallelDataIn = 8'b11110000; #20
+        $display("      %b      |    %b    |       %b      |", parallelLoad, parallelDataIn, serialDataOut);
+        parallelLoad = 0; parallelDataIn = 8'b0000; #20
     end
 
 endmodule
-
