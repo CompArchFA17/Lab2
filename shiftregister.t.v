@@ -21,8 +21,13 @@ module testshiftregister();
     		           .parallelDataOut(parallelDataOut), 
     		           .serialDataOut(serialDataOut));
     
+    initial clk=0;
+    always #10 clk=!clk;
+
     initial begin
-    	// Your Test Code
+    	parallelLoad = 1; parallelDataIn = 8'b10000000; #100
+        serialDataIn = 1; peripheralClkEdge = 1; parallelLoad = 0; #20
+        serialDataIn = 0; #200
     end
 
 endmodule

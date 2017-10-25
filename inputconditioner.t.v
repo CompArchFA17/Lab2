@@ -22,8 +22,13 @@ module testConditioner();
     always #10 clk=!clk;    // 50MHz Clock
     
     initial begin
-    // Your Test Code
-    // Be sure to test each of the three conditioner functions:
-    // Synchronization, Debouncing, Edge Detection
+       pin = 0; #50
+       pin = 1; #100
+       pin = 0; #100
+       pin = 1; #150
+       pin = 0; #30
+       pin = 1; #60
+       pin = 0; #30
+    end
     
 endmodule
