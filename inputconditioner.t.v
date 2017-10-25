@@ -34,14 +34,14 @@ module testConditioner();
     $display("%b        %d         %b                      %b       %b          %b", pin, 10'd0, conditioned, clk, rising, falling);
       
     pin = 1;
-    #101
-    $display("%b        %d         %b                      %b       %b          %b", pin, 10'd105, conditioned, clk, rising, falling);
+    #110
+    $display("%b        %d         %b                      %b       %b          %b", pin, 10'd110, conditioned, clk, rising, falling);
 
-    #45
+    #40
     $display("%b        %d         %b                      %b       %b          %b", pin, 10'd150, conditioned, clk, rising, falling);
     
     pin = 0;
-        #10
+    #10
     $display("%b        %d         %b                      %b       %b          %b", pin, 10'd160, conditioned, clk, rising, falling);
                
     pin = 1;
@@ -49,8 +49,8 @@ module testConditioner();
     $display("%b        %d         %b                      %b       %b          %b", pin, 10'd170, conditioned, clk, rising, falling);
 
     pin = 0;
-    #150
-    $display("%b        %d         %b                      %b       %b          %b", pin, 10'd320, conditioned, clk, rising, falling);
+    #120
+    $display("%b        %d         %b                      %b       %b          %b", pin, 10'd290, conditioned, clk, rising, falling);
       
     #10000 
     $finish;
