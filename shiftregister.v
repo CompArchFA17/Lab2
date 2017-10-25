@@ -18,8 +18,18 @@ output [width-1:0]  parallelDataOut,    // Shift reg data contents
 output              serialDataOut       // Positive edge synchronized
 );
 
-    reg [width-1:0]      shiftregistermem;
+    reg [width-1:0]      data;
+
     always @(posedge clk) begin
-        // Your Code Here
+        if (peripheralClkEdge) begin
+        	data <= {data << 1, serialDataIn};
+        end
+        if (parallelLoad) begin
+        	data <= parallelDataIn;
+        end
+        serialDataOut <= data[width - 1];
+        parallelDataOut <= data;
     end
+
+
 endmodule

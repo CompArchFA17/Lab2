@@ -17,12 +17,23 @@ output reg  negativeedge    // 1 clk pulse at falling edge of conditioned
 
     reg prevconditioned = 0;
     always @(posedge clk ) begin
-        if(conditioned == 0 & prevconditioned == 1) begin
+
+        // look for positive edge
+        if((conditioned == 1) & (prevconditioned == 0)) begin
             positiveedge <= 1;
+        end
+        else begin
+            positiveedge <= 0;
+        end
+
+        // look for negative edge
+        if ((conditioned == 0) & (prevconditioned == 1)) begin
+            negativeedge <= 1;
         end
         else begin
             negativeedge <= 0;
         end
+        prevconditioned <= conditioned;
     end
 endmodule
 
@@ -36,7 +47,6 @@ output reg  out    // Debounced output signal
     parameter wait_time = 3;     // Debounce delay, in clock cycles
 
     reg[wait_time-1:0] prev_vals;
-
     //0 0 0 0 1 0 1 1 1 1
     always @(posedge clk ) begin
         // Case 1: The previous values are all 1s
@@ -50,6 +60,6 @@ output reg  out    // Debounced output signal
         // Update the previous values to have the new signal bit
         // Note that the output won't reflect the latest signal
         // until the next clock cycle
-        prev_vals <= {prev_vals, sig};
+        prev_vals <= {prev_vals, sig}; // wont this overflow? when are we deleting from prev_vals?
     end
 endmodule
