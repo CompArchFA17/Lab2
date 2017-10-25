@@ -34,7 +34,6 @@ module testshiftregister();
         $display("      %b      |    %b    |       %b       |", parallelLoad, parallelDataIn, serialDataOut);
         parallelLoad = 0; parallelDataIn = 8'b00000000; #150
         $display("      %b      |    %b    |       %b      |", parallelLoad, parallelDataIn, serialDataOut);
-        
         $display("----------------------------------------------");
         $display("Tests of serial in, parallel out");
         $display("peripheralClkEdge | serialDataIn | parallelDataOut |");
@@ -46,8 +45,6 @@ module testshiftregister();
         $display("peripheralClkEdge | serialDataIn | parallelDataOut | parallelLoad | parallelDataIn | serialDataOut |");
         peripheralClkEdge = 1; parallelLoad = 1; parallelDataIn = 8'b11111111; serialDataIn = 1; #150
         $display("        %b         |       %b      |     %b    |     %b      |    %b    |       %b       |", peripheralClkEdge, serialDataIn, parallelDataOut,parallelLoad, parallelDataIn, serialDataOut);
-
-
 
         #10000 
         $finish;
