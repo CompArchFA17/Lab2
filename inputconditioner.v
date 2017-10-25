@@ -26,37 +26,30 @@ output reg  negativeedge    // 1 clk pulse at falling edge of conditioned
     end
 endmodule
 
-// only changes the input signal after it is stable for a given waittime
+// only changes the input signal after it is stable for a given wait_time
 module debouncer
 (
 input       clk,   // Clock domain to synchronize input to
 input       sig,   // (Potentially) noisy input signal
 output reg  out    // Debounced output signal
 );
+    parameter wait_time = 3;     // Debounce delay, in clock cycles
 
-    parameter counterwidth = 3; // Counter size, in bits, >= log2(waittime)
-    parameter waittime = 2;     // Debounce delay, in clock cycles
-
-    reg[counterwidth-1:0] counter = 0;
-    reg synchronizer0 = 0;
-    reg synchronizer1 = 0;
+    reg[wait_time-1:0] prev_vals;
 
     //0 0 0 0 1 0 1 1 1 1
     always @(posedge clk ) begin
-        // Case 1: previous signal is same as current output
-        if(out == synchronizer1)
-            counter <= 0;
-        else begin
-            // Case 2: Counter reaches maximum limit
-            if( counter == waittime) begin
-                counter <= 0;
-                out <= synchronizer1;
-            end
-            // Case 3: Counter has not reached max limit
-            else
-                counter <= counter+1;
+        // Case 1: The previous values are all 1s
+        if( prev_vals == ((2**wait_time) - 1)) begin
+            out <= 1;
         end
-        synchronizer0 <= sig;
-        synchronizer1 <= synchronizer0;
+        // Case 2: The previous values are all 0s
+        else if( prev_vals == 0) begin
+            out <= 0;
+        end
+        // Update the previous values to have the new signal bit
+        // Note that the output won't reflect the latest signal
+        // until the next clock cycle
+        prev_vals <= {prev_vals, sig};
     end
 endmodule

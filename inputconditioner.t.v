@@ -26,7 +26,7 @@ module testConditioner();
         $dumpfile("inputconditioner.vcd");
         $dumpvars;
         // Initialize conditioner by running at 0 for 3 clock cycles
-        pin=0; #50
+        pin=0; #100
 
         pin=1; #40
         #100
