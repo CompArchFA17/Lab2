@@ -7,17 +7,19 @@
 
 module testConditioner();
 
-    reg clk;
-    reg pin;
+    reg  clk;
+    reg  pin;
     wire conditioned;
     wire rising;
     wire falling;
-    
-    inputconditioner dut(.clk(clk),
-             .noisysignal(pin),
-             .conditioned(conditioned),
-             .positiveedge(rising),
-             .negativeedge(falling));
+
+    inputconditioner dut (
+        .clk         (clk),
+        .noisysignal (pin),
+        .conditioned (conditioned),
+        .positiveedge(rising),
+        .negativeedge(falling)
+    );
 
 
     // Generate clock (50MHz)
