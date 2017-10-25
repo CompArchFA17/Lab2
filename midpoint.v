@@ -26,3 +26,4 @@ shiftregister SR(clk, peripheralClockEdge, parallelLoad, xA5, serialIn, LEDs[7:0
 
 
 endmodule
+
