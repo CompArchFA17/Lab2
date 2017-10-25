@@ -1,0 +1,27 @@
+Test Sequence
+
+Controls:
+
+Button0: Parallel Data In  
+Button1: Show Last 4 Bits
+Button2: Show First 4 Bits
+
+Switch0: Serial Data In
+Switch1: Serial Data In CLk Edge
+
+To begin testing first press Button0, then Button1. 
+You should see the following sequence in the 4 LEDS: 0011
+Press Button2 to see the first 4 bits which should be: 1100
+
+Now to test the serial data in functionality set switch0 to HIGH and toggle Switch1 to high
+This should write a 1 bit to the back of the shift register and you should see the following:
+Press Button1: 0111
+Press Button2: 1000
+
+Now set switch0 to low and toggle switch1 to high
+This should write a 0 bit to the back of the shift register and you should see the following:
+Press Button1: 1110
+Press Button2: 0000
+
+
+Now press Button0 again and the output should be 11000011 again.

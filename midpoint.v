@@ -9,8 +9,6 @@
 //     time, and multiplexes the LEDs to show the SUM and carryout/overflow at
 //     different times.
 //
-//  Your job:
-/
 //
 //  Usage:
 //     btn0 - load parallel load into input conditioner -> shift register
@@ -63,6 +61,97 @@ module mux2 #( parameter W = 1 )
     assign out = (sel) ? in1 : in0;
 endmodule
 
+//------------------------------------------------------------------------
+// Input Conditioner
+//    1) Synchronizes input to clock domain
+//    2) Debounces input
+//    3) Creates pulses at edge transitions
+//------------------------------------------------------------------------
+
+module inputconditioner
+(clk,noisysignal,conditioned,positiveedge,negativeedge);
+
+    parameter counterwidth = 3; // Counter size, in bits, >= log2(waittime)
+    parameter waittime = 3;     // Debounce delay, in clock cycles
+
+    input clk;
+    input noisysignal;
+    output reg conditioned;
+    output reg positiveedge;
+    output reg negativeedge;
+    
+    reg[counterwidth-1:0] counter = 0;
+    reg synchronizer0 = 0;
+    reg synchronizer1 = 0;
+    reg conditioned1 = 0;
+    
+    always @(posedge clk ) begin
+    if(conditioned == 0 && conditioned1 == 1) begin
+        negativeedge = 1;
+    end else if (conditioned == 1 && conditioned1 == 0) begin
+        positiveedge = 1;
+        end else if (positiveedge == 1 || negativeedge == 1) begin
+            positiveedge = 0;
+            negativeedge = 0;
+        end
+        if(conditioned == synchronizer1)
+            counter <= 0;
+        else begin
+            if( counter == waittime) begin
+                counter <= 0;
+                conditioned <= synchronizer1;
+            end
+            else 
+                counter <= counter+1;
+        end
+        synchronizer0 <= noisysignal;
+        synchronizer1 <= synchronizer0;
+    conditioned1 <= conditioned;
+    end
+endmodule
+
+//------------------------------------------------------------------------
+// Shift Register
+//   Parameterized width (in bits)
+//   Shift register can operate in two modes:
+//      - serial in, parallel out
+//      - parallel in, serial out
+//------------------------------------------------------------------------
+
+module shiftregister
+#(parameter width = 8)
+(
+input               clk,                // FPGA Clock
+input               peripheralClkEdge,  // Edge indicator
+input               parallelLoad,       // 1 = Load shift reg with parallelDataIn
+input  [width-1:0]  parallelDataIn,     // Load shift reg in parallel
+input               serialDataIn,       // Load shift reg serially
+output reg [width-1:0]  parallelDataOut,    // Shift reg data contents
+output reg             serialDataOut       // Positive edge synchronized
+);
+
+    reg [width-1:0]      shiftregistermem;
+
+    always @(posedge clk) begin
+
+        if(parallelLoad==1) begin
+        // load the register with parallelDataIn
+            shiftregistermem <= parallelDataIn;
+        end
+
+        else if(parallelLoad==0) begin
+            if(peripheralClkEdge==1) begin
+            //grab the MSB as SDO and then shift everything over 1 place
+                serialDataOut <= shiftregistermem[width-1];
+                shiftregistermem<={shiftregistermem[width-2:0],serialDataIn};
+            end 
+        end
+        //parallelDataOut is just the current state of the register
+        parallelDataOut <= shiftregistermem;
+
+    end
+endmodule
+
 
 //--------------------------------------------------------------------------------
 // Main Lab 0 wrapper module
@@ -79,7 +168,7 @@ module midpoint
     output [3:0] led
 );
 
-    reg[7:0] parallaData = 8`b11000011; //Assign default parallel in
+    reg[7:0] parallelData = 8'b11000011; //Assign default parallel in
     wire[3:0] res0, res1;     // 
     wire[7:0] shiftregister;  // Current Shift Register Values
     wire res_sel;             // Select between display options
@@ -89,10 +178,9 @@ module midpoint
 
     
     // Capture button input to switch which MUX input to LEDs
-    jkff1 src_sel(.trigger(clk), .j(btn[2]), .k(btn[1]), .q(res_sel));
+    jkff1 src_sel(.trigger(clk), .j(btn[1]), .k(btn[2]), .q(res_sel));
     mux2 #(4) output_select(.in0(res0), .in1(res1), .sel(res_sel), .out(led));
     
-
     //Map to input conditioner
     inputconditioner parallel(.noisysignal(btn[0]),.clk(clk),.negativeedge(parallelslc));
     inputconditioner serialinputs(.noisysignal(sw[0]),.clk(clk),.conditioned(serialin));
