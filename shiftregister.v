@@ -21,11 +21,11 @@ output reg             serialDataOut       // Positive edge synchronized
     reg [width-1:0]      data;
 
     always @(posedge clk) begin
-        if (peripheralClkEdge) begin
-        	data <= {data << 1, serialDataIn};
-        end
         if (parallelLoad) begin
-        	data <= parallelDataIn;
+            data <= parallelDataIn;
+        end
+        else if (peripheralClkEdge) begin
+        	data <= {data << 1, serialDataIn};
         end
         serialDataOut <= data[width - 1];
         parallelDataOut <= data;
