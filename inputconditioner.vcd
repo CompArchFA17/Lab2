@@ -1,9 +1,5 @@
 $date
-<<<<<<< HEAD
-	Tue Oct 24 16:41:04 2017
-=======
-	Tue Oct 24 16:26:27 2017
->>>>>>> 17aeae5ce9538371740ad9e0533440a376273a41
+	Wed Oct 25 11:43:16 2017
 $end
 $version
 	Icarus Verilog
@@ -24,23 +20,15 @@ $var reg 1 ( conditioned $end
 $var reg 3 ) counter [2:0] $end
 $var reg 1 * negativeedge $end
 $var reg 1 + positiveedge $end
-<<<<<<< HEAD
-$var reg 1 , synchronizer0 $end
-$var reg 1 - synchronizer1 $end
-=======
 $var reg 1 , prevconditioned $end
 $var reg 1 - synchronizer0 $end
 $var reg 1 . synchronizer1 $end
->>>>>>> 17aeae5ce9538371740ad9e0533440a376273a41
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-<<<<<<< HEAD
-=======
 0.
->>>>>>> 17aeae5ce9538371740ad9e0533440a376273a41
 0-
 0,
 x+
@@ -56,14 +44,11 @@ x"
 x!
 $end
 #10
-<<<<<<< HEAD
-=======
 0*
 0"
 0+
 0#
 x,
->>>>>>> 17aeae5ce9538371740ad9e0533440a376273a41
 b1 )
 1$
 1&
@@ -75,120 +60,68 @@ b10 )
 1$
 1&
 #40
-1%
-1'
 0$
 0&
 #50
-b11 )
-0%
-0'
+1-
+0(
+0!
+b0 )
 1$
 1&
-#60
 1%
 1'
+#60
 0$
 0&
 #70
-<<<<<<< HEAD
-1,
-b100 )
+0,
+1.
 1$
 1&
 #80
 0$
 0&
 #90
-1-
-b101 )
+b1 )
 1$
 1&
 #100
 0$
 0&
 #110
-1(
-1!
-b0 )
+b10 )
 1$
 1&
 #120
-0%
-0'
 0$
 0&
 #130
-0,
+1(
+1!
+b0 )
 1$
 1&
 #140
 0$
 0&
 #150
-0-
+1+
+1#
+1,
 1$
 1&
 #160
 0$
 0&
 #170
-b1 )
+0+
+0#
 1$
 1&
 #180
 0$
 0&
 #190
-b10 )
 1$
 1&
-#200
-0$
-0&
-#210
-b11 )
-1$
-1&
-#220
-0$
-0&
-#230
-b100 )
-1$
-1&
-#240
-0$
-0&
-#250
-b101 )
-1$
-1&
-#260
-0$
-0&
-#270
-0(
-0!
-b0 )
-1$
-1&
-#280
-0$
-0&
-=======
-1-
-0(
-0!
-b0 )
-1$
-1&
-#80
-0$
-0&
-#90
-0,
-1.
-1$
-1&
->>>>>>> 17aeae5ce9538371740ad9e0533440a376273a41
