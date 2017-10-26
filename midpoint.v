@@ -11,7 +11,8 @@ input 		switch1, // peripheralClkEdge
 input 		button,  // ParallelLoad
 input 		clk,
 input [width-1:0]	parallelDataIn,
-output wire [width-1:0] 	parallelDataOut2
+output [width-1:0] 	parallelDataOut2
+output serialDataOut;
 );
 
 wire conditioned0;
@@ -26,7 +27,7 @@ wire conditioned2;
 wire positiveedge2;
 wire negativeedge2;
 
-wire serialDataOut;
+
 
 inputconditioner parallelLoadCond(clk, button, conditioned0, positiveedge0, negativeedge0); // negativeedge0 is your cleaned up button/ParallelLoad
 
@@ -38,3 +39,5 @@ shiftregister shift(clk, positiveedge2, negativeedge0, parallelDataIn, switch0, 
 
 
 endmodule
+
+

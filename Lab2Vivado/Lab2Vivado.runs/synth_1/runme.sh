@@ -36,4 +36,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log midpoint.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source midpoint.tcl
+EAStep vivado -log lab2_wrapper.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source lab2_wrapper.tcl

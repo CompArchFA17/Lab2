@@ -6,4 +6,4 @@
 # Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 #
 
-vivado -log midpoint.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source midpoint.tcl -notrace
+vivado -log lab2_wrapper.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source lab2_wrapper.tcl -notrace

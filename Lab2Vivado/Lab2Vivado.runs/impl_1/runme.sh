@@ -38,6 +38,6 @@ EAStep()
 
 # pre-commands:
 /bin/touch .write_bitstream.begin.rst
-EAStep vivado -log midpoint.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source midpoint.tcl -notrace
+EAStep vivado -log lab2_wrapper.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source lab2_wrapper.tcl -notrace
 
 
