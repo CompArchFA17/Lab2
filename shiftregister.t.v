@@ -21,17 +21,18 @@ module testshiftregister();
     		           .serialDataIn(serialDataIn),
     		           .parallelDataOut(parallelDataOut),
     		           .serialDataOut(serialDataOut));
+    
     initial clk = 0;
-    always #5 clk=!clk;
+    
     initial begin
-        //$dumpfile("shiftregister.vcd");
-        //$dumpvars;
+        $dumpfile("shiftregister.vcd");
+        $dumpvars;
 
-
+        peripheralClkEdge = 0;
         // Test parallel loads
     	parallelLoad = 1;
         parallelDataIn = 8'b00000000;
-        #20;
+        clk = 1; #10 clk = 0; #10
         if (parallelDataOut == 8'b00000000) begin
             $display("Test Case 1 Passed");
         end
@@ -40,7 +41,7 @@ module testshiftregister();
         end
 
         parallelDataIn = 8'b00001111;
-        #20;
+        clk = 1; #10 clk = 0; #10;
         if (parallelDataOut == 8'b00001111) begin
             $display("Test Case 2 Passed");
         end
@@ -49,92 +50,96 @@ module testshiftregister();
         end
 
         parallelDataIn = 8'b11111111;
-        #20;
+        clk = 1; #10 clk = 0; #10
         if (parallelDataOut == 8'b11111111) begin
             $display("Test Case 3 Passed");
         end
         else begin
             $display("Test Case 3 Failed!");
         end
+        if (serialDataOut == 1) begin
+            $display("Test Case 10 serialDataOut Passed");
+        end
+        else begin
+            $display("Test Case 10 serialDataOut Failed!");
+            $display("%8b", serialDataOut);
+        end
+
 
         parallelLoad = 0;
         parallelDataIn = 8'b00000000;
-        #20;
+        clk = 1; #10 clk = 0; #10
         if (parallelDataOut == 8'b00000000) begin
             $display("Test Case 4 Failed!");
         end
         else begin
             $display("Test Case 4 Passed");
         end
-        $finish;
 
-        // Manual clock
+
+        // serial tests
+        clk = 0; #10
+        parallelLoad = 1;
+        parallelDataIn = 8'b00000000;
+        clk = 1; #10 clk = 0; #10
+        
         parallelLoad = 0;
         serialDataIn = 1;
         peripheralClkEdge = 1;
-
-        clk = 0; clk = 1; clk = 0;
+        
+        clk = 1; #5 clk = 0; #5
         if (parallelDataOut == 8'b00000001) begin
-            $display("passed ----");
+            $display("Test Case 6 Passed");
         end
         else begin
-            $display("failed -----");
+            $display("Test Case 6 Failed!");
             $display("%8b", parallelDataOut);
         end
-        serialDataIn = 0;
-
-        clk = 1; clk = 0;
-        if (parallelDataOut == 8'b00000010) begin
-            $display("passed ----");
-        end
-        else begin
-            $display("failed -----");
-            $display("%8b", parallelDataOut);
-        end
-
-        /*if (parallelDataOut == 8'b00000010) begin
-            $display("passed ----");
-        end
-        else begin
-            $display("failed -----");
-            $display("%8b", parallelDataOut);
-        end*/
-
-        //peripheralClkEdge = 1;
-
-        /*serialDataIn = 1; #10
         if (serialDataOut == 0) begin
-            $display("Passed Test Case 1");
+            $display("Test Case 7 Passed");
         end
         else begin
-            $display("Failed Test Case 1");
-            $display(serialDataOut);
+            $display("Test Case 7 Failed!");
+            $display("%8b", serialDataOut);
+        end
+        
+        clk = 1; #5 clk = 0; #5
+
+        if (parallelDataOut == 8'b00000011) begin
+            $display("passed serial test 2");
+        end
+        else begin
+            $display("failed serial test 2");
             $display("%8b", parallelDataOut);
         end
-        if (parallelDataOut == 1) begin
-            $display("Failed Test Case 2");
+        
+        clk = 1; #5 clk = 0; #5
+        if (parallelDataOut == 8'b00000111) begin
+            $display("passed serial test 3");
         end
         else begin
-            $display("Passed Test Case 2");
+            $display("failed serial test 3");
+            $display("%8b", parallelDataOut);
         end
-        #30
-        if (serialDataOut != 0) begin
-            $display("Failed Test Case 3");
-        end
-        if (parallelDataOut != 8) begin
-            $display("Failed Test Case 4");
-        end*/
 
-        /*if (parallelLoad == 0) begin
-            $display("Failed!");
+        serialDataIn = 0;
+        clk = 1; #5 clk = 0; #5
+        if (parallelDataOut == 8'b00001110) begin
+            $display("passed serial test 4");
         end
-        serialDataIn = 0; #10
-        serialDataIn = 1; #10
-        serialDataIn = 1; #10
-        serialDataIn = 1;
-        #100*/
+        else begin
+            $display("failed serial test 4");
+            $display("%8b", parallelDataOut);
+        end
+        if (serialDataOut == 0) begin
+            $display("passed serialOut test 2");
+        end
+        else begin
+            $display("failed serialOut test 2");
+            $display("%8b", serialDataOut);
+        end
 
-        //$finish;
+        // test serialDataOut
     end
 
 endmodule
