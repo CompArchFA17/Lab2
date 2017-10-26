@@ -27,7 +27,7 @@ module testConditioner();
     // Be sure to test each of the three conditioner functions:
     // Synchronization, Debouncing, Edge Detection
     $dumpfile("inputconditioner.vcd");
-    $dumpvars(0, clk, pin, conditioned, rising, falling);
+    $dumpvars();
 
     //Testing Synchronization and edge detection
     pin = 0; #150
