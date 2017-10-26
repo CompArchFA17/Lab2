@@ -14,8 +14,8 @@ input               peripheralClkEdge,  // Edge indicator
 input               parallelLoad,       // 1 = Load shift reg with parallelDataIn
 input  [width-1:0]  parallelDataIn,     // Load shift reg in parallel
 input               serialDataIn,       // Load shift reg serially
-output reg [width-1:0]  parallelDataOut,    // Shift reg data contents
-output reg             serialDataOut       // Positive edge synchronized
+output [width-1:0]  parallelDataOut,    // Shift reg data contents
+output              serialDataOut       // Positive edge synchronized
 );
 
     reg [width-1:0]      data;
@@ -25,11 +25,12 @@ output reg             serialDataOut       // Positive edge synchronized
             data <= parallelDataIn;
         end
         else if (peripheralClkEdge) begin
-        	data <= {data << 1, serialDataIn};
+        	data <= {data[width - 2:0], serialDataIn};
         end
-        serialDataOut <= data[width - 1];
-        parallelDataOut <= data;
+        
     end
+    assign serialDataOut = data[width - 1];
+    assign parallelDataOut = data;
 
 
 endmodule
