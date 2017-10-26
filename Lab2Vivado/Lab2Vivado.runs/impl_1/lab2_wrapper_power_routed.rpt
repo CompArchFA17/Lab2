@@ -1,7 +1,7 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2017.2 (lin64) Build 1909853 Thu Jun 15 18:39:10 MDT 2017
-| Date             : Wed Oct 25 20:35:32 2017
+| Date             : Wed Oct 25 21:21:15 2017
 | Host             : comparch-VirtualBox running 64-bit unknown
 | Command          : report_power -file lab2_wrapper_power_routed.rpt -pb lab2_wrapper_power_summary_routed.pb -rpx lab2_wrapper_power_routed.rpx
 | Design           : lab2_wrapper
@@ -30,12 +30,12 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 0.245 |
-| Dynamic (W)              | 0.140 |
-| Device Static (W)        | 0.105 |
+| Total On-Chip Power (W)  | 0.879 |
+| Dynamic (W)              | 0.768 |
+| Device Static (W)        | 0.111 |
 | Effective TJA (C/W)      | 11.5  |
-| Max Ambient (C)          | 82.2  |
-| Junction Temperature (C) | 27.8  |
+| Max Ambient (C)          | 74.9  |
+| Junction Temperature (C) | 35.1  |
 | Confidence Level         | Low   |
 | Setting File             | ---   |
 | Simulation Activity File | ---   |
@@ -49,15 +49,15 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     0.057 |       51 |       --- |             --- |
-|   LUT as Logic |     0.046 |        9 |     17600 |            0.05 |
+| Slice Logic    |     0.067 |       46 |       --- |             --- |
+|   LUT as Logic |     0.056 |        7 |     17600 |            0.04 |
 |   BUFG         |     0.006 |        1 |        32 |            3.13 |
-|   Register     |     0.005 |       29 |     35200 |            0.08 |
+|   Register     |     0.005 |       26 |     35200 |            0.07 |
 |   Others       |     0.000 |        8 |       --- |             --- |
-| Signals        |     0.046 |       36 |       --- |             --- |
-| I/O            |     0.038 |       16 |       100 |           16.00 |
-| Static Power   |     0.105 |          |           |                 |
-| Total          |     0.245 |          |           |                 |
+| Signals        |     0.045 |       32 |       --- |             --- |
+| I/O            |     0.657 |       16 |       100 |           16.00 |
+| Static Power   |     0.111 |          |           |                 |
+| Total          |     0.879 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -67,9 +67,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.122 |       0.118 |      0.004 |
-| Vccaux    |       1.800 |     0.012 |       0.001 |      0.011 |
-| Vcco33    |       3.300 |     0.007 |       0.006 |      0.001 |
+| Vccint    |       1.000 |     0.133 |       0.128 |      0.005 |
+| Vccaux    |       1.800 |     0.035 |       0.023 |      0.011 |
+| Vcco33    |       3.300 |     0.182 |       0.181 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -80,7 +80,7 @@ Table of Contents
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | MGTVccaux |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccpint   |       1.000 |     0.017 |       0.000 |      0.017 |
+| Vccpint   |       1.000 |     0.022 |       0.000 |      0.022 |
 | Vccpaux   |       1.800 |     0.010 |       0.000 |      0.010 |
 | Vccpll    |       1.800 |     0.003 |       0.000 |      0.003 |
 | Vcco_ddr  |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -141,11 +141,11 @@ Table of Contents
 +----------------------+-----------+
 | Name                 | Power (W) |
 +----------------------+-----------+
-| lab2_wrapper         |     0.140 |
-|   mid                |     0.077 |
-|     SCLKCond         |     0.040 |
-|     parallelLoadCond |     0.033 |
-|     shift            |     0.003 |
+| lab2_wrapper         |     0.768 |
+|   mid                |     0.085 |
+|     SCLKCond         |     0.039 |
+|     parallelLoadCond |     0.040 |
+|     shift            |     0.006 |
 +----------------------+-----------+
 
 

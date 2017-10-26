@@ -52,10 +52,28 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
+      <File Path="$PSRCDIR/sources_1/imports/Lab2/inputconditioner.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../inputconditioner.v"/>
+          <Attr Name="ImportTime" Val="1508847106"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/Lab2/shiftregister.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../shiftregister.v"/>
+          <Attr Name="ImportTime" Val="1508979871"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/imports/Lab2/midpoint.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../midpoint.v"/>
-          <Attr Name="ImportTime" Val="1508975068"/>
+          <Attr Name="ImportTime" Val="1508980576"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -64,7 +82,7 @@
       <File Path="$PSRCDIR/sources_1/imports/Lab2/lab2wrapper.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../lab2wrapper.v"/>
-          <Attr Name="ImportTime" Val="1508977870"/>
+          <Attr Name="ImportTime" Val="1508978619"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>

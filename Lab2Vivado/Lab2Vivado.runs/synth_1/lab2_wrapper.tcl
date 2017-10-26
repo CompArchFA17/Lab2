@@ -16,6 +16,8 @@ set_property board_part digilentinc.com:zybo:part0:1.0 [current_project]
 set_property ip_output_repo /home/comparch/Desktop/LoganLab2/Lab2/Lab2Vivado/Lab2Vivado.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_verilog -library xil_defaultlib {
+  /home/comparch/Desktop/LoganLab2/Lab2/Lab2Vivado/Lab2Vivado.srcs/sources_1/imports/Lab2/inputconditioner.v
+  /home/comparch/Desktop/LoganLab2/Lab2/Lab2Vivado/Lab2Vivado.srcs/sources_1/imports/Lab2/shiftregister.v
   /home/comparch/Desktop/LoganLab2/Lab2/Lab2Vivado/Lab2Vivado.srcs/sources_1/imports/Lab2/midpoint.v
   /home/comparch/Desktop/LoganLab2/Lab2/Lab2Vivado/Lab2Vivado.srcs/sources_1/imports/Lab2/lab2wrapper.v
 }
