@@ -37,15 +37,15 @@ $dumpvars();
 
 // Check Parallel In, Serial Out 
 	$display("PIn? | PDataIn | SDataOut");
-	parallelLoad =1; parallelDataIn = 8'b00011111; #40
+	parallelLoad =1; parallelDataIn = 8'b00011111; #21
 	$display("%b   | %b | %b ", parallelLoad, parallelDataIn, serialDataOut); // expect 0
-	parallelLoad =1; parallelDataIn = 8'b00111110; #40
+	parallelLoad =1; parallelDataIn = 8'b00111110; #21
 	$display("%b   | %b | %b", parallelLoad, parallelDataIn, serialDataOut); // expect 0
-	parallelLoad =1; parallelDataIn = 8'b01111101; #40
+	parallelLoad =1; parallelDataIn = 8'b01111101; #21
 	$display("%b   | %b | %b", parallelLoad, parallelDataIn, serialDataOut); // expect 0
-	parallelLoad =1; parallelDataIn = 8'b11111010; #40
+	parallelLoad =1; parallelDataIn = 8'b11111010; #21
 	$display("%b   | %b | %b", parallelLoad, parallelDataIn, serialDataOut); // expect 1
-	parallelLoad =1; parallelDataIn = 8'b11110100; #40
+	parallelLoad =1; parallelDataIn = 8'b11110100; #21
 	$display("%b   | %b | %b", parallelLoad, parallelDataIn, serialDataOut); // expect 1
 
 // Check Serial In, Parallel Out
