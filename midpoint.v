@@ -18,9 +18,9 @@ wire sout;
 wire peripheralClockEdge;
 wire parallelLoad;
 wire serialIn;
-inputconditioner IR0(condit0,posedge0,parallelLoad,clk,butn0); //parallel in
-inputconditioner IR1(serialIn,posedge1,negedge1,clk,switch0); //MOSI
-inputconditioner IR2(condit2,peripheralClockEdge,negedge2,clk,switch1); //sclock
+inputconditioner IR0(clk, butn0, condit0,posedge0,parallelLoad); //parallel in
+inputconditioner IR1(clk, switch0, serialIn,posedge1,negedge1); //MOSI
+inputconditioner IR2(clk,switch1, condit2,peripheralClockEdge,negedge2); //sclock
 
 shiftregister SR(clk, peripheralClockEdge, parallelLoad, xA5, serialIn, LEDs[7:0], sout);
 
@@ -88,22 +88,23 @@ module lab0_wrapper
     input        clk,
     input  [3:0] sw,
     input  [3:0] btn,
-    output [3:0] led
+    output [7:0] je
 
     //inputs utilized for the are clk, sw0&sw1, and btn0
   //buttons 2 and 3 switch between res0 and res1 displays :)
 );
-  wire[3:0] res0, res1;     // Output display options (res0 is least sig. res1 is most sig figs)
-	wire res_sel;             // Select between display options
-  
+
+  //wire[3:0] res0, res1;     // Output display options (res0 is least sig. res1 is most sig figs)
+	//wire res_sel;             // Select between display options
+  //wire[7:0] LEDout;
 	// Capture button input to switch which MUX input to LEDs
-	jkff1 src_sel(.trigger(clk), .j(btn[3]), .k(btn[2]), .q(res_sel));
-	mux2 #(4) output_select(.in0(res0), .in1(res1), .sel(res_sel), .out(led));
+	//jkff1 src_sel(.trigger(clk), .j(btn[3]), .k(btn[2]), .q(res_sel));
+	//mux2 #(4) output_select(.in0(res0), .in1(res1), .sel(res_sel), .out(led));
   
-  midpoint mid(LEDout[7:0],btn[0], sw[0],sw[1],10100101,clk);
+  midpoint mid(btn[0], sw[0],sw[1], 8'b10100101, clk, je[7:0]);
   
-  assign res0[3:0]= LEDout[7:4]; //least significant
-  assign res1[3:0]=LEDout[3:0]; //most significant
+  // assign res0[3:0]= LEDout[7:4]; //least significant
+  // assign res1[3:0]=LEDout[3:0]; //most significant
   
 endmodule
  
