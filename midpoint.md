@@ -1,6 +1,6 @@
 Midpoint
 
-Since there are 4 leds on FPGA board, I put a MUX to control led by Switch 2. If Switch 2 is off, 0~3 bits are shown on LED. Otherwise, 4~7 bits are shown on LED.
+Since there are 4 leds on FPGA board, I put a MUX to control led by Switch 2. If Switch 2 is off, 0-3 bits are shown on LED. Otherwise, 4-7 bits are shown on LED.
 
 I tested the followings.
 1. Check the initial value(xA5 = 10100101). When Switch 2 is off, LED 0 and 2 are on and LED 1 and 3 are off.(x5 = 0101) When Switch 2 is on, LED 1 and 3 are on and LED 0 and 2 are off.(xA = 1010)
