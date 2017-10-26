@@ -23,7 +23,7 @@ output              serialDataOut       // Positive edge synchronized
       // Serial shift prioritized over parallel load in our implementation
     if (peripheralClkEdge == 1) begin
           shiftregistermem <= shiftregistermem << 1;
-          shiftregistermem[width-1:0] <= serialDataIn;
+          shiftregistermem[0] <= serialDataIn;
     end
         else if (parallelLoad == 1) begin
             shiftregistermem <= parallelDataIn;

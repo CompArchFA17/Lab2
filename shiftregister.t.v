@@ -37,9 +37,11 @@ module testshiftregister();
         $display("----------------------------------------------");
         $display("Tests of serial in, parallel out");
         $display("peripheralClkEdge | serialDataIn | parallelDataOut |");
-        peripheralClkEdge = 1; serialDataIn = 1; #150
+        peripheralClkEdge = 1; serialDataIn = 1; #20
         $display("        %b         |       %b      |     %b    |", peripheralClkEdge, serialDataIn, parallelDataOut);
-        peripheralClkEdge = 0; serialDataIn = 1; #150
+        peripheralClkEdge = 0; serialDataIn = 1; #20
+        $display("        %b         |       %b      |     %b    |", peripheralClkEdge, serialDataIn, parallelDataOut);
+        peripheralClkEdge = 1; serialDataIn = 1; #20
         $display("        %b         |       %b      |     %b    |", peripheralClkEdge, serialDataIn, parallelDataOut);
         // peripheralClkEdge should take priority over parallelLoad
         $display("peripheralClkEdge | serialDataIn | parallelDataOut | parallelLoad | parallelDataIn | serialDataOut |");
