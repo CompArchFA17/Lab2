@@ -8,4 +8,4 @@ I tested the followings.
 3. Otherwise, if Switch 1 is on, then 1 is loaded to the LSB. 
 4. If I click Button 0, the value is reseted to the initial value.
 
-The test video is [here](https://drive.google.com/open?id=0BwRWdLa3OOtLSDFaXzFhN1FGZ2s)
+The test video is [here](https://drive.google.com/open?id=0BwRWdLa3OOtLUC1XQm1iU0lKaEU)
