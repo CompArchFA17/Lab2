@@ -19,10 +19,15 @@ module spiMemory
 	inputcondition condition1(clk, sclk_pin, , positiveEdge, negativeEdge);
 	inputcondition condition1(clk, cs_pin, conditionedInput2, , );
 
-	wire parallelOut, serialOut;
-	shiftregister shiftRegister(clk, positiveEdge, sr_we, parallelDataIn, conditionedInput1, parallelOut, serialOut);
+	wire parallelOut[7:0], serialOut;
+	shiftregister shiftRegister(clk, positiveEdge, SR_WE, parallelDataIn, conditionedInput1, parallelOut, serialOut);
 
 	wire q;
 	dff dFF(clk, serialOut, negativeEdge, q, );
+
+	wire parallelIn[7:0], address[7:0]
+	datamemory dataMemory(clk, parallelIn, address[6:0], DM_WE, parallelOut);
+
+
 endmodule
    
