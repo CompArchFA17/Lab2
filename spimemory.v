@@ -38,7 +38,7 @@ module spiMemory
 	wire q;
 	dff #(1) dff2(clk, negativeEdge, serialOut, q);
 
-	// datamemory dataMemory(clk, shiftRegOutP, address, DM_WE, dataMemoryOut);
+	datamemory dataMemory(clk, shiftRegOutP, address[7:1], DM_WE, dataMemoryOut);
 
 
 endmodule
