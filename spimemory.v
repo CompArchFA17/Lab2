@@ -21,7 +21,7 @@ module spiMemory
 	wire mosi, chip_select;
 	wire sclk_pos, sclk_neg;
 	inputconditioner c1(.clk(clk),
-                      .noisysignal(miso_pin),
+                      .noisysignal(mosi_pin),
                       .conditioned(conditioned));
 	inputconditioner c2(.clk(clk),
                       .noisysignal(sclk_pin),
@@ -47,9 +47,12 @@ module spiMemory
 	wire q;
 	dff #(1) dff2(clk, sclk_neg, serialOut, q);
 
+  // Tri-state buffer
+  assign miso_pin = (MISO_BUFE) ? q : 1'bz;
+
 	datamemory dataMemory(clk, shiftRegOutP, address[7:1], DM_WE, dataMemoryOut);
 
-  finiteStateMachine fsm(chip_select)
+  finiteStateMachine fsm(sclk_pos, chip_select, shiftRegOut[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE);
 
 
 endmodule
