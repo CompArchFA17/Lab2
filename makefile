@@ -18,5 +18,5 @@ dflipflop: dflipflop.v
 fsm: fsm.v
 	iverilog -Wall -o fsm fsm.v
 
-spimemory: spimemory.v
-	iverilog -Wall -o spimemory spimemory.v
+spimemory: spimemory.t.v spimemory.v
+	iverilog -Wall -o spimemory spimemory.t.v
