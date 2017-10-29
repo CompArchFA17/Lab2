@@ -15,10 +15,8 @@ module finiteStateMachine(
 reg [7:0] state;
 localparam CSLow = 2'b00;
 localparam addressLoad = 2'b00;
-localparam CS_Low = 2'b00;
-localparam CS_Low = 2'b00;
-
 localparam CSHigh = 2'b00;
+
 integer counter = 0;
 //change states on the clk cycles
 always @(posedge clk) begin
@@ -39,13 +37,22 @@ always @(posedge clk) begin
         state <= Red;
     end
 
+    if (addressLoad == ) begin 
+        if (counter == 8) begin
+            counter = 0;
+        end
+        else begin
+            counter = counter + 1;
+        end
+    end
+
     
     case (state)
         //driving - follow traffic laws
         CSLow: begin
             MISO_BUFE = 0;
             DM_WE = 0;
-            ADDR_WE = 0;
+            ADDR_WE = 1
             SR_WE = 0;
         end
         addressLoad: begin
@@ -53,27 +60,9 @@ always @(posedge clk) begin
             DM_WE = 0;
             ADDR_WE = 1;
             SR_WE = 0;
-            counter = counter + 1;
         end
-        CSLow: begin
-            MISO_BUFE = 0;
-            DM_WE = 0;
-            ADDR_WE = 0;
-            SR_WE = 0;
-        end
-        CSLow: begin
-            MISO_BUFE = 0;
-            DM_WE = 0;
-            ADDR_WE = 0;
-            SR_WE = 0;
-        end
-        CSLow: begin
-            MISO_BUFE = 0;
-            DM_WE = 0;
-            ADDR_WE = 0;
-            SR_WE = 0;
-        end
-        CSLow: begin
+        
+        CSHigh: begin
             MISO_BUFE = 0;
             DM_WE = 0;
             ADDR_WE = 0;
