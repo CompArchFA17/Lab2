@@ -16,24 +16,32 @@ module spiMemory
     output [3:0]    leds        // LEDs for debugging
 );
 	reg MISO_BUFE, DM_WE, ADDR_WE, SR_WE;
+  
 	wire conditionedInput1, conditionedInput2;
 	wire positiveEdge, negativeEdge;
-	inputconditioner condition1(clk, miso_pin, conditioned, ,);
-	inputconditioner condition2(clk, sclk_pin, , positiveEdge, negativeEdge);
-	inputconditioner condition3(clk, cs_pin, conditionedInput2, , );
+	inputconditioner c1(.clk(clk),
+                      .noisysignal(miso_pin),
+                      .conditioned(conditioned));
+	inputconditioner c2(.clk(clk),
+                      .noisysignal(sclk_pin),
+                      .positiveedge(positiveEdge),
+                      .negativeedge(negativeEdge));
+	inputconditioner c3(.clk(clk),
+                      .noisysignal(cs_pin),
+                      .conditioned(conditionedInput2));
 
 	wire[7:0] shiftRegOutP, dataMemoryOut;
-    wire serialOut;
+  wire serialOut;
 
-    shiftregister #(8) sr(.clk(clk),
-                 .peripheralClkEdge(positiveEdge),
-                 .parallelLoad(SR_WE),
-                 .parallelDataIn(dataMemoryOut),
-                 .serialDataIn(conditionedInput1),
-                 .parallelDataOut(shiftRegOutP),
-                 .serialDataOut(serialOut));
+  shiftregister #(8) sr(.clk(clk),
+               .peripheralClkEdge(positiveEdge),
+               .parallelLoad(SR_WE),
+               .parallelDataIn(dataMemoryOut),
+               .serialDataIn(conditionedInput1),
+               .parallelDataOut(shiftRegOutP),
+               .serialDataOut(serialOut));
 
-  	wire[7:0] address;
+	wire[7:0] address;
 	dff #(8) dff1(clk, ADDR_WE, shiftRegOutP, address);
 	wire q;
 	dff #(1) dff2(clk, negativeEdge, serialOut, q);
