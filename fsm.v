@@ -24,19 +24,6 @@ always @(posedge clk) begin
     // commands: CS_Low, done address load, parallelDataLoad, serialDataLoad
     // CS_high
 
-    //normally you'll have an input of strings that'll dictate which states you go to (like the AddressIn)
-    //but here, i'll just manually set it
-    //this'll normally be much more confusing and fun. which state should you be in to start? and then generally states lead to other states. 
-    if (trafficlight == Green) begin
-        state <= Green;
-    end
-    if (trafficlight == Yellow) begin
-        state <= Yellow;
-    end
-    if (trafficlight == Red) begin
-        state <= Red;
-    end
-
     if (addressLoad == ) begin 
         if (counter == 8) begin
             counter = 0;
@@ -48,7 +35,6 @@ always @(posedge clk) begin
 
     
     case (state)
-        //driving - follow traffic laws
         CSLow: begin
             MISO_BUFE = 0;
             DM_WE = 0;
