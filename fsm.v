@@ -3,7 +3,7 @@
 //Example of a Finite State Machine where the traffic light state dictates the driving.
 
 module finiteStateMachine(
-    input [1:0],
+    input [2:0],
     input clk,
     output reg MISO_BUFE,
     output reg DM_WE,
@@ -12,13 +12,19 @@ module finiteStateMachine(
 );
     
 
-reg [1:0] state;
-localparam Green = 2'b00;
-localparam Yellow = 2'b01;
-localparam Red = 2'b10;
+reg [7:0] state;
+localparam CSLow = 2'b00;
+localparam addressLoad = 2'b00;
+localparam CS_Low = 2'b00;
+localparam CS_Low = 2'b00;
 
+localparam CSHigh = 2'b00;
+integer counter = 0;
 //change states on the clk cycles
 always @(posedge clk) begin
+    
+    // commands: CS_Low, done address load, parallelDataLoad, serialDataLoad
+    // CS_high
 
     //normally you'll have an input of strings that'll dictate which states you go to (like the AddressIn)
     //but here, i'll just manually set it
@@ -33,22 +39,45 @@ always @(posedge clk) begin
         state <= Red;
     end
 
+    
     case (state)
         //driving - follow traffic laws
-        Green: begin
-            driving = 1;
-            braking = 0;
-            stopped <= 0;
+        CSLow: begin
+            MISO_BUFE = 0;
+            DM_WE = 0;
+            ADDR_WE = 0;
+            SR_WE = 0;
         end
-        Yellow: begin
-            driving = 0;
-            braking = 1;
-            stopped <= 0;
+        addressLoad: begin
+            MISO_BUFE = 0;
+            DM_WE = 0;
+            ADDR_WE = 1;
+            SR_WE = 0;
+            counter = counter + 1;
         end
-        Red: begin
-            driving = 0;
-            braking = 0;
-            stopped <= 1;
+        CSLow: begin
+            MISO_BUFE = 0;
+            DM_WE = 0;
+            ADDR_WE = 0;
+            SR_WE = 0;
+        end
+        CSLow: begin
+            MISO_BUFE = 0;
+            DM_WE = 0;
+            ADDR_WE = 0;
+            SR_WE = 0;
+        end
+        CSLow: begin
+            MISO_BUFE = 0;
+            DM_WE = 0;
+            ADDR_WE = 0;
+            SR_WE = 0;
+        end
+        CSLow: begin
+            MISO_BUFE = 0;
+            DM_WE = 0;
+            ADDR_WE = 0;
+            SR_WE = 0;
         end
     endcase
 end
