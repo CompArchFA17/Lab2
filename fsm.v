@@ -3,11 +3,14 @@
 //Example of a Finite State Machine where the traffic light state dictates the driving.
 
 module finiteStateMachine(
-    input [1:0] trafficlight,
+    input [1:0],
     input clk,
-    output reg driving,
-    output reg stopped,
-    output reg braking);
+    output reg MISO_BUFE,
+    output reg DM_WE,
+    output reg ADDR_WE,
+    output reg SR_WE
+);
+    
 
 reg [1:0] state;
 localparam Green = 2'b00;
