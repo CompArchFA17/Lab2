@@ -1,0 +1,16 @@
+﻿Midpoint Test Instructions
+
+
+PIPO:
+1. Press button 0 (parallelLoad) to load parallelDataIn (specified as 0xA5, or b10100101).
+2. Press button 1 to display the least significant bits. An LED ‘on’ state represents when a bit is 1 (and when it is off, it represents when a bit is 0). LEDs 0 and 2 should be on and LEDs 1 and 3 should be off in order to represent least significant bits ‘0101’.
+3. Press button 2 to display the most significant bits. LEDs 0 and 2 should be off and LEDs 1 and 3 should be on in order to represent the most significant bits ‘1010’.
+
+
+SIPO:
+1. Place switch 0 in the “low” position. This represents a 0 value bit. When switch 2 is toggled from low to high, the 0 bit will be serially loaded, and the bits in the shift register will shift up one degree from their previous places. 
+2. Press button 1. LEDs 0 and 2 will now be off, and LEDs 1 and 3 will be on.
+3. Press button 2. LEDs 0, 1, and 3 will be off, and LED 2 will be on.
+4. Place switch 0 in the high position, which represents a 1 value bit. Toggle switch 1 from low to high to serially load a 1 into the shift register.
+5. Press button 1. LEDs 0 and 2 will now be on, and LEDs 1 and 3 will be of.
+6. Press button 2. LEDs 1 and 2 will be off, and LEDs 0 and 4 will be on.
