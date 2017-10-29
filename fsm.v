@@ -3,6 +3,7 @@
 //Example of a Finite State Machine where the traffic light state dictates the driving.
 
 module finiteStateMachine(
+    input sclk_pos,
     input chip_select,
     input r_w,
     output reg MISO_BUFE,
