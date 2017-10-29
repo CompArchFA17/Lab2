@@ -23,7 +23,7 @@ module spiMemory
 	inputconditioner condition3(clk, cs_pin, conditionedInput2, , );
 
 	wire[7:0] shiftRegOutP, dataMemoryOut;
-  wire serialOut, address;
+  wire serialOut;
 
   shiftregister #(8) sr(.clk(clk),
                  .peripheralClkEdge(positiveEdge),
@@ -33,9 +33,10 @@ module spiMemory
                  .parallelDataOut(shiftRegOutP),
                  .serialDataOut(serialOut));
 
-	// dff #(8) dff1(clk, ADDR_WE, shiftRegOutP, address);
-	// wire q;
-	// dff #(1) dff2(clk, negativeEdge, serialOut, q);
+  wire[7:0] address;
+	dff #(8) dff1(clk, ADDR_WE, shiftRegOutP, address);
+	wire q;
+	dff #(1) dff2(clk, negativeEdge, serialOut, q);
 
 	// datamemory dataMemory(clk, shiftRegOutP, address, DM_WE, dataMemoryOut);
 
