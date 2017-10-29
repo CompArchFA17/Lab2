@@ -9,7 +9,7 @@
 `include "addresslatch.v"
 `include "dflipflop.v"
 
-module spiMemory
+module spimemory
 (
     input           clk,        // FPGA clock
     input           sclk_pin,   // SPI clock
