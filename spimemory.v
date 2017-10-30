@@ -74,6 +74,7 @@ module spimemory
 	// finite state machine
 
 	fsm fsm(sclk_ic_positiveedge, cs_ic_conditioned, sr_parallelDataOut[0], miso_buff, dm_we, addr_we, sr_we);
+	// fsm fsm(clk, cs_ic_conditioned, sr_parallelDataOut[0], miso_buff, dm_we, addr_we, sr_we);
 
 
 	// data memory
