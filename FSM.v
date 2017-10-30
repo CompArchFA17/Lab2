@@ -7,62 +7,50 @@
 
 module FSM
 (
-	input 			clk,
-	input 			sclk, 
-    input           positiveedge,        	// 
-    input           conditioned,   			//
-    input           parallelDataOut[0],     // 
-    output          miso_bufe,   	// WTF is this
-    output          DM_WE,   		// data memory write enable 
-    output	    	ADDR_WE        	// write enable for address latch 
-	output 			SR_WE			// shift register write enable 
-	output 			MISO_pin
-)
+	input 			clk, // internal
+	input 			SCLKEdge, // positive edge of sclk from input cond #2
+    input           ChipSelCond,   			// conditioned chip select from input cond #3
+    input           shiftRegOutPZero,     // parallelDataOut[0], tells us to read or write
+    output reg          MISO_BUFE,   	// controls "valve". 1 if we are reading, 0 otherwise. 
+    output reg         DM_WE,   		// data memory write enable 
+    output reg	    	ADDR_WE,        	// write enable for address latch 
+	output reg			SR_WE			// shift register write enable 
 
-shiftregister boofato(//some shit);
+);
 
-//notes 
-// maybe miso buffe shoulfd just always be zero unless you set it to 1 
-// 
+reg counter;
+parameter width = 8;
 
+always @(posedge clk) begin
 
-always @(posedge sclk ) begin
+	if (SCLKEdge == 1) begin
+		if (ChipSelCond == 0) begin
+				counter <= counter + 1;
+				if (counter <= width-1) begin
+					ADDR_WE <= 1;
+				end
+				else if (counter == width) begin
+					ADDR_WE <= 0;
+						if (shiftRegOutPZero == 0) begin // if you are writing to datamemory
+							DM_WE <= 1;
+						end
+						else if (shiftRegOutPZero == 1) begin // if you are reading to datamemory
+							SR_WE <= 1;
+							MISO_BUFE <= 1;
+						end
+				end
+				else if (counter > width) begin
+					ADDR_WE <= 0;
+				end
 
-if(conditioned == 0)begin				// if you are doing things
-	// ADDR_WE is 1 for 7 sclck's, then is set to zero
-	// 
-	if(parallelDataOut[0] == 0)begin  // if you are writing to datamemory
-		// once the above 7 sclks are done, DM_WE = 1 
-		// leave that on for 8 sclks then turn to 0 
-		// at the end, Addr_WE = 0, DM_WE = 0, SR_WE = 0
-		// MISO_BUFE = 0 to set the thing to z 
-		
+		end
+		else if (ChipSelCond == 1) begin
+			DM_WE <= 0;
+			ADDR_WE <= 0; 
+			SR_WE <= 0; 
+			MISO_BUFE <= 0; // to get Z 
+		end
 	end
-	if(parallelDataOut[0] == 1)begin  // if you are reading from data memory
-		// once those 7 sclks are done (on sclk number 8) set SR_WE to 1
-		// set MISO_BUFE to 1 so that we get the data the master wants to read 
-		// DM_WE to 0 
-		//
-		
-	end
+
 end
-
-
-if(conditioned == 1)begin			// if you are ingoring things and tri-stating
-	// DM_WE = 0
-	// ADDR+WE = 0 
-	// SR_WE = 0 
-	// MISO_BUFE = 0 to get Z 
-end
-
-if(MISO_BUFE == 0)
-	assign MISO_pin = DFF_serialout // there needs to be the d flip flop that exists here 
-
-if(MISO_BUFE == 1)
-	assign MISO_pin = z // syntak might be jank
-
-end 
-
 endmodule
-   
-
