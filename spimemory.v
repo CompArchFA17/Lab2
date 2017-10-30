@@ -16,7 +16,7 @@ module spiMemory
     output          miso_pin,   // SPI master in slave out
     output [3:0]    leds        // LEDs for debugging
 );
-	reg MISO_BUFE, DM_WE, ADDR_WE, SR_WE;
+	wire MISO_BUFE, DM_WE, ADDR_WE, SR_WE;
 
 	wire mosi, chip_select;
 	wire sclk_pos, sclk_neg;
@@ -52,7 +52,7 @@ module spiMemory
 
 	datamemory dataMemory(clk, shiftRegOutP, address[7:1], DM_WE, dataMemoryOut);
 
-  finiteStateMachine fsm(sclk_pos, chip_select, shiftRegOut[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE);
+  finiteStateMachine fsm(sclk, chip_select, shiftRegOut[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE);
 
 
 endmodule
