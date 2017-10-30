@@ -15,7 +15,7 @@ module fsm
 	output reg sr_we
 );
 
-	reg count;
+	reg [3:0] count;
 	reg [7:0] outputval;
 	reg rw;
 
@@ -26,70 +26,78 @@ module fsm
 		STATE_END = 5'b10000;
 
 	// State logic
+	always @(posedge sclk) begin
+	// always @(sclk) begin
+		if (state === 5'bx) begin
+			state <= STATE_START;
+		end
 
-	always @(sclk) begin
+		else begin
 
-		case(state)
+			case(state)
 
-			STATE_START: begin
-				if (chip_sel == 1) begin
-					state <= STATE_START;
-				end
-				else if (chip_sel == 0) begin
-					state <= STATE_RECIEVE;
-					count <= 0;
-				end
-			end
-
-			STATE_RECIEVE: begin
-				if (count <= 8) begin
-					outputval[7 - count] <= shift_reg_out;
-					count <= count + 1;
-					if (count == 7) begin
-						rw <= shift_reg_out;
+				STATE_START: begin
+					if (chip_sel == 1) begin
+						state <= STATE_START;
+					end
+					else if (chip_sel == 0) begin
+						state <= STATE_RECIEVE;
+						count <= 4'd0;
 					end
 				end
-				else if (count == 8) begin
-					if (rw == 1) begin
-						state <= STATE_READ;
-						count <= 0;
+
+				STATE_RECIEVE: begin
+					if (count < 4'd8) begin
+						outputval[7 - count] <= shift_reg_out;
+						count <= count + 4'd1;
+						if (count == 4'd7) begin
+							rw <= shift_reg_out;
+						end
 					end
-					else if (rw == 0) begin
-						state <= STATE_WRITE;
-						count <= 0;
+					else if (count == 4'd8) begin
+						if (rw === 1'b1) begin
+							state <= STATE_READ;
+							count <= 4'd0;
+						end
+						else if (rw === 1'b0) begin
+							state <= STATE_WRITE;
+							count <= 4'd0;
+						end
+						else if (rw === 1'bx) begin
+							count <= count;
+						end
 					end
 				end
-			end
 
-			STATE_WRITE: begin
-				if (count <= 8) begin
-					count <= count + 1;
+				STATE_WRITE: begin
+					if (count < 4'd8) begin
+						count <= count + 4'd1;
+					end
+					else if (count == 4'd8) begin
+						state <= STATE_END;
+					end
 				end
-				else if (count == 8) begin
-					state <= STATE_END;
-				end
-			end
 
-			STATE_READ: begin
-				if (count <= 8) begin
-					count <= count + 1;
+				STATE_READ: begin
+					if (count < 4'd8) begin
+						count <= count + 4'd1;
+					end
+					else if (count == 4'd8) begin
+						state <= STATE_END;
+					end
 				end
-				else if (count == 8) begin
-					state <= STATE_END;
-				end
-			end
 
-			STATE_END: begin
-				if (chip_sel == 1) begin
-					state <= STATE_START;
+				STATE_END: begin
+					if (chip_sel == 1) begin
+						state <= STATE_START;
+					end
+					else if (chip_sel == 0) begin
+						state <= STATE_END;
+					end
 				end
-				else if (chip_sel == 0) begin
-					state <= STATE_END;
-				end
-			end
 
-		endcase
-
+			endcase
+		end
 	end
 
 
@@ -103,6 +111,7 @@ module fsm
 			end
 
 			STATE_WRITE: begin
+				miso_buff <= 1'b0;
 				dm_we <= 1'b1;
 			end
 
