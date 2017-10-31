@@ -43,15 +43,14 @@ wire DM_WE;
 wire ADDR_WE;
 wire SR_WE;
 
-parameter counterwidth = 5; // Counter size, in bits, >= log2(waittime)
-reg[counterwidth-1:0] counter = 0;
+// parameter counterwidth = 5; // Counter size, in bits, >= log2(waittime)
+// reg[counterwidth-1:0] counter = 0;
 
 inputconditioner serialInCond(clk, mosi_pin, MOSI, positiveedge0, negativeedge0); // MOSICond is cleaned up MOSI / Serial In
 
 inputconditioner SCLKCond(clk, sclk_pin, conditioned1, SCLKEdge, negativeedge1); // positive edge is your cleaned up SCLKEdge
 
 inputconditioner ChipSelCond(clk, cs_pin, ChipSel, positiveedge2, negativeedge2); // conditioned2 is your cleaned up Chip Select
-
 
 	shiftregister SPIShift(clk, SCLKEdge, SR_WE, dataMemOut, MOSI, shiftRegOutP, MISO);
 

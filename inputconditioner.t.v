@@ -25,7 +25,7 @@ $dumpfile("inputconditioner.vcd");
 $dumpvars();
 
 $display(" clk | pin | conditioned | -edge| + edge"); 
-pin = 0; #400
+pin = 0; #40
 $display("%b | %b | %b | %b | %b", clk, pin, conditioned, rising, falling );
 pin = 1; #100
 $display("%b | %b | %b | %b | %b", clk, pin, conditioned, rising, falling );
