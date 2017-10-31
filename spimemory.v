@@ -37,7 +37,7 @@ wire MISO;
 wire MISO_PreBuff;
 wire [size-1:0] shiftRegOutP;
 wire [6:0] address;
-wire [size-2:0] dataMemOut;
+wire [size-1:0] dataMemOut;
 wire MISO_BUFE;
 wire DM_WE;
 wire ADDR_WE;
@@ -53,7 +53,7 @@ inputconditioner SCLKCond(clk, sclk_pin, conditioned1, SCLKEdge, negativeedge1);
 inputconditioner ChipSelCond(clk, cs_pin, ChipSel, positiveedge2, negativeedge2); // conditioned2 is your cleaned up Chip Select
 
 
-	shiftregister SPIShift(clk, SCLKEdge, SR_WR, dataMemOut, MOSI, shiftRegOutP, MISO);
+	shiftregister SPIShift(clk, SCLKEdge, SR_WE, dataMemOut, MOSI, shiftRegOutP, MISO);
 
 	dffADDR DFFAddr(clk, ADDR_WE, shiftRegOutP[7:1], address); 
 
