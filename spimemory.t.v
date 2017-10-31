@@ -21,236 +21,161 @@ $dumpvars();
 
 $display("CS_pin | sclk_pin | MOSI  | MISO 	");
 
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #2000
-//$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #1600
-//$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #2000
-//$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #1600cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #2000
-//$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #1600cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #2000
-//$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #1600
-
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #200
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #180
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #200
 
 
+/* TESTING FOR CHIP SELECT 1 DOES NOTHING
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+*/
+
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
 
 
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
-cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
-
-
-//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
-//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
-//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
-//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
-//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
-//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
-//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
-//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
-//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
-//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
-//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
-
-
-
+// TURN CHIP SELECT ON
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 1;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 1;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // THESE SET IT TO WRITE
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160 // SET TO WRITE
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 0
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160  
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 1
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 2
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 3
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 1;  #160 // 4
+cs_pin = 0; sclk_pin= 0; mosi_pin = 1;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 1;  #160 // 5
+cs_pin = 0; sclk_pin= 0; mosi_pin = 1;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 6
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 7
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 8
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #600 
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #600
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #600
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #600
+// start counting address again - FOR READING
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 1;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 1;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 1;  #160 // SET TO READ
+cs_pin = 0; sclk_pin= 0; mosi_pin = 1;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 0
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 1
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 2
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 3
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 1;  #160 // 4
+cs_pin = 0; sclk_pin= 0; mosi_pin = 1;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 1;  #160 // 5
+cs_pin = 0; sclk_pin= 0; mosi_pin = 1;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 6
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 7
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #160 // 8
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #600 
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #600
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #600
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #600
 
 
 

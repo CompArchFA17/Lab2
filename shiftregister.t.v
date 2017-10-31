@@ -45,7 +45,7 @@ $dumpvars();
 	$display("%b   | %b | %b", parallelLoad, parallelDataIn, serialDataOut); // expect 0
 	parallelLoad =1; parallelDataIn = 8'b11111010; #21
 	$display("%b   | %b | %b", parallelLoad, parallelDataIn, serialDataOut); // expect 1
-	parallelLoad =1; parallelDataIn = 8'b11110100; #21
+	parallelLoad =1; parallelDataIn = 8'b11110100; #500
 	$display("%b   | %b | %b", parallelLoad, parallelDataIn, serialDataOut); // expect 1
 
 // Check Serial In, Parallel Out

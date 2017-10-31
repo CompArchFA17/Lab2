@@ -22,7 +22,8 @@ module FSM
 parameter width = 8;
 parameter counterwidth = 5; // Counter size, in bits, >= log2(waittime)   
 reg[counterwidth-1:0] counter = 0;
-reg WriteController = 0; 
+reg WriteController; 
+reg restart;
 
 always @(posedge clk) begin
 
@@ -31,7 +32,7 @@ always @(posedge clk) begin
 			counter <= counter + 1;
 			if (counter == width-1) 
 				ADDR_WE <= 1;
-			if (counter == width) begin
+			else if (counter == width) begin
 				ADDR_WE <= 0;
 					if (shiftRegOutPZero == 0)  // if you are writing to datamemory
 						WriteController <= 1; 
@@ -40,17 +41,20 @@ always @(posedge clk) begin
 						MISO_BUFE <= 1;	
 					end
 			end
-			else if (counter > width - 1)
+			else if (counter > width) begin
 				ADDR_WE <= 0;
-			else if (counter == 15) begin
-				counter <= 0;
-				if (WriteController == 1) 
-					DM_WE <= 1; 
+				if (counter == 4'b1111) begin
+					counter <= 0;
+					if (WriteController == 1) 
+						DM_WE <= 1; 
+				end
 			end
+			
 		end
 		
 		else if (ChipSelCond == 1) begin
 			counter <= 0;
+			WriteController <= 0;
 			DM_WE <= 0; 
 			ADDR_WE <= 0; 
 			SR_WE <= 0; 
@@ -58,12 +62,6 @@ always @(posedge clk) begin
 		end
 	end
 
-/*
-	if (CSWire == 1) begin
-		ChipSelCond <= 1;
-		CSWire <= 0;
-	end
-*/
 
 end
 endmodule

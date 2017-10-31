@@ -44,6 +44,14 @@ $display("%b  | %b		| %b 	| %b 		| %b ", ChipSelCond, MISO_BUFE, DM_WE, ADDR_WE,
 ChipSelCond = 0; SCLKEdge = 1; shiftRegOutPZero = 1; #200
 $display("%b  | %b		| %b 	| %b 		| %b ", ChipSelCond, MISO_BUFE, DM_WE, ADDR_WE, SR_WE);
 
+// intermediate. Chip Sel = 1, SCLKEdge = 1, shiftRegOutPZero = 1 (read), everything else is zero
+ChipSelCond = 1; SCLKEdge = 1; shiftRegOutPZero = 1; #200
+$display("%b  | %b		| %b 	| %b 		| %b ", ChipSelCond, MISO_BUFE, DM_WE, ADDR_WE, SR_WE);
+
+// trial 3. Chip Sel = 0, SCLKEdge = 1, shiftRegOutPZero = 1 (write), DM_WE should turn on, everything else is zero
+ChipSelCond = 0; SCLKEdge = 1; shiftRegOutPZero = 0; #600
+$display("%b  | %b		| %b 	| %b 		| %b ", ChipSelCond, MISO_BUFE, DM_WE, ADDR_WE, SR_WE);
+
 $finish;
 end
 
