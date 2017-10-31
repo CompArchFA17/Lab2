@@ -26,6 +26,7 @@ output reg		SR_WE         //Parallel Load
       case(currentState) 
         0: begin // Default State
           if (CS == 0) begin
+            ADDR_WE <=1;
             currentState <= 1;
           end
           else begin
@@ -39,7 +40,6 @@ output reg		SR_WE         //Parallel Load
         end
         
         1: begin // Accepting Address
-          ADDR_WE <=1;
           counter <= counter + 1;
           if(counter == 6) begin
           	currentState <= 2;
@@ -60,7 +60,8 @@ output reg		SR_WE         //Parallel Load
         
         3: begin // First read state
           SR_WE <= 0;
-          currentState <= 4; 
+          MISOBUFE <= 1;
+          currentState <= 5; 
         end
         
         4: begin // Second read state
