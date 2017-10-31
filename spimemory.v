@@ -42,6 +42,11 @@ reg MISO_BUFE;
 reg DM_WE;
 reg ADDR_WE;
 reg SR_WE;
+assign parallelDataIn_forADDR = 8'b00000000;
+
+
+parameter counterwidth = 5; // Counter size, in bits, >= log2(waittime)
+reg[counterwidth-1:0] counter = 0;
 
 inputconditioner serialInCond(clk, mosi_pin, MOSI, positiveedge0, negativeedge0); // MOSICond is cleaned up MOSI / Serial In
 
@@ -49,21 +54,30 @@ inputconditioner SCLKCond(clk, sclk_pin, conditioned1, SCLKEdge, negativeedge1);
 
 inputconditioner ChipSelCond(clk, cs_pin, ChipSel, positiveedge2, negativeedge2); // conditioned2 is your cleaned up Chip Select
 
+always @(posedge clk) begin
 
-datamemory data(clk, dataMemOut, address, DM_WE, shiftRegOutP);
+	// if counter is less than 7, then assign address
+	if (counter <= 6) begin
+		shiftregister ShiftAddress(clk, SCLKEdge, 0, parallelDataIn_forADDR, MOSI, shiftRegOutP, MISO_PreBuff); // shift bits into address
+	counter <= counter + 1;
+	end
 
-dff8 DFFAddr(clk, ADDR_WE, shiftRegOutP, address);
+	// if counter is 7, then assign either DM_WE or SR_WE and MISO_BUFE. Send over address.
+	if (counter == 7) begin
+		dff8 DFFAddr(clk, ADDR_WE, shiftRegOutP, address); 
+	end
 
-dff DFFMISO(clk, negativeedge1, MISO, MISO_PreBuff);
+	// if counter is greater than 7, then just do stuff with shiftregoutP and datamemory
+	if (counter > 7) begin
+		dff DFFMISO(clk, negativeedge1, MISO, MISO_PreBuff);
+		datamemory data(clk, dataMemOut, address, DM_WE, shiftRegOutP);
+		shiftregister SPIShift(clk, SCLKEdge, SR_WR, dataMemOut, MOSI, shiftRegOutP, MISO);
+		// bufif1
+		bufif1 (miso_pin, MISO_PreBuff, MISO_BUFE);
+	end
+end
 
-shiftregister SPIShift(clk, SCLKEdge, SR_WR, dataMemOut, MOSI, shiftRegOutP, MISO);
- 
-FSM SPIFSM(clk, SCLKEdge, ChipSel, shiftRegOutP[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE);
-
-
-
-// current problem. certain things only happen for the second set of 8 bits (or whatever). need counters? 
-// Not using things properly :(
+FSM SPIFSM(clk, SCLKEdge, ChipSel, shiftRegOutP[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE); // this can stay out here because its counter is working at the same time as the one above
 
 endmodule
    
