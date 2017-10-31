@@ -53,39 +53,18 @@ inputconditioner SCLKCond(clk, sclk_pin, conditioned1, SCLKEdge, negativeedge1);
 inputconditioner ChipSelCond(clk, cs_pin, ChipSel, positiveedge2, negativeedge2); // conditioned2 is your cleaned up Chip Select
 
 
-/*
-always @(posedge clk) begin
-
-	// if counter is less than 7, then assign address
-	if (counter <= 6) begin
-		shiftregister ShiftAddress(clk, SCLKEdge, 0, dataMemOut, MOSI, shiftRegOutP,MISO_PreBuff); // shift bits into address
-	counter <= counter + 1;
-	end
-
-	// if counter is 7, then assign either DM_WE or SR_WE and MISO_BUFE. Send over address.
-	if (counter == 7) begin
-		dff8 DFFAddr(clk, ADDR_WE, shiftRegOutP, address); 
-	end
-
-	// if counter is greater than 7, then just do stuff with shiftregoutP and datamemory
-	if (counter > 7) begin
-		dff DFFMISO(clk, negativeedge1, MISO, MISO_PreBuff);
-		datamemory data(clk, dataMemOut, address, DM_WE, shiftRegOutP);
-		shiftregister SPIShift(clk, SCLKEdge, SR_WR, dataMemOut, MOSI, shiftRegOutP, MISO);
-		// bufif1
-		bufif1 (miso_pin, MISO_PreBuff, MISO_BUFE);
-	end
-end
-
-FSM SPIFSM(clk, SCLKEdge, ChipSel, shiftRegOutP[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE); // this can stay out here because its counter is working at the same time as the one above
-*/ 
-
 	shiftregister SPIShift(clk, SCLKEdge, SR_WR, dataMemOut, MOSI, shiftRegOutP, MISO);
+
 	dffADDR DFFAddr(clk, ADDR_WE, shiftRegOutP[7:1], address); 
+
 	FSM SPIFSM(clk, SCLKEdge, ChipSel, shiftRegOutP[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE); 
+
 	dff DFFMISO(clk, negativeedge1, MISO, MISO_PreBuff);
+
 	datamemory data(clk, dataMemOut, address, DM_WE, shiftRegOutP);
+
 	bufif1 (miso_pin, MISO_PreBuff, MISO_BUFE);
+
 endmodule
    
 
