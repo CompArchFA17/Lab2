@@ -50,6 +50,7 @@ output reg		SR_WE         //Parallel Load
         2: begin // Accepting Read/Write Bit
           ADDR_WE <= 0;
           if (shiftRegOut == 1) begin
+            SR_WE <= 1;
           	currentState <= 3;
           end
           else begin
@@ -57,13 +58,12 @@ output reg		SR_WE         //Parallel Load
           end
         end
         
-        3: begin // First read state, set WE high
-          SR_WE <= 1;
+        3: begin // First read state
+          SR_WE <= 0;
           currentState <= 4; 
         end
         
-        4: begin // Second read state, set WE low
-        	SR_WE <= 0;
+        4: begin // Second read state
           currentState <= 5;
           MISOBUFE <= 1;
         end
