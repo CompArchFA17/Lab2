@@ -21,95 +21,233 @@ $dumpvars();
 
 $display("CS_pin | sclk_pin | MOSI  | MISO 	");
 
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #500
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #500
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #2000
+//$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #1600
+//$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #2000
+//$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #1600cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #2000
+//$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #1600cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #2000
+//$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
+cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #1600
 
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 1;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 1;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 1;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 1; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
-cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #50
-$display("%b      | %b        | %b     | %b  ", cs_pin, sclk_pin, mosi_pin, miso_pin);
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+
+
+
+
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 1;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 1; mosi_pin = 0;  #48
+cs_pin = 1; sclk_pin= 0; mosi_pin = 0;  #48
+
+
+//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
+//cs_pin = 0; sclk_pin= 0; mosi_pin = 0;  #160
 
 
 

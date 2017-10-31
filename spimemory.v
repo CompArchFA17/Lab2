@@ -62,7 +62,7 @@ inputconditioner ChipSelCond(clk, cs_pin, ChipSel, positiveedge2, negativeedge2)
 
 	datamemory data(clk, dataMemOut, address, DM_WE, shiftRegOutP);
 
-	bufif1 (miso_pin, MISO_PreBuff, MISO_BUFE);
+	bufif1 covefefe(miso_pin, MISO_PreBuff, MISO_BUFE);
 
 endmodule
    
