@@ -25,12 +25,12 @@ output              serialDataOut       // Positive edge synchronized
           shiftregistermem <= shiftregistermem << 1;
           shiftregistermem[0] <= serialDataIn;
     end
-        else if (parallelLoad == 1) begin
-            shiftregistermem <= parallelDataIn;
-        end
+    else if (parallelLoad == 1) begin
+        shiftregistermem <= parallelDataIn;
     end
-    // output serial and parallel
-    assign parallelDataOut = shiftregistermem;
-    assign serialDataOut = shiftregistermem[width - 1];   
+  end
+  // output serial and parallel
+  assign parallelDataOut = shiftregistermem;
+  assign serialDataOut = shiftregistermem[width - 1];   
 
 endmodule
