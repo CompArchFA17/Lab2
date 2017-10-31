@@ -88,12 +88,7 @@ module fsm
 				end
 
 				STATE_END: begin
-					if (chip_sel == 1) begin
 						state <= STATE_START;
-					end
-					else if (chip_sel == 0) begin
-						state <= STATE_END;
-					end
 				end
 
 			endcase
@@ -108,14 +103,21 @@ module fsm
 
 			STATE_RECIEVE: begin
 				addr_we <= 1'b1;
+				dm_we <= 1'b0;
+				miso_buff = 1'b0;
+				sr_we = 1'b0;
 			end
 
 			STATE_WRITE: begin
-				miso_buff <= 1'b0;
+				addr_we <= 1'b0;
 				dm_we <= 1'b1;
+				miso_buff <= 1'b0;
+				sr_we <= 1'b0;
 			end
 
 			STATE_READ: begin
+				addr_we <= 1'b0;
+				dm_we <= 1'b0;
 				miso_buff <= 1'b1;
 				sr_we <= 1'b1;
 			end
