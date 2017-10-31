@@ -47,3 +47,52 @@ always @(posedge sclk) begin
       	currentState<=2;
         counter <=3'b0; //reset counter
       end
+    end
+  
+    2: begin // Accepting Read/Write Bit
+      ADDR_WE <= 0;
+      if (shiftRegOut == 1) begin
+      	currentState <= 3;
+      end
+      else begin
+      	currentState <= 6;
+      end
+    end
+    
+    3: begin // First read state, set WE high
+      SR_WE <= 1;
+      current_state <= 4; 
+    end
+    
+    4: begin // Second read state, set WE low
+    	SR_WE <= 0;
+      current_state <= 5;
+    end
+    
+    5: begin 
+      MISOBUFE <= 1;
+      counter <= counter + 1; 
+      if (counter == 7) begin
+        current_state <= 0;
+        counter <= 0;
+      end
+    end
+    
+    6: begin // allowing shift register to accept 8 bits of data
+      if (counter == 7) begin
+        DM_WE <= 1;
+        current_state <= 7;
+        counter <= 0;
+      end
+      else begin
+        counter <= counter + 1;
+      end
+    end
+    
+    7: begin // writing to DM for one clock cycle (DM is already high by the time this is reached)
+      DM_WE <= 0;
+      current_state <= 0;
+    end
+  endcase
+
+endmodule
