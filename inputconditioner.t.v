@@ -27,6 +27,9 @@ module testConditioner();
     always #10 clk = !clk;    // 50MHz Clock
 
     initial begin
+
+        $dumpfile("input_conditioner.vcd");
+        $dumpvars();
     //Test case 1: Input Synchronization (synchronizes signal with the internal clock)
         pin = 0; #5
         if (conditioned == 0 && clk == 0)
@@ -43,13 +46,13 @@ module testConditioner();
         pin = 1; #15
         if (conditioned != 1 && clk == 1)
             $display("Test Case 1c failed: pin not changed inside of clock cycle");
-    end
+
 
 
     // Test Case 2 + 3: Debouncing
-    initial begin
+
         // Test Case 2: Noisy high input signal
-        pin = 0; #300
+        pin = 0; #3000
         pin = 1; #5
         pin = 0; #5
         pin = 1; #5
@@ -84,12 +87,8 @@ module testConditioner();
         if (conditioned != 0) begin
             $display("Test Case X failed. conditioned output is not low");
         end
-    end
 
     // Test Case 4 + 5: Edge Detection
-    initial begin
-        $dumpfile("input_conditioner.vcd");
-        $dumpvars();
 
         pin = 0; #300
         pin = 1; #300
@@ -98,8 +97,9 @@ module testConditioner();
         pin = 0; #300
         pin = 1; #300
         pin = 0; #300
-        $finish();
-    end
+
+    $finish();
+end
 
     // Test Case 4: Positive Edge Detection
 
@@ -120,5 +120,4 @@ module testConditioner();
             $display("falling: %b", falling);
         end
     end
-
 endmodule
