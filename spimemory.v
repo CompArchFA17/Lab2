@@ -38,12 +38,10 @@ wire MISO_PreBuff;
 wire [size-1:0] shiftRegOutP;
 wire [6:0] address;
 wire [size-2:0] dataMemOut;
-reg MISO_BUFE;
-reg DM_WE;
-reg ADDR_WE;
-reg SR_WE;
-assign parallelDataIn_forADDR = 8'b00000000;
-
+wire MISO_BUFE;
+wire DM_WE;
+wire ADDR_WE;
+wire SR_WE;
 
 parameter counterwidth = 5; // Counter size, in bits, >= log2(waittime)
 reg[counterwidth-1:0] counter = 0;
@@ -54,11 +52,13 @@ inputconditioner SCLKCond(clk, sclk_pin, conditioned1, SCLKEdge, negativeedge1);
 
 inputconditioner ChipSelCond(clk, cs_pin, ChipSel, positiveedge2, negativeedge2); // conditioned2 is your cleaned up Chip Select
 
+
+/*
 always @(posedge clk) begin
 
 	// if counter is less than 7, then assign address
 	if (counter <= 6) begin
-		shiftregister ShiftAddress(clk, SCLKEdge, 0, parallelDataIn_forADDR, MOSI, shiftRegOutP, MISO_PreBuff); // shift bits into address
+		shiftregister ShiftAddress(clk, SCLKEdge, 0, dataMemOut, MOSI, shiftRegOutP,MISO_PreBuff); // shift bits into address
 	counter <= counter + 1;
 	end
 
@@ -78,7 +78,14 @@ always @(posedge clk) begin
 end
 
 FSM SPIFSM(clk, SCLKEdge, ChipSel, shiftRegOutP[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE); // this can stay out here because its counter is working at the same time as the one above
+*/ 
 
+	shiftregister SPIShift(clk, SCLKEdge, SR_WR, dataMemOut, MOSI, shiftRegOutP, MISO);
+	dffADDR DFFAddr(clk, ADDR_WE, shiftRegOutP[7:1], address); 
+	FSM SPIFSM(clk, SCLKEdge, ChipSel, shiftRegOutP[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE); 
+	dff DFFMISO(clk, negativeedge1, MISO, MISO_PreBuff);
+	datamemory data(clk, dataMemOut, address, DM_WE, shiftRegOutP);
+	bufif1 (miso_pin, MISO_PreBuff, MISO_BUFE);
 endmodule
    
 
@@ -96,7 +103,7 @@ module dff #( parameter W = 1 )
     end
 endmodule
 
-module dff8 #( parameter W = 8 )
+module dffADDR #( parameter W = 7 )
 (
     input trigger,
     input enable,
