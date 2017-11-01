@@ -1,0 +1,8 @@
+# Example filter file
+#   Each line has a value (which much match what is in the wave viewer exactly) and a string alias to replace the value if found
+00 Reset
+01 AddressLoad
+02 Branch
+03 Write
+04 Read
+05 DataLoad

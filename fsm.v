@@ -32,7 +32,7 @@ module finiteStateMachine(
                 state <= addressLoad;
             end
             else if (state == addressLoad) begin
-                if (counter == 6) begin
+                if (counter == 5) begin
                     counter <= 0;
                     state <= branch;
                 end
@@ -71,13 +71,13 @@ module finiteStateMachine(
             addressLoad: begin
                 MISO_BUFE <= 0;
                 DM_WE <= 0;
-                ADDR_WE <= 1;
+                ADDR_WE <= 0;
                 SR_WE <= 0;
             end
             branch: begin
                 MISO_BUFE <= 0;
                 DM_WE <= 0;
-                ADDR_WE <= 0;
+                ADDR_WE <= 1;
                 SR_WE <= 0;
             end
             write: begin

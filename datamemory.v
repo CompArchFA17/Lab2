@@ -22,6 +22,10 @@ module datamemory
 
     reg [width-1:0] memory [depth-1:0];
 
+    initial begin
+        memory[0] = 0;
+    end
+
     always @(posedge clk) begin
         if(writeEnable)
             memory[address] <= dataIn;
