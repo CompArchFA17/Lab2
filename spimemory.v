@@ -23,7 +23,7 @@ module spiMemory
 	inputconditioner c1(.clk(clk),
                       .noisysignal(mosi_pin),
                       .conditioned(mosi_conditioned));
-	inputconditioner c2(.clk(clk),
+	inputconditioner #(1) c2(.clk(clk),
                       .noisysignal(sclk_pin),
                       .positiveedge(sclk_pos),
                       .negativeedge(sclk_neg));
