@@ -66,45 +66,44 @@ module finiteStateMachine(
             else if (state <= reset) begin
                 state <= reset;
             end
-
-            case (state)
-                addressLoad: begin
-                    MISO_BUFE <= 0;
-                    DM_WE <= 0;
-                    ADDR_WE <= 1;
-                    SR_WE <= 0;
-                end
-                branch: begin
-                    MISO_BUFE <= 0;
-                    DM_WE <= 0;
-                    ADDR_WE <= 0;
-                    SR_WE <= 0;
-                end
-                write: begin
-                    MISO_BUFE <= 0;
-                    DM_WE <= 1;
-                    ADDR_WE <= 0;
-                    SR_WE <= 0;
-                end
-                read: begin
-                    MISO_BUFE <= 1;
-                    DM_WE <= 0;
-                    ADDR_WE <= 0;
-                    SR_WE <= 0;
-                end
-                dataLoad: begin
-                    MISO_BUFE <= 0;
-                    DM_WE <= 0;
-                    ADDR_WE <= 0;
-                    SR_WE <= 1;
-                end
-                reset: begin
-                    MISO_BUFE <= 0;
-                    DM_WE <= 0;
-                    ADDR_WE <= 0;
-                    SR_WE <= 0;
-                end
-            endcase
         end
+        case (state)
+            addressLoad: begin
+                MISO_BUFE <= 0;
+                DM_WE <= 0;
+                ADDR_WE <= 1;
+                SR_WE <= 0;
+            end
+            branch: begin
+                MISO_BUFE <= 0;
+                DM_WE <= 0;
+                ADDR_WE <= 0;
+                SR_WE <= 0;
+            end
+            write: begin
+                MISO_BUFE <= 0;
+                DM_WE <= 1;
+                ADDR_WE <= 0;
+                SR_WE <= 0;
+            end
+            read: begin
+                MISO_BUFE <= 1;
+                DM_WE <= 0;
+                ADDR_WE <= 0;
+                SR_WE <= 0;
+            end
+            dataLoad: begin
+                MISO_BUFE <= 0;
+                DM_WE <= 0;
+                ADDR_WE <= 0;
+                SR_WE <= 1;
+            end
+            reset: begin
+                MISO_BUFE <= 0;
+                DM_WE <= 0;
+                ADDR_WE <= 0;
+                SR_WE <= 0;
+            end
+        endcase
     end
 endmodule
