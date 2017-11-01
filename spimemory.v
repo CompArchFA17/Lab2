@@ -249,38 +249,12 @@ module spiMemory
 	dff output_ff(.trigger(clk),.enable(negSCLK),.d(serialout),.q(output_ff_out));
 	
 	tristatebuffer outbuffer(.out(miso_pin),.in(output_ff_out),.en(miso_buff));
- 	//Wait for chip select to be asserted low and begin
- 	always @(posedge clk) begin
- 		If()
-
-    //Read first 8 bits
-    for (i = 7; i > 0; i = i-1) begin
-    	assign serialin
-    end
-
-    shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(parallelslc),.parallelDataIn(parallelData),.serialDataIn(serialin),.parallelDataOut(shiftregister));
-
-
-    //Write Operation
 
 
     shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(parallelslc),.parallelDataIn(parallelData),.serialDataIn(serialin),.parallelDataOut(shiftregister));
 
     //data memory
     datamemory data(.clk(clk),.address(address),.writeEnable(dm_we),.dataIn(shiftregister));
-
-    //Input into Shift Register
-
-
-	//Read Operation
-
-    shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(parallelslc),.parallelDataIn(d_out),.serialDataOut(serialout));
-
-    //data memory
-    datamemory data(.clk(clk),.dataOut(),.address(),.writeEnable(dm_we));
-
-
-
 
 
     // Assign bits of shiftregister to appropriate display boxes
