@@ -44,6 +44,7 @@ module spiMemory
     output DM_WE
 );
 wire [7:0] shiftRegOutP;
+<<<<<<< HEAD
 wire [7:0] dataMemOut;
 wire [6:0] address;
 wire MISOBUFE;
@@ -72,7 +73,7 @@ fsm fsm0(shiftRegOutP[0],cs,ClkEdge,clk,MISOBUFE,DM_WE,ADDR_WE,SR_WE);
 shiftregister sr0(clk,ClkEdge,SR_WE,dataMemOut[7:0],SerialIn, shiftRegOutP[7:0],D0);
 
 //data memory
-datamemory dm0(clk,dataMemOut[7:0],address[6:0],DM_WE,shiftRegOutP[7:0]);
+datamemory dm0(clk,DataMemOut[7:0],address[6:0],DM_WE,shiftRegOutP[7:0]);
 
 //address latch
 addressLatch aL0(ADDR_WE,shiftRegOutP[6:0],clk,address[6:0]);

@@ -38,7 +38,7 @@ module fsmTest();
     // test for read
     CS = 0; shiftRegOut = 1;
       
-    for (counter = 0; counter < 18; counter = counter + 1)
+    for (counter = 0; counter < 17; counter = counter + 1)
           begin 
         sclk = 0; #10
             sclk = 1; #10
