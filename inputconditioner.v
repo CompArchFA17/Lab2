@@ -23,27 +23,27 @@ module inputconditioner
     reg conditioned1 = 0;
     
     always @(posedge clk ) begin
-    if(conditioned == 0 && conditioned1 == 1) begin
+    if(conditioned1 == 0 && conditioned == 1) begin
         negativeedge = 1;
-    end else if (conditioned == 1 && conditioned1 == 0) begin
+    end else if (conditioned1 == 1 && conditioned == 0) begin
         positiveedge = 1;
         end else if (positiveedge == 1 || negativeedge == 1) begin
             positiveedge = 0;
             negativeedge = 0;
         end
-        if(conditioned == synchronizer1)
+        if(conditioned1 == synchronizer1)
             counter <= 0;
         else begin
             if( counter == waittime) begin
                 counter <= 0;
-                conditioned <= synchronizer1;
+                conditioned1 <= synchronizer1;
             end
             else 
                 counter <= counter+1;
         end
         synchronizer0 <= noisysignal;
         synchronizer1 <= synchronizer0;
-    conditioned1 <= conditioned;
+    conditioned <= conditioned1;
     end
 endmodule
 

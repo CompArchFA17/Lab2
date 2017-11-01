@@ -52,6 +52,15 @@ module jkff1
     end
 endmodule
 
+module tristatebuffer(out,in,en);
+	input [7:0] in;
+	input en;
+	output [7:0] out;
+	
+	assign out = en ? in : 8'b0;
+	
+endmodule
+
 // Two-input MUX with parameterized bit width (default: 1-bit)
 module mux2 #( parameter W = 1 )
 (
@@ -215,6 +224,7 @@ module spiMemory
     wire res_sel;             // Select between display options
     wire parallelslc;         // select parallel input
     wire serialin;            // binary input for serial input
+	wire serialout;           // serial output of shift register
     wire posSCLK;             // clk edge for serial input
     wire negSCLK;			  // 
     wire CS ;				  // chip select
@@ -223,6 +233,7 @@ module spiMemory
     wire dm_we;				  // dm_we
     wire addr_we;			  // addr_we
     wire sr_we;				  // sr_we
+	wire output_ff_out        // output ff output
     
     //Map to input conditioners
     inputconditioner MOSI(.noisysignal(mosi_pin),.clk(clk),.conditioned(serialin));
@@ -235,6 +246,9 @@ module spiMemory
     //Address Latch 
     dlatch addr_latch(.data(parallelData),.clk(clk),.addr_we(addr_we),.addr(address));
 
+	dff output_ff(.trigger(clk),.enable(negSCLK),.d(serialout),.q(output_ff_out));
+	
+	tristatebuffer outbuffer(.out(miso_pin),.in(output_ff_out),.en(miso_buff));
  	//Wait for chip select to be asserted low and begin
  	always @(posedge clk) begin
  		If()
@@ -260,7 +274,7 @@ module spiMemory
 
 	//Read Operation
 
-    shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(parallelslc),.parallelDataIn(d_out),.serialDataOut());
+    shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(parallelslc),.parallelDataIn(d_out),.serialDataOut(serialout));
 
     //data memory
     datamemory data(.clk(clk),.dataOut(),.address(),.writeEnable(dm_we));
