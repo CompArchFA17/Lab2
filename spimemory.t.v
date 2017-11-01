@@ -12,104 +12,174 @@ module testspimemory ();
 	initial clk = 0;
 	always #10 clk = !clk;
 
-	initial sclk = 0;
-	always #250 sclk = !sclk;
-
 	initial begin
 		$dumpfile("spimemory.vcd");
-		$dumpvars();
+		$dumpvars(0, dut.dm.memory[0], dut.dm.memory[1]);
 
-// Address bits
-		cs = 1; #500
+		// One cycle to get to first state
+		cs = 1;	// keep cs high until in state
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		// Start presenting address bits
 		cs = 0;
-		mosi_pin = 0; #3500
-		mosi_pin = 1; #500
-		mosi_pin = 8; #4000
-		cs  = 1; #500
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
+
+		// Indicate write state
+		sclk = 0; mosi_pin = 0; #1000
+		sclk = 1; #1000
+
+		// Start presenting data bits
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
+
+		sclk = 0; mosi_pin = 0; #1000
+		sclk = 1; #1000
+
+		// Chip select goes high.
+		sclk = 0; cs = 1; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		// Chip select goes low.
+		// Start presenting address bits
 		cs = 0;
-		mosi_pin = 0; #8000;		
-		// sclk = 1; #15
-		// mosi_pin = 0;
-		// sclk = 0; #15
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
 
-		// sclk = 1; #15
-		// // mosi_pin = 0;
-		// sclk = 0; #15
+		sclk = 0; mosi_pin = 0; #1000
+		sclk = 1; #1000
 
-		// sclk = 1; #15
-		// // mosi_pin = 0;
-		// sclk = 0; #15
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
 
-		// sclk = 1; #15
-		// // mosi_pin = 0;
-		// sclk = 0; #15
+		sclk = 0; mosi_pin = 0; #1000
+		sclk = 1; #1000
 
-		// sclk = 1; #15
-		// // mosi_pin = 0;
-		// sclk = 0; #15
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
 
-		// sclk = 1; #15
-		// // mosi_pin = 0;
-		// sclk = 0; #15
+		sclk = 0; mosi_pin = 0; #1000
+		sclk = 1; #1000
 
-		// sclk = 1; #15
-		// // mosi_pin = 0;
-		// sclk = 0; #15
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
 
+		// Indicate read state
+		sclk = 0; mosi_pin = 1; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+
+		sclk = 0; #1000
+		sclk = 1; #1000
 		
-// // Read/Write flag
-// 		sclk = 1; #15
-// 		mosi_pin = 0;
-// 		sclk = 0; #15
 
-// // Data bits
-// 		sclk = 1; #15
-// 		mosi_pin = 0;
-// 		sclk = 0; #15
 
-// 		$displayb(miso_pin);
+		// // Data to write
+		// mosi_pin = 1;
+		// sclk = 0; #1000
+		// sclk = 1; #1000
 
-// 		sclk = 1; #15
-// 		mosi_pin = 0;
-// 		sclk = 0; #15
+		// sclk = 0; #1000
+		// sclk = 1; #1000
 
-// 		$displayb(miso_pin);
+		// sclk = 0; #1000
+		// sclk = 1; #1000
 
-// 		sclk = 1; #15
-// 		mosi_pin = 0;
-// 		sclk = 0; #15
+		// sclk = 0; #1000
+		// sclk = 1; #1000
 
-// 		$displayb(miso_pin);
+		// sclk = 0; #1000
+		// sclk = 1; #1000
 
-// 		sclk = 1; #15
-// 		mosi_pin = 0;
-// 		sclk = 0; #15
+		// sclk = 0; #1000
+		// sclk = 1; #1000
 
-// 		$displayb(miso_pin);
+		// sclk = 0; #1000
+		// sclk = 1; #1000
 
-// 		sclk = 1; #15
-// 		mosi_pin = 0;
-// 		sclk = 0; #15
+		// sclk = 0; #1000
+		// sclk = 1; #1000
 
-// 		$displayb(miso_pin);
 
-// 		sclk = 1; #15
-// 		mosi_pin = 0;
-// 		sclk = 0; #15
 
-// 		$displayb(miso_pin);
-
-// 		sclk = 1; #15
-// 		mosi_pin = 0;
-// 		sclk = 0; #15
-
-// 		$displayb(miso_pin);
-
-// 		sclk = 1; #15
-// 		mosi_pin = 0;
-// 		sclk = 0; #15
-
-// 		$displayb(miso_pin);
 
 		$finish();
 		

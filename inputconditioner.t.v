@@ -5,6 +5,7 @@
 
 `include "inputconditioner.v"
 
+
 module testConditioner();
 
     reg  clk;
@@ -52,7 +53,7 @@ module testConditioner();
     // Test Case 2 + 3: Debouncing
 
         // Test Case 2: Noisy high input signal
-        pin = 0; #3000
+        pin = 0; #300
         pin = 1; #5
         pin = 0; #5
         pin = 1; #5

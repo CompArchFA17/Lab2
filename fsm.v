@@ -47,43 +47,46 @@ module fsm
 				end
 
 				STATE_RECIEVE: begin
-					if (count < 4'd8) begin
+					if (count < 4'd7) begin
 						outputval[7 - count] <= shift_reg_out;
 						count <= count + 4'd1;
-						if (count == 4'd7) begin
-							rw <= shift_reg_out;
-						end
+						// if (count == 4'd6) begin
+						// 	rw <= shift_reg_out;
+						// end
 					end
-					else if (count == 4'd8) begin
-						if (rw === 1'b1) begin
+					else if (count == 4'd7) begin
+						// rw <= shift_reg_out;
+						if (shift_reg_out === 1'b1) begin
 							state <= STATE_READ;
 							count <= 4'd0;
 						end
-						else if (rw === 1'b0) begin
+						else if (shift_reg_out === 1'b0) begin
 							state <= STATE_WRITE;
 							count <= 4'd0;
 						end
-						else if (rw === 1'bx) begin
+						else if (shift_reg_out === 1'bx) begin
 							count <= count;
 						end
 					end
 				end
 
 				STATE_WRITE: begin
-					if (count < 4'd8) begin
+					if (count < 4'd7) begin
 						count <= count + 4'd1;
 					end
-					else if (count == 4'd8) begin
+					else if (count == 4'd7) begin
 						state <= STATE_END;
+						count <= 4'b0;
 					end
 				end
 
 				STATE_READ: begin
-					if (count < 4'd8) begin
+					if (count < 4'd7) begin
 						count <= count + 4'd1;
 					end
-					else if (count == 4'd8) begin
+					else if (count == 4'd7) begin
 						state <= STATE_END;
+						count <= 4'b0;
 					end
 				end
 
