@@ -18,11 +18,8 @@ module spiMemory
 );
 	wire MISO_BUFE, DM_WE, ADDR_WE, SR_WE;
 
-	wire mosi_conditioned, chip_select;
+	wire chip_select;
 	wire sclk_pos, sclk_neg;
-	inputconditioner c1(.clk(clk),
-                      .noisysignal(mosi_pin),
-                      .conditioned(mosi_conditioned));
 	inputconditioner #(1) c2(.clk(clk),
                       .noisysignal(sclk_pin),
                       .positiveedge(sclk_pos),
@@ -38,7 +35,7 @@ module spiMemory
                .peripheralClkEdge(sclk_pos),
                .parallelLoad(SR_WE),
                .parallelDataIn(dataMemoryOut),
-               .serialDataIn(mosi_conditioned),
+               .serialDataIn(mosi_pin),
                .parallelDataOut(shiftRegOutP),
                .serialDataOut(serialOut));
 

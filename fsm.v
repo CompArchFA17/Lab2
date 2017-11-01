@@ -19,6 +19,7 @@ module finiteStateMachine(
     localparam read = 4;
     localparam reset = 0;
     localparam dataLoad = 5;
+    localparam dataLoad2 = 6;
 
     reg[7:0] state = reset;
 
@@ -40,6 +41,9 @@ module finiteStateMachine(
             end
         end
         if (state == dataLoad) begin
+            state <= dataLoad2;
+        end
+        if (state == dataLoad2) begin
             state <= read;
         end
 
@@ -91,6 +95,12 @@ module finiteStateMachine(
             end
             dataLoad: begin
                 MISO_BUFE <= 0;
+                DM_WE <= 0;
+                ADDR_WE <= 0;
+                SR_WE <= 0;
+            end
+            dataLoad2: begin
+                MISO_BUFE <= 1;
                 DM_WE <= 0;
                 ADDR_WE <= 0;
                 SR_WE <= 1;

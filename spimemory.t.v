@@ -42,7 +42,7 @@ module testSPIMemory();
         mosi_pin = 1;
         sclk_pin = 0; #10 sclk_pin = 1; #10; // 8
 
-        mosi_pin = 1'bx;
+        mosi_pin = 1'bX;
         // Read output
         sclk_pin = 0; #10 sclk_pin = 1; #10; // 1
         testOut[0] = miso_pin;
