@@ -50,7 +50,11 @@ module spiMemory
   // Tri-state buffer
   assign miso_pin = (MISO_BUFE) ? q : 1'bz;
 
-	datamemory dataMemory(clk, shiftRegOutP, address[7:1], DM_WE, dataMemoryOut);
+	datamemory dataMemory(.clk(clk),
+                        .dataOut(dataMemoryOut),
+                        .dataIn(shiftRegOutP),
+                        .address(address[7:1]),
+                        .writeEnable(DM_WE));
 
   finiteStateMachine fsm(clk, sclk_pos, chip_select, shiftRegOut[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE);
 
