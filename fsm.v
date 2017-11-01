@@ -17,12 +17,13 @@ module finiteStateMachine(
     localparam write = 3;
     localparam read = 4;
     localparam reset = 0;
+    localparam dataLoad = 5;
 
     reg[7:0] state = reset;
 
     integer counter = 0;
     //change states on the clk cycles
-   
+    
     always @(posedge sclk) begin
         // commands: CS_Low, done address load, parallelDataLoad, serialDataLoad
         // CS_high
@@ -31,7 +32,7 @@ module finiteStateMachine(
             state <= addressLoad;
         end
         else if (state == addressLoad) begin
-            if (counter == 8) begin
+            if (counter == 6) begin
                 counter <= 0;
                 state <= branch;
             end
@@ -44,11 +45,16 @@ module finiteStateMachine(
                 state <= write;
             end
             else begin // read
-                state <= read;
+                state <= dataLoad;
             end
         end
-        else if (state == write || state == write) begin
-            if (counter == 8) begin
+        else if (state == dataLoad) begin
+            state <= read;
+        end
+
+
+        else if ((state == read) || (state == write)) begin
+            if (counter == 7) begin
                 counter <= 0;
                 state <= reset;
             end
@@ -84,9 +90,14 @@ module finiteStateMachine(
                 MISO_BUFE <= 1;
                 DM_WE <= 0;
                 ADDR_WE <= 0;
+                SR_WE <= 0;
+            end
+            dataLoad: begin
+                MISO_BUFE <= 0;
+                DM_WE <= 0;
+                ADDR_WE <= 0;
                 SR_WE <= 1;
             end
-
             reset: begin
                 MISO_BUFE <= 0;
                 DM_WE <= 0;

@@ -22,6 +22,7 @@ module testSPIMemory();
         $dumpfile("spimemory.vcd");
         $dumpvars;
 
+        //#50;
         // Push input
         cs_pin = 0;     
         mosi_pin = 0;
@@ -58,7 +59,9 @@ module testSPIMemory();
         sclk_pin = 0; #10 sclk_pin = 1; #10; // 7
         testOut[6] = miso_pin;
         sclk_pin = 0; #10 sclk_pin = 1; #10; // 8
-
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 8
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 8
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 8
         $display("%8b", testOut);
         $finish;
     end

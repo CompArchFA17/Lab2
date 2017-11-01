@@ -38,7 +38,7 @@ module spiMemory
                .peripheralClkEdge(sclk_pos),
                .parallelLoad(SR_WE),
                .parallelDataIn(dataMemoryOut),
-               .serialDataIn(mosi),
+               .serialDataIn(mosi_pin),
                .parallelDataOut(shiftRegOutP),
                .serialDataOut(serialOut));
 
