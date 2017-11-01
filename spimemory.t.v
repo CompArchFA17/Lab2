@@ -14,121 +14,51 @@ module testSPIMemory();
     spiMemory spi(clk, sclk_pin, cs_pin, mosi_pin, miso_pin, );
 
     initial clk = 0;
+    initial cs_pin = 1;
+    reg [7:0] testOut = 8'bxxxxxxxx; // last bit is 1 for read
 
     initial begin
 
-        cs_pin = 1;
-        // Test parallel loads
-        parallelLoad = 1;
-        parallelDataIn = 8'b00000000;
-        clk = 1; #10 clk = 0; #10
-        if (parallelDataOut == 8'b00000000) begin
-            $display("Test Case 1 Passed");
-        end
-        else begin
-            $display("Test Case 1 Failed!");
-        end
+    
 
-    //     parallelDataIn = 8'b00001111;
-    //     clk = 1; #10 clk = 0; #10;
-    //     if (parallelDataOut == 8'b00001111) begin
-    //         $display("Test Case 2 Passed");
-    //     end
-    //     else begin
-    //         $display("Test Case 2 Failed!");
-    //     end
+        // Push input
+        cs_pin = 0;     
+        mosi_pin = 0;
+        clk = 0; #10 clk = 1; #10; // 1
+        mosi_pin = 0;
+        clk = 0; #10 clk = 1; #10; // 2
+        mosi_pin = 0;
+        clk = 0; #10 clk = 1; #10; // 3
+        mosi_pin = 0;
+        clk = 0; #10 clk = 1; #10; // 4
+        mosi_pin = 0; 
+        clk = 0; #10 clk = 1; #10; // 5
+        mosi_pin = 0;
+        clk = 0; #10 clk = 1; #10; // 6
+        mosi_pin = 0;
+        clk = 0; #10 clk = 1; #10; // 7
+        mosi_pin = 1;
+        clk = 0; #10 clk = 1; #10; // 8
+        
+        mosi_pin = 1'bx;
+        // Read output
+        clk = 0; #10 clk = 1; #10; // 1
+        testOut[0] = miso_pin;
+        clk = 0; #10 clk = 1; #10; // 2
+        testOut[1] = miso_pin;
+        clk = 0; #10 clk = 1; #10; // 3
+        testOut[2] = miso_pin;
+        clk = 0; #10 clk = 1; #10; // 4
+        testOut[3] = miso_pin; 
+        clk = 0; #10 clk = 1; #10; // 5
+        testOut[4] = miso_pin;
+        clk = 0; #10 clk = 1; #10; // 6
+        testOut[5] = miso_pin;
+        clk = 0; #10 clk = 1; #10; // 7
+        testOut[6] = miso_pin;
+        clk = 0; #10 clk = 1; #10; // 8
 
-    //     parallelDataIn = 8'b11111111;
-    //     clk = 1; #10 clk = 0; #10
-    //     if (parallelDataOut == 8'b11111111) begin
-    //         $display("Test Case 3 Passed");
-    //     end
-    //     else begin
-    //         $display("Test Case 3 Failed!");
-    //     end
-    //     if (serialDataOut == 1) begin
-    //         $display("Test Case 10 serialDataOut Passed");
-    //     end
-    //     else begin
-    //         $display("Test Case 10 serialDataOut Failed!");
-    //         $display("%8b", serialDataOut);
-    //     end
-
-
-    //     parallelLoad = 0;
-    //     parallelDataIn = 8'b00000000;
-    //     clk = 1; #10 clk = 0; #10
-    //     if (parallelDataOut == 8'b00000000) begin
-    //         $display("Test Case 4 Failed!");
-    //     end
-    //     else begin
-    //         $display("Test Case 4 Passed");
-    //     end
-
-
-    //     // serial tests
-    //     clk = 0; #10
-    //     parallelLoad = 1;
-    //     parallelDataIn = 8'b00000000;
-    //     clk = 1; #10 clk = 0; #10
-
-    //     parallelLoad = 0;
-    //     serialDataIn = 1;
-    //     peripheralClkEdge = 1;
-
-    //     clk = 1; #5 clk = 0; #5
-    //     if (parallelDataOut == 8'b00000001) begin
-    //         $display("Test Case 6 Passed");
-    //     end
-    //     else begin
-    //         $display("Test Case 6 Failed!");
-    //         $display("%8b", parallelDataOut);
-    //     end
-    //     if (serialDataOut == 0) begin
-    //         $display("Test Case 7 Passed");
-    //     end
-    //     else begin
-    //         $display("Test Case 7 Failed!");
-    //         $display("%8b", serialDataOut);
-    //     end
-
-    //     clk = 1; #5 clk = 0; #5
-
-    //     if (parallelDataOut == 8'b00000011) begin
-    //         $display("passed serial test 2");
-    //     end
-    //     else begin
-    //         $display("failed serial test 2");
-    //         $display("%8b", parallelDataOut);
-    //     end
-
-    //     clk = 1; #5 clk = 0; #5
-    //     if (parallelDataOut == 8'b00000111) begin
-    //         $display("passed serial test 3");
-    //     end
-    //     else begin
-    //         $display("failed serial test 3");
-    //         $display("%8b", parallelDataOut);
-    //     end
-
-    //     serialDataIn = 0;
-    //     clk = 1; #5 clk = 0; #5
-    //     if (parallelDataOut == 8'b00001110) begin
-    //         $display("passed serial test 4");
-    //     end
-    //     else begin
-    //         $display("failed serial test 4");
-    //         $display("%8b", parallelDataOut);
-    //     end
-    //     if (serialDataOut == 0) begin
-    //         $display("passed serialOut test 2");
-    //     end
-    //     else begin
-    //         $display("failed serialOut test 2");
-    //         $display("%8b", serialDataOut);
-    //     end
-
-    //     // test serialDataOut
-    // end
+        $display("%8b", testOut);
+    end
 
 endmodule
