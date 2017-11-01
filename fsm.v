@@ -28,7 +28,7 @@ module fsm
 	// State logic
 	always @(posedge sclk) begin
 	// always @(sclk) begin
-		if (state === 5'bx) begin
+		if (state === 6'bx) begin
 			state <= STATE_START;
 		end
 
@@ -81,17 +81,17 @@ module fsm
 				end
 
 				STATE_READ0: begin
+					state <= STATE_READ1;
+				end
+
+				STATE_READ0: begin
 					if (count < 4'd7) begin
 						count <= count + 4'd1;
 					end
 					else if (count == 4'd7) begin
-						state <= STATE_READ1;
+						state <= STATE_END;
 						count <= 4'b0;
 					end
-				end
-
-				STATE_READ1: begin
-					state <= STATE_END;
 				end
 
 				STATE_END: begin
