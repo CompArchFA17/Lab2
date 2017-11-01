@@ -57,7 +57,7 @@ module fsm
 					else if (count == 4'd7) begin
 						// rw <= shift_reg_out;
 						if (shift_reg_out === 1'b1) begin
-							state <= STATE_READ;
+							state <= STATE_READ0;
 							count <= 4'd0;
 						end
 						else if (shift_reg_out === 1'b0) begin
