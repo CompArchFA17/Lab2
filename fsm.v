@@ -12,26 +12,25 @@ module finiteStateMachine(
     output reg SR_WE
 );
 
-    reg[7:0] state;
-    reg[7:0] prev_state;
     localparam addressLoad = 1;
     localparam branch = 2;
     localparam write = 3;
     localparam read = 4;
     localparam reset = 0;
 
+    reg[7:0] state = reset;
+
     integer counter = 0;
     //change states on the clk cycles
+   
     always @(posedge sclk) begin
-
         // commands: CS_Low, done address load, parallelDataLoad, serialDataLoad
         // CS_high
 
-        prev_state <= state;
-        if (chip_select == 0) begin
+        if ((state == reset) && (chip_select == 0)) begin
             state <= addressLoad;
         end
-        else if (prev_state == addressLoad) begin
+        else if (state == addressLoad) begin
             if (counter == 8) begin
                 counter <= 0;
                 state <= branch;
