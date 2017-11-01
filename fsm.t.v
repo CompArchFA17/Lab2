@@ -44,7 +44,56 @@ module fsmTest();
             sclk = 1; #10
         $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
       end
-       
+    
+    // test for write
+    $display("Testing for write");
+    CS = 1; #50
+    sclk = 0; #10
+    sclk = 1; #10
+    CS = 0; shiftRegOut = 0; #10
+    
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
+    
+    sclk = 0; #10
+    sclk = 1; #10
+    $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
+    
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    sclk = 0; #10
+    sclk = 1; #10
+    $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
+    
+    sclk = 0; #10
+    sclk = 1; #10
+    $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
+
 
   #10000 
     $finish;
