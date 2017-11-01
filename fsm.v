@@ -23,6 +23,14 @@ output reg		SR_WE         //Parallel Load
     
   always @(posedge clk) begin
     if (sclk) begin
+      if (CS) begin
+        currentState <= 0;
+        MISOBUFE <= 0;
+        DM_WE <= 0;
+        ADDR_WE <= 0;
+        SR_WE <=0;
+        counter <= 0;
+      end
       case(currentState) 
         0: begin // Default State
           if (CS == 0) begin
@@ -41,7 +49,7 @@ output reg		SR_WE         //Parallel Load
         
         1: begin // Accepting Address
           counter <= counter + 1;
-          if(counter == 6) begin
+          if(counter == 5) begin
           	currentState <= 2;
             counter <= 0; //reset counter
           end

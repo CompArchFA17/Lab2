@@ -54,22 +54,30 @@ module fsmTest();
     
     sclk = 0; #10
     sclk = 1; #10
+    $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
     sclk = 0; #10
     sclk = 1; #10
+    $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
     sclk = 0; #10
     sclk = 1; #10
+    $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
     sclk = 0; #10
     sclk = 1; #10
+    $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
     sclk = 0; #10
     sclk = 1; #10
+    $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
     sclk = 0; #10
     sclk = 1; #10
+    $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
     sclk = 0; #10
     sclk = 1; #10
+    // accept 7 bits for address
     $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
     
     sclk = 0; #10
     sclk = 1; #10
+    // accept 1 bit for read/write
     $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
     
     sclk = 0; #10
@@ -88,10 +96,12 @@ module fsmTest();
     sclk = 1; #10
     sclk = 0; #10
     sclk = 1; #10
+    // accept 8 bits for data, write to DM
     $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
     
     sclk = 0; #10
     sclk = 1; #10
+    // stop writing to DM
     $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
 
 

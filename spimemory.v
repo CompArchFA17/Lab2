@@ -7,6 +7,32 @@
 `include "datamemory.v"
 `include "shiftregister.v"
 
+module addressLatch
+(
+input CE,
+input [6:0]D,
+input C,
+output reg [6:0]Q
+);
+always @(posedge C) begin
+	if (CE==1)
+	Q[6:0]<=D[6:0];
+end
+endmodule
+
+
+module dff(
+input D,
+output reg Q,
+input CE,
+input C
+);
+always @(posedge C) begin
+	if (CE==1)
+		begin Q<=D; end
+	end
+endmodule
+
 module spiMemory
 (
     input           clk,        // FPGA clock
@@ -14,9 +40,25 @@ module spiMemory
     input           cs_pin,     // SPI chip select
     output          miso_pin,   // SPI master in slave out
     input           mosi_pin,   // SPI master out slave in
-    output [3:0]    leds        // LEDs for debugging
+    output [3:0]    leds,        // LEDs for debugging
+    output DM_WE
 );
 wire [7:0] shiftRegOutP;
+wire [7:0] dataMemOut;
+wire [6:0] address;
+wire MISOBUFE;
+wire Q0;
+wire D0;
+wire SerialIn;
+wire posedge0;
+wire negedge0;
+wire CEDFF;
+wire SR_WE;
+wire ADDR_WE;
+wire DM_WE;
+wire ClkEdge;
+wire cs;
+
 
 //input conditioners
 inputconditioner ic0(clk,mosi_pin, SerialIn,posedge0,negedge0);
@@ -27,7 +69,7 @@ inputconditioner ic2(clk,cs_pin, cs, posedge1,negedge1);
 fsm fsm0(shiftRegOutP[0],cs,ClkEdge,clk,MISOBUFE,DM_WE,ADDR_WE,SR_WE);
 
 //shift register
-shiftregister sr0(clk,ClkEdge,SR_WE,DataMemOut[7:0],SerialIn, shiftRegOutP[7:0],D0);
+shiftregister sr0(clk,ClkEdge,SR_WE,dataMemOut[7:0],SerialIn, shiftRegOutP[7:0],D0);
 
 //data memory
 datamemory dm0(clk,dataMemOut[7:0],address[6:0],DM_WE,shiftRegOutP[7:0]);
@@ -39,32 +81,7 @@ addressLatch aL0(ADDR_WE,shiftRegOutP[6:0],clk,address[6:0]);
 dff dff0(D0,Q0,CEDFF,clk);
 
 //miso buffer
-bufif1(miso_pin,Q0,MISO_BUFE);
+bufif1 buffer(miso_pin,Q0,MISOBUFE);
 
 endmodule
    
-module addressLatch
-(
-input CE,
-input [6:0]D,
-input C,
-output [6:0]Q
-);
-always @(posedge C) begin
-	if (CE==1)
-	Q[6:0]<=D[6:0];
-end
-endmodule
-
-
-module dff(
-input D,
-output Q,
-input CE,
-input C
-);
-always @(posedge C) begin
-	if (CE==1)
-		begin Q<=D; end
-	end
-endmodule
