@@ -53,7 +53,14 @@ module spiMemory
                         .address(address[7:1]),
                         .writeEnable(DM_WE));
 
-  finiteStateMachine fsm(clk, sclk_pos, chip_select, shiftRegOut[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE);
+  finiteStateMachine fsm(.clk(clk),
+                         .sclk_posedge(sclk_pos),
+                         .chip_select(chip_select),
+                         .r_w(shiftRegOutP[0]), 
+                         .MISO_BUFE(MISO_BUFE), 
+                         .DM_WE(DM_WE),
+                         .ADDR_WE(ADDR_WE),
+                         .SR_WE(SR_WE));
 
 
 endmodule

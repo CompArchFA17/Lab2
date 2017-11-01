@@ -22,9 +22,9 @@ module datamemory
 
     reg [width-1:0] memory [depth-1:0];
 
-    initial begin
+    /*initial begin
         memory[0] = 8'b11111111;
-    end
+    end*/
 
     always @(posedge clk) begin
         if(writeEnable)

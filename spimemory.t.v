@@ -23,6 +23,44 @@ module testSPIMemory();
         $dumpvars;
 
         //#50;
+
+        cs_pin = 0;
+        mosi_pin = 0;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 1
+        mosi_pin = 0;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 2
+        mosi_pin = 0;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 3
+        mosi_pin = 0;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 4
+        mosi_pin = 0;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 5
+        mosi_pin = 0;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 6
+        mosi_pin = 0;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 7
+        mosi_pin = 0; // write
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 8
+
+        cs_pin = 1;
+        mosi_pin = 0;
+        // Read output
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 1
+        mosi_pin = 0;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 2
+        mosi_pin = 0;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 3
+        mosi_pin = 1;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 4
+        mosi_pin = 1;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 5
+        mosi_pin = 0;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 6
+        mosi_pin = 0;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 7
+        mosi_pin = 0;
+        sclk_pin = 0; #10 sclk_pin = 1; #10; // 8
+
         // Push input
         cs_pin = 0;
         mosi_pin = 0;
@@ -39,7 +77,7 @@ module testSPIMemory();
         sclk_pin = 0; #10 sclk_pin = 1; #10; // 6
         mosi_pin = 0;
         sclk_pin = 0; #10 sclk_pin = 1; #10; // 7
-        mosi_pin = 1;
+        mosi_pin = 1; // read 
         sclk_pin = 0; #10 sclk_pin = 1; #10; // 8
 
         mosi_pin = 1'bX;

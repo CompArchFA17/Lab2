@@ -12,7 +12,7 @@ module finiteStateMachine(
     output reg ADDR_WE,
     output reg SR_WE
 );
-
+    
     localparam addressLoad = 1;
     localparam branch = 2;
     localparam write = 3;
@@ -20,6 +20,7 @@ module finiteStateMachine(
     localparam reset = 0;
     localparam dataLoad = 5;
     localparam dataLoad2 = 6;
+    localparam writeFinish = 7;
 
     reg[7:0] state = reset;
 
@@ -30,9 +31,11 @@ module finiteStateMachine(
 
         // Some state transitions should happen immediately
         if ((state == reset) && (chip_select == 0)) begin
+            $display("start");
             state <= addressLoad;
         end
-        if (state == branch) begin
+        else if (state == branch) begin
+            $display("branch");
             if (r_w == 0) begin // write
                 state <= write;
             end
@@ -40,11 +43,17 @@ module finiteStateMachine(
                 state <= dataLoad;
             end
         end
-        if (state == dataLoad) begin
+        else if (state == dataLoad) begin
+            $display("dataLoad1");
             state <= dataLoad2;
         end
-        if (state == dataLoad2) begin
+        else if (state == dataLoad2) begin
+            $display("dataLoad2");
             state <= read;
+        end
+        else if (state == writeFinish) begin
+            $display("write finish");
+            state <= reset;
         end
 
         // Some states need to wait a given tim based on the serial clock.
@@ -58,7 +67,8 @@ module finiteStateMachine(
                     counter <= counter + 1;
                 end
             end
-            else if ((state == read) || (state == write)) begin
+            else if (state == read) begin
+                $display("read");
                 if (counter == 7) begin
                     counter <= 0;
                     state <= reset;
@@ -67,7 +77,19 @@ module finiteStateMachine(
                     counter <= counter + 1;
                 end
             end
+            else if (state == write) begin
+                $display("write");
+                if (counter == 8) begin
+                    counter <= 0;
+                    state <= writeFinish;
+                end
+                else begin
+                    counter <= counter + 1;
+                end
+            end
         end
+
+
         case (state)
             addressLoad: begin
                 MISO_BUFE <= 0;
@@ -100,10 +122,16 @@ module finiteStateMachine(
                 SR_WE <= 0;
             end
             dataLoad2: begin
-                MISO_BUFE <= 1;
+                MISO_BUFE <= 0;
                 DM_WE <= 0;
                 ADDR_WE <= 0;
                 SR_WE <= 1;
+            end
+            writeFinish: begin
+                MISO_BUFE <= 0;
+                DM_WE <= 1;
+                ADDR_WE <= 0;
+                SR_WE <= 0;
             end
             reset: begin
                 MISO_BUFE <= 0;
