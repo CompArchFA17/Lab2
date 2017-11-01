@@ -26,13 +26,27 @@ module finiteStateMachine(
     //change states on the clk cycles
 
     always @(posedge clk) begin
-        if (sclk_posedge) begin
 
-            if ((state == reset) && (chip_select == 0)) begin
-                state <= addressLoad;
+        // Some state transitions should happen immediately
+        if ((state == reset) && (chip_select == 0)) begin
+            state <= addressLoad;
+        end
+        if (state == branch) begin
+            if (r_w == 0) begin // write
+                state <= write;
             end
-            else if (state == addressLoad) begin
-                if (counter == 5) begin
+            else begin // read
+                state <= dataLoad;
+            end
+        end
+        if (state == dataLoad) begin
+            state <= read;
+        end
+
+        // Some states need to wait a given tim based on the serial clock.
+        if (sclk_posedge) begin
+            if (state == addressLoad) begin
+                if (counter == 7) begin
                     counter <= 0;
                     state <= branch;
                 end
@@ -40,19 +54,6 @@ module finiteStateMachine(
                     counter <= counter + 1;
                 end
             end
-            else if (state == branch) begin
-                if (r_w == 0) begin // write
-                    state <= write;
-                end
-                else begin // read
-                    state <= dataLoad;
-                end
-            end
-            else if (state == dataLoad) begin
-                state <= read;
-            end
-
-
             else if ((state == read) || (state == write)) begin
                 if (counter == 7) begin
                     counter <= 0;
@@ -61,10 +62,6 @@ module finiteStateMachine(
                 else begin
                     counter <= counter + 1;
                 end
-            end
-
-            else if (state <= reset) begin
-                state <= reset;
             end
         end
         case (state)
