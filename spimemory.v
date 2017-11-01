@@ -52,7 +52,7 @@ module spiMemory
 
 	datamemory dataMemory(clk, shiftRegOutP, address[7:1], DM_WE, dataMemoryOut);
 
-  finiteStateMachine fsm(sclk_pin, chip_select, shiftRegOut[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE);
+  finiteStateMachine fsm(clk, sclk_pos, chip_select, shiftRegOut[0], MISO_BUFE, DM_WE, ADDR_WE, SR_WE);
 
 
 endmodule
