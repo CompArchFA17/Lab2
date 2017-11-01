@@ -41,7 +41,7 @@ output reg		SR_WE         //Parallel Load
         
         1: begin // Accepting Address
           counter <= counter + 1;
-          if(counter == 6) begin
+          if(counter == 5) begin
           	currentState <= 2;
             counter <= 0; //reset counter
           end
