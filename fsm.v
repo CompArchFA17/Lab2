@@ -20,10 +20,10 @@ module fsm
 	reg rw;
 
 	// State encoding (one hot)
-	reg [4:0] state;
-	localparam STATE_START = 5'b00001, STATE_RECIEVE = 5'b00010,
-		STATE_WRITE = 5'b00100, STATE_READ = 5'b01000,
-		STATE_END = 5'b10000;
+	reg [5:0] state;
+	localparam STATE_START = 6'b000001, STATE_RECIEVE = 6'b000010,
+		STATE_WRITE = 6'b000100, STATE_READ0 = 6'b001000,
+		STATE_READ1 = 6'b010000, STATE_END = 6'b100000;
 
 	// State logic
 	always @(posedge sclk) begin
@@ -80,18 +80,22 @@ module fsm
 					end
 				end
 
-				STATE_READ: begin
+				STATE_READ0: begin
 					if (count < 4'd7) begin
 						count <= count + 4'd1;
 					end
 					else if (count == 4'd7) begin
-						state <= STATE_END;
+						state <= STATE_READ1;
 						count <= 4'b0;
 					end
 				end
 
+				STATE_READ1: begin
+					state <= STATE_END;
+				end
+
 				STATE_END: begin
-						state <= STATE_START;
+					state <= STATE_START;
 				end
 
 			endcase
@@ -118,11 +122,18 @@ module fsm
 				sr_we <= 1'b0;
 			end
 
-			STATE_READ: begin
+			STATE_READ0: begin
+				addr_we <= 1'b0;
+				dm_we <= 1'b0;
+				miso_buff <= 1'b0;
+				sr_we <= 1'b1;
+			end
+
+			STATE_READ1: begin
 				addr_we <= 1'b0;
 				dm_we <= 1'b0;
 				miso_buff <= 1'b1;
-				sr_we <= 1'b1;
+				sr_we <= 1'b0;
 			end
 
 		endcase
