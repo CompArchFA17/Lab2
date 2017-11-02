@@ -37,7 +37,8 @@ inputconditioner sclkcond(.clk(clk), .noisysignal(sclk_pin),
                           .positiveedge(sclk_pos), .negativeedge(sclk_neg));
 
 shiftregister shiftReg(.clk(clk), .peripheralClkEdge(sclk_pos),
-                       .parallelDataOut(shift_pOut), .serialDataOut(shift_sOut)
+                       .parallelDataOut(shift_pOut), .serialDataOut(shift_sOut),
+                       .serialDataIn(mosi), .parallelLoad(load_shift), .parallelDataIn(mem_out)
                        );
 datamemory mem(.clk(clk),
                .dataOut(mem_out),
@@ -54,7 +55,7 @@ initial begin
    miso_pin <= 'z;
 end
 
-always @(posedge sclk_pos) begin
+always @(negedge sclk_pos) begin
   if(!cs) begin
     if(state == `READ_ADDRESS) begin
       bitsTx = bitsTx + 1;
@@ -66,15 +67,14 @@ always @(posedge sclk_pos) begin
     if(state == `READ_DATA) begin
       bitsTx = bitsTx + 1;
       if(bitsTx == 8) begin
-        load_mem <= 0;
-        addressReg <= addressReg + 1;//Not defined in the spec, but useful
+        load_mem <= 1;
       end
     end
     if(state == `READ_WR) begin
-      if(shift_pOut[0] == 1) begin
+      if(shift_pOut[0] == 0) begin
         state <= `READ_DATA;
       end
-      if(shift_pOut[0] == 0) begin
+      if(shift_pOut[0] == 1) begin
         state <= `WRITE_DATA;
         load_shift <= 1;
       end

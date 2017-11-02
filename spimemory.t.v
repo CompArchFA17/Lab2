@@ -38,13 +38,13 @@ module testMemory();
       dutpassed = 1;
 
       cs_pin = 1;
-      #100;
+      #1000;
       if(miso_pin !== 'z) begin
 	 $display("chip not in Z state when CS is high");
 	 dutpassed = 0;
       end
       cs_pin = 0;
-      #100
+      #1000
 
       address = 7'b1010101;
       data = 8'b11110000;
@@ -53,50 +53,50 @@ module testMemory();
       for(i=0; i < 7; i=i+1) begin
 	 mosi_pin = address[i];
 	 sclk_pin = 1;
-	 #100;
+	 #1000;
 	 sclk_pin = 0;
-	 #100;
+	 #1000;
       end
 
       //set write
       mosi_pin = 0;
       sclk_pin = 1;
-      #100;
+      #1000;
       sclk_pin = 0;
-      #100;
+      #1000;
 
 
       //write data
       for(i=0; i < 8; i=i+1) begin
 	 mosi_pin = data[i];
 	 sclk_pin = 1;
-	 #100;
+	 #1000;
 	 sclk_pin = 0;
-	 #100;
+	 #1000;
 
       end
       //deassert and reassert CS
       cs_pin = 1;
-      #100;
+      #1000;
       cs_pin = 0;
-      #100;
-      
+      #1000;
+
       //write address
       for(i=0; i < 7; i=i+1) begin
 	 mosi_pin = address[i];
 	 sclk_pin = 1;
-	 #100;
+	 #1000;
 	 sclk_pin = 0;
-	 #100;
+	 #1000;
 
       end
 
       //set read
-      mosi_pin = 0;
+      mosi_pin = 1;
       sclk_pin = 1;
-      #100;
+      #1000;
       sclk_pin = 0;
-      #100;
+      #1000;
 
       //read data
       for(i=0; i < 8; i=i+1) begin
@@ -105,9 +105,9 @@ module testMemory();
 	    dutpassed = 0;
 	 end
 	 sclk_pin = 1;
-	 #100;
+	 #1000;
 	 sclk_pin = 0;
-	 #100;
+	 #1000;
       end
 
       $display("DUT passed");
