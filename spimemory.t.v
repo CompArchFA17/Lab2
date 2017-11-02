@@ -120,64 +120,63 @@ module testspimemory ();
 		sclk = 0; mosi_pin = 1; #1000
 		sclk = 1; #1000
 
+		if (dut.dataMemOut != dut.dm.memory[0]) begin
+			$display("Test failed: the data and memory do not match");
+			$display("data: %b, mem: %b", dut.dataMemOut, dut.dm.memory[0]);
+		end
+
 		// Cycle through to push all data to serialOut
 		sclk = 0; #1000
 		sclk = 1; #1000
+		if (miso_pin != dut.dm.memory[0][0]) begin
+			$display("Test failed at time %t: output of shift register does not match the value of the memory at the correspondong address. miso_pin: %b, memory: %b", $time, miso_pin, dut.dm.memory[0][0]);
+			$display("%b", dut.fsm.state);
+		end
 
 		sclk = 0; #1000
 		sclk = 1; #1000
+		if (miso_pin != dut.dm.memory[0][1]) begin
+			$display("Test failed at time %t: output of shift register does not match the value of the memory at the correspondong address. miso_pin: %b, memory: %b", $time, miso_pin, dut.dm.memory[0][1]);
+			$display("%b", dut.fsm.state);
+		end
 
 		sclk = 0; #1000
 		sclk = 1; #1000
+		if (miso_pin != dut.dm.memory[0][2]) begin
+			$display("Test failed at time %t: output of shift register does not match the value of the memory at the correspondong address. miso_pin: %b, memory: %b", $time, miso_pin, dut.dm.memory[0][2]);
+		end
 
 		sclk = 0; #1000
 		sclk = 1; #1000
+		if (miso_pin != dut.dm.memory[0][3]) begin
+			$display("Test failed at time %t: output of shift register does not match the value of the memory at the correspondong address. miso_pin: %b, memory: %b", $time, miso_pin, dut.dm.memory[0][3]);
+		end
 
 		sclk = 0; #1000
 		sclk = 1; #1000
+		if (miso_pin != dut.dm.memory[0][4]) begin
+			$display("Test failed at time %t: output of shift register does not match the value of the memory at the correspondong address. miso_pin: %b, memory: %b", $time, miso_pin, dut.dm.memory[0][4]);
+		end
 
 		sclk = 0; #1000
 		sclk = 1; #1000
+		if (miso_pin != dut.dm.memory[0][5]) begin
+			$display("Test failed at time %t: output of shift register does not match the value of the memory at the correspondong address. miso_pin: %b, memory: %b", $time, miso_pin, dut.dm.memory[0][5]);
+		end
 
 		sclk = 0; #1000
 		sclk = 1; #1000
+		if (miso_pin != dut.dm.memory[0][6]) begin
+			$display("Test failed at time %t: output of shift register does not match the value of the memory at the correspondong address. miso_pin: %b, memory: %b", $time, miso_pin, dut.dm.memory[0][6]);
+		end
 
 		sclk = 0; #1000
 		sclk = 1; #1000
-
-		sclk = 0; #1000
-		sclk = 1; #1000
-
-		sclk = 0; #1000
-		sclk = 1; #1000
+		if (miso_pin != dut.dm.memory[0][7]) begin
+			$display("Test failed at time %t: output of shift register does not match the value of the memory at the correspondong address. miso_pin: %b, memory: %b", $time, miso_pin, dut.dm.memory[0][7]);
+			$display("%b", dut.fsm.state);
+		end
 		
-
-
-		// // Data to write
-		// mosi_pin = 1;
-		// sclk = 0; #1000
-		// sclk = 1; #1000
-
-		// sclk = 0; #1000
-		// sclk = 1; #1000
-
-		// sclk = 0; #1000
-		// sclk = 1; #1000
-
-		// sclk = 0; #1000
-		// sclk = 1; #1000
-
-		// sclk = 0; #1000
-		// sclk = 1; #1000
-
-		// sclk = 0; #1000
-		// sclk = 1; #1000
-
-		// sclk = 0; #1000
-		// sclk = 1; #1000
-
-		// sclk = 0; #1000
-		// sclk = 1; #1000
 
 
 
