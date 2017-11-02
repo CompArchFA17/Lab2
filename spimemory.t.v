@@ -30,10 +30,13 @@ module testMemory();
    //always #10 clk != clk;
 
    initial begin
+      dutpassed = 1;
+      
       cs_pin = 1;
       #100;
-      if(miso_pin !== Z) begin
+      if(miso_pin !== 'z) begin
 	 $display("chip not in Z state when CS is low");
+	 dutpassed = 0;
       end
       cs_pin = 0;
       #100
@@ -79,7 +82,7 @@ module testMemory();
 
       //read data
       for(i=0; i < 8; i=i+1) begin
-	 if(miso_pin != data[i]) begin
+	 if(miso_pin !== data[i] || miso_pin === 'x) begin
 	    $display("read byte is different from written byte");
 	    dutpassed = 0;
 	 end
@@ -87,14 +90,13 @@ module testMemory();
 	 #100;
 	 sclk_pin = 0;
       end
+      
+      $display("DUT passed");
 
 
-      if(dutpassed) begin
-	 $display("DUT passed");
-      end
-      else begin
-	 $display("DUT failed");
-      end
-
+   end // initial begin
+   always @(negedge dutpassed) begin
+      $display("DUT failed");
+      $finish();
    end
 endmodule
