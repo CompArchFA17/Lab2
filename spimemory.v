@@ -212,10 +212,9 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
     input mosi_pin;
     output [3:0] leds;
  
-    wire[7:0] parallelData;    // ParallelData Out
+    wire[7:0] parallelData;   // ParallelData Out
     wire[6:0] address;        // address
-    wire[3:0] res0, res1;     // 
-    wire[7:0] parallelOut;  // Current Shift Register Values
+    wire[7:0] parallelOut;    // Current Shift Register Values
     wire res_sel;             // Select between display options
     wire parallelslc;         // select parallel input
     wire serialin;            // binary input for serial input
@@ -228,23 +227,14 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
     wire dm_we;               // dm_we
     wire addr_we;             // addr_we
     wire sr_we;               // sr_we
-    wire output_ff_out;        // output ff output
-    
-    // Assign bits of shiftregister to appropriate display boxes
-    assign res0[0] = parallelOut[0];
-    assign res0[1] = parallelOut[1];
-    assign res0[2] = parallelOut[2];
-    assign res0[3] = parallelOut[3];
-    assign res1[0] = parallelOut[4];
-    assign res1[1] = parallelOut[5];
-    assign res1[2] = parallelOut[6];
-    assign res1[3] = parallelOut[7];
+    wire output_ff_out;       // output ff output
+    wire filler;              // filler wire
     
     //Map to input conditioners
     //(clk,noisysignal,conditioned,positiveedge,negativeedge);
-    inputconditioner MOSI_conditioner(.clk(clk),.conditioned(serialin),.noisysignal(mosi_pin));
-    inputconditioner SCLK(.clk(clk),.noisysignal(sclk_pin),.positiveedge(posSCLK),.negativeedge(negSCLK));
-    inputconditioner CS_conditioner(.clk(clk),.conditioned(CS),.noisysignal(cs_pin));
+    inputconditioner MOSI_conditioner(.clk(clk),.noisysignal(mosi_pin),.conditioned(serialin),.positiveedge(filler),.negativeedge(filler));
+    inputconditioner SCLK(.clk(clk),.noisysignal(sclk_pin),.conditioned(filler),.positiveedge(posSCLK),.negativeedge(negSCLK));
+    inputconditioner CS_conditioner(.clk(clk),.noisysignal(cs_pin),conditioned(CS),.positiveedge(filler),.negativeedge(filler));
 
     //finite statemachine
     //(MISO_BUFF,DM_WE,ADDR_WE,SR_WE,POS_EDGE,CS,shiftRegOutP0,clk)
