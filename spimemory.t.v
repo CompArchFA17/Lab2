@@ -80,9 +80,12 @@ module spiTest();
     end
     // now output the bits that were read from address 1
     $display("Reading data at address 0");
-    for (counter = 0; counter < 8; counter = counter + 1) begin
+    for (counter = 0; counter < 10; counter = counter + 1) begin
       sclk_pin <= 0; #1000
       sclk_pin <= 1; #1000
+      if (counter == 8) begin
+        $display("reading 2 more");
+      end
       $display("   %b     | %b      | %b        |   %b     |%b|%b|%b", sclk_pin, cs_pin, mosi_pin, miso_pin, q0[7:0], q1, q2);
     end
     cs_pin <= 1;

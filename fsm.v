@@ -80,7 +80,7 @@ output reg		SR_WE         //Parallel Load
         // end
         
         5: begin 
-          if (counter == 6) begin
+          if (counter == 7) begin
             currentState <= 0;
             counter <= 0;
             MISOBUFE <= 0;
