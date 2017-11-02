@@ -44,6 +44,10 @@ module testspimemory ();
 		sclk = 0; mosi_pin = 0; #1000
 		sclk = 1; #1000
 
+		if (dut.dm.address != 7'b0000000) begin
+			$display("Test failed: the address to be written to does not match the expected address.");
+		end
+
 		// Indicate write state
 		sclk = 0; mosi_pin = 0; #1000
 		sclk = 1; #1000
@@ -73,6 +77,10 @@ module testspimemory ();
 		sclk = 0; mosi_pin = 0; #1000
 		sclk = 1; #1000
 
+		if (dut.dm.memory[0] != 8'b10101010) begin
+			$display("Test case failed: the data written to the memory does not match the expected data.");
+		end
+
 		// Chip select goes high.
 		sclk = 0; cs = 1; #1000
 		sclk = 1; #1000
@@ -93,8 +101,9 @@ module testspimemory ();
 		sclk = 1; #1000
 
 		// Chip select goes low.
-		// Start presenting address bits '7b 1010101
 		cs = 0;
+		
+		// Start presenting address bits '7b 1010101
 		sclk = 0; mosi_pin = 0; #1000
 		sclk = 1; #1000
 
@@ -115,6 +124,10 @@ module testspimemory ();
 
 		sclk = 0; mosi_pin = 0; #1000
 		sclk = 1; #1000
+
+		if (dut.dm.address != 7'b0000000) begin
+			$display("Test failed: the address to be written to does not match the expected address.");
+		end
 
 		// Indicate read state
 		sclk = 0; mosi_pin = 1; #1000
