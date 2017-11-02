@@ -364,8 +364,9 @@ module spiMemory(clk,sw,led);
 
     // Assign bits of shiftregister to appropriate display boxes
     initial begin
-        led[0] <= miso;
-        if (miso === 1'bz ) begin
+	    if (miso) begin
+			led[0] <= 1;
+		end else if (miso === 1'bz ) begin
             led[3] <= 1 ;
         end
     end
