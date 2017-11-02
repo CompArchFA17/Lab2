@@ -1,3 +1,7 @@
+
+`include "fsm.v"
+`include "datamemory.v"
+
 //------------------------------------------------------------------------
 // SPI Memory
 //------------------------------------------------------------------------
@@ -222,7 +226,7 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
     wire posSCLK;             // clk edge for serial input
     wire negSCLK;             // 
     wire CS ;                 // chip select
-    wire Flag;                // R/W flag
+    wire Flag;                // R/W flag 
     wire miso_buff;           // miso_buff
     wire dm_we;               // dm_we
     wire addr_we;             // addr_we
@@ -234,7 +238,7 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
     //(clk,noisysignal,conditioned,positiveedge,negativeedge);
     inputconditioner MOSI_conditioner(.clk(clk),.noisysignal(mosi_pin),.conditioned(serialin),.positiveedge(filler),.negativeedge(filler));
     inputconditioner SCLK(.clk(clk),.noisysignal(sclk_pin),.conditioned(filler),.positiveedge(posSCLK),.negativeedge(negSCLK));
-    inputconditioner CS_conditioner(.clk(clk),.noisysignal(cs_pin),conditioned(CS),.positiveedge(filler),.negativeedge(filler));
+    inputconditioner CS_conditioner(.clk(clk),.noisysignal(cs_pin),.conditioned(CS),.positiveedge(filler),.negativeedge(filler));
 
     //finite statemachine
     //(MISO_BUFF,DM_WE,ADDR_WE,SR_WE,POS_EDGE,CS,shiftRegOutP0,clk)
