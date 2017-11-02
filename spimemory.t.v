@@ -21,15 +21,14 @@ module testMemory();
 		 .mosi_pin(mosi_pin), 
 		 .miso_pin(miso_pin));
 
+   initial clk = 0;
+   
+   always #10 clk = !clk;
+
    initial begin
-      clk = 0;
       sclk_pin = 0;
       cs_pin = 0;
       mosi_pin = 0;
-   end
-   //always #10 clk != clk;
-
-   initial begin
       dutpassed = 1;
       
       cs_pin = 1;
@@ -50,6 +49,7 @@ module testMemory();
 	 sclk_pin = 1;
 	 #100;
 	 sclk_pin = 0;
+	 #100;
       end
       
       //set write
@@ -57,6 +57,8 @@ module testMemory();
       sclk_pin = 1;
       #100;
       sclk_pin = 0;
+      #100;
+      
       
       //write data
       for(i=0; i < 8; i=i+1) begin
@@ -64,6 +66,8 @@ module testMemory();
 	 sclk_pin = 1;
 	 #100;
 	 sclk_pin = 0;
+	 #100;
+	 
       end
 
       //write address
@@ -72,6 +76,8 @@ module testMemory();
 	 sclk_pin = 1;
 	 #100;
 	 sclk_pin = 0;
+	 #100;
+	 
       end
 
       //set read
@@ -79,6 +85,7 @@ module testMemory();
       sclk_pin = 1;
       #100;
       sclk_pin = 0;
+      #100;
 
       //read data
       for(i=0; i < 8; i=i+1) begin
@@ -89,6 +96,7 @@ module testMemory();
 	 sclk_pin = 1;
 	 #100;
 	 sclk_pin = 0;
+	 #100;
       end
       
       $display("DUT passed");
