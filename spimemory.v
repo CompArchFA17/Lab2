@@ -53,11 +53,11 @@ module jkff1
 endmodule
 
 module tristatebuffer(out,in,en);
-	input [7:0] in;
+	input in;
 	input en;
-	output [7:0] out;
+	output out;
 	
-	assign out = en ? in : 8'bz;
+	assign out = en ? in : 1'bz;
 	
 endmodule
 
