@@ -9,7 +9,8 @@
 
 module spiMemory
 #(
-    parameter width  = 8
+    parameter width  = 8,
+    parameter addresswidth = 7
 )
 (
     input           clk,        // FPGA clock
@@ -40,9 +41,10 @@ shiftregister shift(.clk(clk), .peripheralClkEdge(clkedge), .parallelLoad(SR_WE)
 					.parallelDataIn(dataMemOut), .serialDataIn(serialin),
 					.parallelDataOut(shiftRegOut), .serialDataOut(serialout));
 register dff(.q(miso_pin), .d(serialout), .wrenable(nedge), .clk(clk));
-datamemory memory(.clk(clk), .dataOut(dataMemOut), .address(address[width-2:0]), .writeEnable(DM_WE), .dataIn(shiftRegOut));
+datamemory memory(.clk(clk), .dataOut(dataMemOut), .address(address[addresswidth:1]),
+                  .writeEnable(DM_WE), .dataIn(shiftRegOut));
 addresslatch latch(.q(address), .d(shiftRegOut), .wrenable(ADDR_WE), .clk(clk));
-fsm spifsm( .lsb(shiftRegOut[0]), .chipSelect(chip), .clk(clk),
+fsm spifsm( .lsb(shiftRegOut[0]), .chipSelect(chip), .clk(sclk_pin),
 			.sr_we(SR_WE), .addr_we(ADDR_WE), .dm_we(DM_WE));
 
 endmodule
