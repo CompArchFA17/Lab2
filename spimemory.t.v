@@ -69,7 +69,12 @@ module testMemory();
 	 #100;
 	 
       end
-
+      //deassert and reassert CS
+      cs_pin = 1;
+      #100;
+      cs_pin = 0;
+      #100;
+      
       //write address
       for(i=0; i < 7; i=i+1) begin
 	 mosi_pin = address[i];
