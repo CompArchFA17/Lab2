@@ -215,7 +215,7 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
     wire[7:0] parallelData;    // ParallelData Out
     wire[6:0] address; 		  // address
     wire[3:0] res0, res1;     // 
-    wire[7:0] shiftregister;  // Current Shift Register Values
+    wire[7:0] parallelOut;  // Current Shift Register Values
     wire res_sel;             // Select between display options
     wire parallelslc;         // select parallel input
     wire serialin;            // binary input for serial input
@@ -236,7 +236,7 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
     inputconditioner CS_conditioner(.noisysignal(cs_pin),.clk(clk),.conditioned(CS));
 
     //finite statemachine
-    fsm(.POS_EDGE(posSCLK),.CS(CS),.shiftRegOutP0(Flag),.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(sr_we),.SR_WE(sr_we));
+    fsm fsm_process(.POS_EDGE(posSCLK),.CS(CS),.shiftRegOutP0(parallelOut[0]),.clk(clk),.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(sr_we),.SR_WE(sr_we));
 
     //Address Latch 
     dlatch addr_latch(.data(parallelData),.clk(clk),.addr_we(addr_we),.addr(address));
@@ -246,21 +246,21 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
 	tristatebuffer outbuffer(.out(miso_pin),.in(output_ff_out),.en(miso_buff));
 
 
-    shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(parallelslc),.parallelDataIn(parallelData),.serialDataIn(serialin),.parallelDataOut(shiftregister));
+    shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(parallelslc),.parallelDataIn(parallelData),.serialDataIn(serialin),.parallelDataOut(parallelOut));
 
     //data memory
     datamemory data(.clk(clk),.address(address),.writeEnable(dm_we),.dataIn(shiftregister));
 
 
     // Assign bits of shiftregister to appropriate display boxes
-    assign res0[0] = shiftregister[0];
-    assign res0[1] = shiftregister[1];
-    assign res0[2] = shiftregister[2];
-    assign res0[3] = shiftregister[3];
-    assign res1[0] = shiftregister[4];
-    assign res1[1] = shiftregister[5];
-    assign res1[2] = shiftregister[6];
-    assign res1[3] = shiftregister[7];
+    assign res0[0] = parallelOut[0];
+    assign res0[1] = parallelOut[1];
+    assign res0[2] = parallelOut[2];
+    assign res0[3] = parallelOut[3];
+    assign res1[0] = parallelOut[4];
+    assign res1[1] = parallelOut[5];
+    assign res1[2] = parallelOut[6];
+    assign res1[3] = parallelOut[7];
 
 endmodule
    
