@@ -14,11 +14,11 @@ module testMemory();
    reg [7:0] data;
    reg 	dutpassed;
    reg[31:0] i;
-   
-   spiMemory dut(.clk(clk), 
-		 .sclk_pin(sclk_pin), 
+
+   spiMemory dut(.clk(clk),
+		 .sclk_pin(sclk_pin),
 		 .cs_pin(cs_pin),
-		 .mosi_pin(mosi_pin), 
+		 .mosi_pin(mosi_pin),
 		 .miso_pin(miso_pin));
 
    initial begin
@@ -37,10 +37,10 @@ module testMemory();
       end
       cs_pin = 0;
       #100
-      
+
       address = 7'b1010101;
       data = 8'b11110000;
-      
+
       //write address
       for(i=0; i < 7; i=i+1) begin
 	 mosi_pin = address[i];
@@ -48,13 +48,13 @@ module testMemory();
 	 #100;
 	 sclk_pin = 0;
       end
-      
+
       //set write
       mosi_pin = 0;
       sclk_pin = 1;
       #100;
       sclk_pin = 0;
-      
+
       //write data
       for(i=0; i < 8; i=i+1) begin
 	 mosi_pin = data[i];
