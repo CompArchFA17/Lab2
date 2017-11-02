@@ -202,6 +202,11 @@ endmodule
 //
 //------------------------------------------------------------------------
 
+//                MISO_BUFF            DM_WE            ADDR_WE          SR_WE
+//CS              0                    0                0                0
+//~CS             0                    0                1                1
+//shiftRegOutP[0] 1                    0                0                1
+//~shiftRegOutP[0]0                    1                0                0
 module fsm(MISO_BUFF,DM_WE,ADDR_WE,SR_WE,POS_EDGE,CS,shiftRegOutP0,clk);
    input POS_EDGE;
    input CS;
@@ -224,7 +229,7 @@ module fsm(MISO_BUFF,DM_WE,ADDR_WE,SR_WE,POS_EDGE,CS,shiftRegOutP0,clk);
       input [1:0] state;
       input POS_EDGE;
       input CS;
-      input ShiftRegOutP0;
+      input shiftRegOutP0;
       case(state)
         2'b00:if(!CS) begin
                  fsm_function = 2'b01;
@@ -246,25 +251,27 @@ module fsm(MISO_BUFF,DM_WE,ADDR_WE,SR_WE,POS_EDGE,CS,shiftRegOutP0,clk);
 
    always @ (posedge clk) begin
       state <= next_state;
-      if (state == 2'b00) begin
+      if (next_state == 2'b00) begin
          MISO_BUFF <= 0;
          DM_WE <= 0;
          SR_WE <= 0;
-      end else if (state == 2'b01) begin
-         if(counter==0) begin
+		 ADDR_WE <= 0;
+      end else if (next_state == 2'b01) begin
+         if(POS_EDGE) begin
            counter <= 1;
          end
          SR_WE <= 1;
-      end else if (state == 2'b10) begin
+      end else if (next_state == 2'b10) begin
          MISO_BUFF <= 1;
          ADDR_WE <= 0;
-      end else if (state == 2'b11) begin
+      end else if (next_state == 2'b11) begin
          DM_WE <= 1;
          ADDR_WE <= 0;
          SR_WE <= 0;
       end
       if (counter==7)begin
         ADDR_WE<=1;
+		counter <= counter + 1;
       end
       else if (counter==8)begin
         ADDR_WE <=0;
