@@ -148,10 +148,11 @@ module testspimemory ();
 		sclk = 0; #1000
 		sclk = 1; #1000
 
+		cs = 1;
+
 		sclk = 0; #1000
 		sclk = 1; #1000
 		
-
 
 		// // Data to write
 		// mosi_pin = 1;

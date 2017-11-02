@@ -48,11 +48,7 @@ module fsm
 
 				STATE_RECIEVE: begin
 					if (count < 4'd7) begin
-						outputval[7 - count] <= shift_reg_out;
 						count <= count + 4'd1;
-						// if (count == 4'd6) begin
-						// 	rw <= shift_reg_out;
-						// end
 					end
 					else if (count == 4'd7) begin
 						// rw <= shift_reg_out;
@@ -84,7 +80,7 @@ module fsm
 					state <= STATE_READ1;
 				end
 
-				STATE_READ0: begin
+				STATE_READ1: begin
 					if (count < 4'd7) begin
 						count <= count + 4'd1;
 					end
@@ -107,6 +103,13 @@ module fsm
 	always @(state) begin
 
 		case (state)
+
+			STATE_START: begin
+				addr_we <= 1'b0;
+				dm_we <= 1'b0;
+				miso_buff <= 1'b0;
+				sr_we <= 1'b0;
+			end
 
 			STATE_RECIEVE: begin
 				addr_we <= 1'b1;
@@ -133,6 +136,13 @@ module fsm
 				addr_we <= 1'b0;
 				dm_we <= 1'b0;
 				miso_buff <= 1'b1;
+				sr_we <= 1'b0;
+			end
+
+			STATE_END: begin
+				addr_we <= 1'b0;
+				dm_we <= 1'b0;
+				miso_buff <= 1'b0;
 				sr_we <= 1'b0;
 			end
 
