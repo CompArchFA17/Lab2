@@ -289,10 +289,10 @@ endmodule
 //   led3  = tristated
 //--------------------------------------------------------------------------------
 
-module spiMemory(clk,sw,leds);
+module spiMemory(clk,sw,led);
     input clk;
     input [2:0] sw;
-	output reg [3:0] leds;
+	output reg [3:0] led;
  
     wire[7:0] parallelData;   // ParallelData Out
     wire[6:0] address; 		  // address
@@ -337,9 +337,9 @@ module spiMemory(clk,sw,leds);
 
     // Assign bits of shiftregister to appropriate display boxes
     initial begin
-        leds[0] <= miso;
+        led[0] <= miso;
         if (miso == 1'bz ) begin
-            leds[3] <= 1 ;
+            led[3] <= 1 ;
         end
     end
 endmodule
