@@ -50,19 +50,20 @@ output reg		SR_WE         //Parallel Load
         
         1: begin // Accepting Address
           counter <= counter + 1;
-          if(counter == 5) begin
+          if(counter == 6) begin
           	currentState <= 2;
             counter <= 0; //reset counter
+            ADDR_WE <= 0;
           end
         end
       
         2: begin // Accepting Read/Write Bit
-          ADDR_WE <= 0;
           if (shiftRegOut == 1) begin
             SR_WE <= 1;
           	currentState <= 3;
           end
           else begin
+            DM_WE <= 1;
           	currentState <= 6;
           end
         end
@@ -73,13 +74,13 @@ output reg		SR_WE         //Parallel Load
           currentState <= 5; 
         end
         
-        4: begin // Second read state
-          currentState <= 5;
-          MISOBUFE <= 1;
-        end
+        // 4: begin // Second read state
+        //   currentState <= 5;
+        //   MISOBUFE <= 1;
+        // end
         
         5: begin 
-          if (counter == 7) begin
+          if (counter == 6) begin
             currentState <= 0;
             counter <= 0;
             MISOBUFE <= 0;
@@ -91,8 +92,8 @@ output reg		SR_WE         //Parallel Load
         
         6: begin // allowing shift register to accept 8 bits of data
           if (counter == 7) begin
-            DM_WE <= 1;
-            currentState <= 7;
+            DM_WE <= 0;
+            currentState <= 0;
             counter <= 0;
           end
           else begin

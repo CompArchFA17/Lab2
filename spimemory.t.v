@@ -37,7 +37,7 @@ module spiTest();
     // give address 1 and write bits
     cs_pin = 0;#1000;
     for (counter = 0; counter < 16; counter = counter + 1) begin 
-      if (counter == 5 || counter > 7) begin //write 1's to address
+      if (counter > 7) begin //write 1's to address
         mosi_pin <= 1;
       end
       else begin
@@ -60,6 +60,7 @@ module spiTest();
     
     //read operation
     cs_pin <= 0;#1000;
+    $display("Reading data at address");
     for (counter = 0; counter < 8; counter = counter + 1) begin 
       if (counter == 0) begin //resetting mosi_pin to read from address 
         mosi_pin <= 0;
@@ -69,6 +70,7 @@ module spiTest();
       end
       sclk_pin <= 0; #1000
       sclk_pin <= 1; #1000;
+      $display("   %b     | %b      | %b        |   %b     |%b|%b|%b", sclk_pin, cs_pin, mosi_pin, miso_pin, q0[7:0], q1, q2);
     end
     // now output the bits that were read from address 1
     $display("Reading data at address 1");
