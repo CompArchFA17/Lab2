@@ -30,63 +30,71 @@ module testMemory();
    //always #10 clk != clk;
 
    initial begin
-   address = 7'b1010101;
-   data = 8'b11110000;
-   
-   //write address
-   for(i=0; i < 7; i=i+1) begin
-      mosi_pin = address[i];
-      sclk_pin = 1;
+      cs_pin = 1;
       #100;
-      sclk_pin = 0;
-   end
-   
-   //set write
-   mosi_pin = 0;
-   sclk_pin = 1;
-   #100;
-   sclk_pin = 0;
-   
-   //write data
-   for(i=0; i < 8; i=i+1) begin
-      mosi_pin = data[i];
-      sclk_pin = 1;
-      #100;
-      sclk_pin = 0;
-   end
-
-   //write address
-   for(i=0; i < 7; i=i+1) begin
-      mosi_pin = address[i];
-      sclk_pin = 1;
-      #100;
-      sclk_pin = 0;
-   end
-
-   //set read
-   mosi_pin = 0;
-   sclk_pin = 1;
-   #100;
-   sclk_pin = 0;
-
-   //read data
-   for(i=0; i < 8; i=i+1) begin
-      if(miso_pin != data[i]) begin
-	 $display("read byte is different from written byte");
-	 dutpassed = 0;
+      if(miso_pin !== Z) begin
+	 $display("chip not in Z state when CS is low");
       end
+      cs_pin = 0;
+      #100
+      
+      address = 7'b1010101;
+      data = 8'b11110000;
+      
+      //write address
+      for(i=0; i < 7; i=i+1) begin
+	 mosi_pin = address[i];
+	 sclk_pin = 1;
+	 #100;
+	 sclk_pin = 0;
+      end
+      
+      //set write
+      mosi_pin = 0;
       sclk_pin = 1;
       #100;
       sclk_pin = 0;
-   end
+      
+      //write data
+      for(i=0; i < 8; i=i+1) begin
+	 mosi_pin = data[i];
+	 sclk_pin = 1;
+	 #100;
+	 sclk_pin = 0;
+      end
+
+      //write address
+      for(i=0; i < 7; i=i+1) begin
+	 mosi_pin = address[i];
+	 sclk_pin = 1;
+	 #100;
+	 sclk_pin = 0;
+      end
+
+      //set read
+      mosi_pin = 0;
+      sclk_pin = 1;
+      #100;
+      sclk_pin = 0;
+
+      //read data
+      for(i=0; i < 8; i=i+1) begin
+	 if(miso_pin != data[i]) begin
+	    $display("read byte is different from written byte");
+	    dutpassed = 0;
+	 end
+	 sclk_pin = 1;
+	 #100;
+	 sclk_pin = 0;
+      end
 
 
-   if(dutpassed) begin
-      $display("DUT passed");
-    end
-    else begin
-      $display("DUT failed");
-    end
+      if(dutpassed) begin
+	 $display("DUT passed");
+      end
+      else begin
+	 $display("DUT failed");
+      end
 
    end
 endmodule
