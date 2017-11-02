@@ -35,7 +35,7 @@ module testMemory();
       cs_pin = 1;
       #100;
       if(miso_pin !== 'z) begin
-	 $display("chip not in Z state when CS is low");
+	 $display("chip not in Z state when CS is high");
 	 dutpassed = 0;
       end
       cs_pin = 0;
