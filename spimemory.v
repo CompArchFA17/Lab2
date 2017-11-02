@@ -236,20 +236,20 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
     inputconditioner CS_conditioner(.noisysignal(cs_pin),.clk(clk),.conditioned(CS));
 
     //finite statemachine
-    fsm fsm_process(.POS_EDGE(posSCLK),.CS(CS),.shiftRegOutP0(parallelOut[0]),.clk(clk),.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(sr_we),.SR_WE(sr_we));
+    fsm fsm_process(.POS_EDGE(posSCLK),.CS(CS),.shiftRegOutP0(parallelOut[0]),.clk(clk),.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(addr_we),.SR_WE(sr_we));
 
     //Address Latch 
-    dlatch addr_latch(.data(parallelData),.clk(clk),.addr_we(addr_we),.addr(address));
+    dlatch addr_latch(.data(parallelOut),.clk(clk),.addr_we(addr_we),.addr(address));
 
 	dff output_ff(.trigger(clk),.enable(negSCLK),.d(serialout),.q(output_ff_out));
 	
 	tristatebuffer outbuffer(.out(miso_pin),.in(output_ff_out),.en(miso_buff));
 
 
-    shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(parallelslc),.parallelDataIn(parallelData),.serialDataIn(serialin),.parallelDataOut(parallelOut));
+    shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(sr_we),.parallelDataIn(parallelData),.serialDataIn(serialin),.parallelDataOut(parallelOut),.serialDataOut(serialout));
 
     //data memory
-    datamemory data(.clk(clk),.address(address),.writeEnable(dm_we),.dataIn(shiftregister));
+    datamemory data(.clk(clk),.address(address),.writeEnable(dm_we),.dataIn(parallelOut),.dataOut(parallelData));
 
 
     // Assign bits of shiftregister to appropriate display boxes
