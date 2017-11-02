@@ -30,8 +30,10 @@ module testMemory();
    //always #10 clk != clk;
 
    initial begin
+   $dumpfile("spimem.vcd");
+   $dumpvars(0, testMemory);
       dutpassed = 1;
-      
+
       cs_pin = 1;
       #100;
       if(miso_pin !== 'z) begin
@@ -90,7 +92,7 @@ module testMemory();
 	 #100;
 	 sclk_pin = 0;
       end
-      
+
       $display("DUT passed");
 
 

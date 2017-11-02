@@ -51,6 +51,7 @@ initial begin
    bitsTx     <= 4'd0;
    load_shift <= 0;
    load_mem   <= 0;
+   miso_pin <= 'z;
 end
 
 always @(posedge sclk_pos) begin
