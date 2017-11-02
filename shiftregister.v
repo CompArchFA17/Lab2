@@ -25,6 +25,7 @@ module shiftregister #(parameter width = 8) (
 		else if (peripheralClkEdge) begin
 			shiftregistermem <= {parallelDataOut[width-2:0], serialDataIn};
 		end
+
 		parallelDataOut <= shiftregistermem;
 		serialDataOut <= shiftregistermem[width-1];
 	end
