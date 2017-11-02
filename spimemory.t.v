@@ -14,23 +14,29 @@ module testMemory();
    reg [7:0] data;
    reg 	dutpassed;
    reg[31:0] i;
-   
-   spiMemory dut(.clk(clk), 
-		 .sclk_pin(sclk_pin), 
+
+   spiMemory dut(.clk(clk),
+		 .sclk_pin(sclk_pin),
 		 .cs_pin(cs_pin),
-		 .mosi_pin(mosi_pin), 
+		 .mosi_pin(mosi_pin),
 		 .miso_pin(miso_pin));
 
    initial clk = 0;
-   
+
    always #10 clk = !clk;
 
    initial begin
       sclk_pin = 0;
       cs_pin = 0;
       mosi_pin = 0;
+   end
+   //always #10 clk != clk;
+
+   initial begin
+   $dumpfile("spimem.vcd");
+   $dumpvars(0, testMemory);
       dutpassed = 1;
-      
+
       cs_pin = 1;
       #100;
       if(miso_pin !== 'z) begin
@@ -39,10 +45,10 @@ module testMemory();
       end
       cs_pin = 0;
       #100
-      
+
       address = 7'b1010101;
       data = 8'b11110000;
-      
+
       //write address
       for(i=0; i < 7; i=i+1) begin
 	 mosi_pin = address[i];
@@ -51,15 +57,15 @@ module testMemory();
 	 sclk_pin = 0;
 	 #100;
       end
-      
+
       //set write
       mosi_pin = 0;
       sclk_pin = 1;
       #100;
       sclk_pin = 0;
       #100;
-      
-      
+
+
       //write data
       for(i=0; i < 8; i=i+1) begin
 	 mosi_pin = data[i];
@@ -67,7 +73,7 @@ module testMemory();
 	 #100;
 	 sclk_pin = 0;
 	 #100;
-	 
+
       end
       //deassert and reassert CS
       cs_pin = 1;
@@ -82,7 +88,7 @@ module testMemory();
 	 #100;
 	 sclk_pin = 0;
 	 #100;
-	 
+
       end
 
       //set read
@@ -103,7 +109,7 @@ module testMemory();
 	 sclk_pin = 0;
 	 #100;
       end
-      
+
       $display("DUT passed");
 
 
