@@ -9,15 +9,19 @@ module testFSM();
     wire sr_we;
     wire addr_we;
     wire dm_we;
+    wire[4:0] currentState;
 
-    fsm dut(lsb, chipSelect, clk, sr_we, addr_we, dm_we); 
+    fsm dut(lsb, chipSelect, clk, sr_we, addr_we, dm_we, currentState); 
     initial clk=0;
     always #10 clk=!clk;
 
     initial begin
         $dumpfile("fsm.vcd");
         $dumpvars(0, testFSM);    
-        lsb=0;chipSelect=1;
+        lsb=1;chipSelect=1; #350
         $display("testing chip select");
+        chipSelect=0; #10
+        
+        lsb=0;chipSelect=1;
     end
 endmodule 
