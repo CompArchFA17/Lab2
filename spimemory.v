@@ -57,7 +57,7 @@ module tristatebuffer(out,in,en);
 	input en;
 	output [7:0] out;
 	
-	assign out = en ? in : 8'b0;
+	assign out = en ? in : 8'bz;
 	
 endmodule
 
@@ -80,7 +80,7 @@ module dff #(parameter W = 1)
 	input [W-1:0] d,
 	output reg [W-1:0] q
 );
-	always @p(posedge trigger) begin
+	always @ (posedge trigger) begin
 		if(enable) begin
 			q <=d;
 		end
@@ -93,14 +93,12 @@ module dlatch
 	input [7:0] data ,
 	input clk,
 	input addr_we,
-	output [6:0] addr
+	output reg [6:0] addr
 );
-
-reg [6:0] addr;
 
 always @(posedge clk) begin
 	if(addr_we) begin
-		assign addr = data[7:1];
+		addr = data[7:1];
 	end 
 end
 
@@ -206,19 +204,16 @@ endmodule
 //   Write: 
 //--------------------------------------------------------------------------------
 
-module spiMemory
-(
-    input           clk,        // FPGA clock
-    input           sclk_pin,   // SPI clock
-    input           cs_pin,     // SPI chip select
-    output          miso_pin,   // SPI master in slave out
-    input           mosi_pin,   // SPI master out slave in
-    output [3:0]    leds        // LEDs for debugging
-)
-
-	integer i; 
-    wire[7:0] parallelData    // ParallelData Out
-    wire[6:0] address 		  // address
+module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
+    input clk;
+	input sclk_pin;
+	input cs_pin;
+    output miso_pin;
+	input mosi_pin;
+	output [3:0] leds;
+ 
+    wire[7:0] parallelData;    // ParallelData Out
+    wire[6:0] address; 		  // address
     wire[3:0] res0, res1;     // 
     wire[7:0] shiftregister;  // Current Shift Register Values
     wire res_sel;             // Select between display options
@@ -233,12 +228,12 @@ module spiMemory
     wire dm_we;				  // dm_we
     wire addr_we;			  // addr_we
     wire sr_we;				  // sr_we
-	wire output_ff_out        // output ff output
+	wire output_ff_out;        // output ff output
     
     //Map to input conditioners
-    inputconditioner MOSI(.noisysignal(mosi_pin),.clk(clk),.conditioned(serialin));
+    inputconditioner MOSI_conditioner(.noisysignal(mosi_pin),.clk(clk),.conditioned(serialin));
     inputconditioner SCLK(.noisysignal(sclk_pin),.clk(clk),.positiveedge(posSCLK),.negativeedge(negSCLK));
-    inputconditioner CS(.noisysignal(cs_pin),.clk(clk),.conditioned(CS));
+    inputconditioner CS_conditioner(.noisysignal(cs_pin),.clk(clk),.conditioned(CS));
 
     //finite statemachine
     fsm(.POS_EDGE(posSCLK),.CS(CS),.shiftRegOutP0(Flag),.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(sr_we),.SR_WE(sr_we));
