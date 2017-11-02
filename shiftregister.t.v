@@ -6,7 +6,8 @@
 //          - The rest of the bits shift up by one position.
 //      2) When parallelLoad is asserted, the shift register will take the value of parallelDataIn.
 //          - Data is not loaded into the shift register from the serialDataInPort if parallelLoad is true.
-//      3) parallelDataOut always presents the entirety of the contents of the shift register
+//      3) serialDataOut will always present the MSB of the shift register.
+//      4) parallelDataOut always presents the entirety of the contents of the shift register
 //------------------------------------------------------------------------
 
 `include "shiftregister.v"
@@ -70,7 +71,7 @@ module testshiftregister();
 
         // Test Case 0: the parallelDataOut port displays the entire contents of the shift register.
         if (parallelDataOut != dut.shiftregistermem) begin
-            $display("Test case 0 failed: parallelDataOut does not match the contents of the shift register.")
+            $display("Test case 0 failed: parallelDataOut does not match the contents of the shift register.");
         end
 
         // Test Case 1: Serially load data into the shift register.
@@ -80,8 +81,10 @@ module testshiftregister();
             $displayb("parallelDataOut: %b", parallelDataOut);
         end
 
+
         serialDataIn = 1;
-        peripheralClkEdge = 1;
+        peripheralClkEdge = 1; #10
+        peripheralClkEdge = 0; #50
 
         // Test Case 2: at the peripheral clock edge, serialData in is loaded into the LSB of the shift register
         // and the rest of the bits shift over one position
@@ -96,8 +99,8 @@ module testshiftregister();
         parallelLoad = 1; 
 
         // Parallel load data (8'b00000000).
-        parallelDataIn = 8'b00000000;
-        peripheralClkEdge = 1;
+        parallelDataIn = 8'b00000000;   #50
+        peripheralClkEdge = 1;  #10
 
         // Test Case 3: Load parallel data.
         // ParallelDataIn should have been loaded into the shift register.
@@ -156,11 +159,10 @@ module testshiftregister();
         // Present parallel load data to the parallelDataIn port.
         parallelDataIn = 8'b11010101; #50
 
-
-        // The serialDataOut port should not have the value of the most significant bit of the 
-        // parallel data presented because this would mean the data was saved in the register. 
-        if (serialDataOut == 1) begin
-            $display("Test Case 6 failed: serialDataOut changed without parallelLoad enabled %t", $time);
+        // Test Case 6: Only parallel load data when parallelLoad is high.
+        // The parallelDataOut port should not have the value of the parallelDataIn port. 
+        if (parallelDataOut == 8'b11010101) begin
+            $display("Test Case 6 failed: parallelDataOut changed without parallelLoad enabled %t", $time);
             $displayb("serialDataOut: %b", serialDataOut);
         end
 
