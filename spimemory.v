@@ -53,12 +53,12 @@ module jkff1
 endmodule
 
 module tristatebuffer(out,in,en);
-	input in;
-	input en;
-	output out;
-	
-	assign out = en ? in : 1'bz;
-	
+    input in;
+    input en;
+    output out;
+    
+    assign out = en ? in : 1'bz;
+    
 endmodule
 
 // Two-input MUX with parameterized bit width (default: 1-bit)
@@ -75,31 +75,31 @@ endmodule
 
 module dff #(parameter W = 1)
 (
-	input trigger,
-	input enable,
-	input [W-1:0] d,
-	output reg [W-1:0] q
+    input trigger,
+    input enable,
+    input [W-1:0] d,
+    output reg [W-1:0] q
 );
-	always @ (posedge trigger) begin
-		if(enable) begin
-			q <=d;
-		end
-	end
+    always @ (posedge trigger) begin
+        if(enable) begin
+            q <=d;
+        end
+    end
 
 endmodule
 
 module dlatch 
 (
-	input [7:0] data ,
-	input clk,
-	input addr_we,
-	output reg [6:0] addr
+    input [7:0] data ,
+    input clk,
+    input addr_we,
+    output reg [6:0] addr
 );
 
 always @(posedge clk) begin
-	if(addr_we) begin
-		addr = data[7:1];
-	end 
+    if(addr_we) begin
+        addr = data[7:1];
+    end 
 end
 
 endmodule
@@ -206,52 +206,30 @@ endmodule
 
 module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
     input clk;
-	input sclk_pin;
-	input cs_pin;
+    input sclk_pin;
+    input cs_pin;
     output miso_pin;
-	input mosi_pin;
-	output [3:0] leds;
+    input mosi_pin;
+    output [3:0] leds;
  
     wire[7:0] parallelData;    // ParallelData Out
-    wire[6:0] address; 		  // address
+    wire[6:0] address;        // address
     wire[3:0] res0, res1;     // 
     wire[7:0] parallelOut;  // Current Shift Register Values
     wire res_sel;             // Select between display options
     wire parallelslc;         // select parallel input
     wire serialin;            // binary input for serial input
-	wire serialout;           // serial output of shift register
+    wire serialout;           // serial output of shift register
     wire posSCLK;             // clk edge for serial input
-    wire negSCLK;			  // 
-    wire CS ;				  // chip select
-    wire Flag; 				  // R/W flag
-    wire miso_buff;			  // miso_buff
-    wire dm_we;				  // dm_we
-    wire addr_we;			  // addr_we
-    wire sr_we;				  // sr_we
-	wire output_ff_out;        // output ff output
+    wire negSCLK;             // 
+    wire CS ;                 // chip select
+    wire Flag;                // R/W flag
+    wire miso_buff;           // miso_buff
+    wire dm_we;               // dm_we
+    wire addr_we;             // addr_we
+    wire sr_we;               // sr_we
+    wire output_ff_out;        // output ff output
     
-    //Map to input conditioners
-    inputconditioner MOSI_conditioner(.noisysignal(mosi_pin),.clk(clk),.conditioned(serialin));
-    inputconditioner SCLK(.noisysignal(sclk_pin),.clk(clk),.positiveedge(posSCLK),.negativeedge(negSCLK));
-    inputconditioner CS_conditioner(.noisysignal(cs_pin),.clk(clk),.conditioned(CS));
-
-    //finite statemachine
-    fsm fsm_process(.POS_EDGE(posSCLK),.CS(CS),.shiftRegOutP0(parallelOut[0]),.clk(clk),.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(addr_we),.SR_WE(sr_we));
-
-    //Address Latch 
-    dlatch addr_latch(.data(parallelOut),.clk(clk),.addr_we(addr_we),.addr(address));
-
-	dff output_ff(.trigger(clk),.enable(negSCLK),.d(serialout),.q(output_ff_out));
-	
-	tristatebuffer outbuffer(.out(miso_pin),.in(output_ff_out),.en(miso_buff));
-
-
-    shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(sr_we),.parallelDataIn(parallelData),.serialDataIn(serialin),.parallelDataOut(parallelOut),.serialDataOut(serialout));
-
-    //data memory
-    datamemory data(.clk(clk),.address(address),.writeEnable(dm_we),.dataIn(parallelOut),.dataOut(parallelData));
-
-
     // Assign bits of shiftregister to appropriate display boxes
     assign res0[0] = parallelOut[0];
     assign res0[1] = parallelOut[1];
@@ -261,6 +239,29 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
     assign res1[1] = parallelOut[5];
     assign res1[2] = parallelOut[6];
     assign res1[3] = parallelOut[7];
+    
+    //Map to input conditioners
+    //(clk,noisysignal,conditioned,positiveedge,negativeedge);
+    inputconditioner MOSI_conditioner(.clk(clk),.conditioned(serialin),.noisysignal(mosi_pin));
+    inputconditioner SCLK(.clk(clk),.noisysignal(sclk_pin),.positiveedge(posSCLK),.negativeedge(negSCLK));
+    inputconditioner CS_conditioner(.clk(clk),.conditioned(CS),.noisysignal(cs_pin));
+
+    //finite statemachine
+    //(MISO_BUFF,DM_WE,ADDR_WE,SR_WE,POS_EDGE,CS,shiftRegOutP0,clk)
+    fsm fsm_process(.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(addr_we),.SR_WE(sr_we),.POS_EDGE(posSCLK),.CS(CS),.shiftRegOutP0(parallelOut[0]),.clk(clk));
+
+    //Address Latch 
+    dlatch addr_latch(.data(parallelOut),.clk(clk),.addr_we(addr_we),.addr(address));
+
+    dff output_ff(.trigger(clk),.enable(negSCLK),.d(serialout),.q(output_ff_out));
+    
+    tristatebuffer outbuffer(.out(miso_pin),.in(output_ff_out),.en(miso_buff));
+
+    //(clk,peripheralClkEdge,parallelLoad,parallelDataIn,serialDataIn,parallelDataOut,serialDataOut)
+    shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(sr_we),.parallelDataIn(parallelData),.serialDataIn(serialin),.parallelDataOut(parallelOut),.serialDataOut(serialout));
+
+    //data memory
+    //clk,dataOut,address,writeEnable,dataIn
+    datamemory data(.clk(clk),.dataOut(parallelData),.address(address),.writeEnable(dm_we),.dataIn(parallelOut));
 
 endmodule
-   
