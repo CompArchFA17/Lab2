@@ -14,7 +14,7 @@ endmodule
 
 module addresslatch
 #(
-    parameter width  = 7
+    parameter width  = 8
 )
 (
 output reg[width-1:0]  	q,
