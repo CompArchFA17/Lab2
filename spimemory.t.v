@@ -170,14 +170,14 @@ module testspimemory ();
 			$display("Test failed at time %t: output of shift register does not match the value of the memory at the correspondong address. miso_pin: %b, memory: %b", $time, miso_pin, dut.dm.memory[0][6]);
 		end
 
+		cs = 1;
+
 		sclk = 0; #1000
 		sclk = 1; #1000
 		if (miso_pin != dut.dm.memory[0][7]) begin
 			$display("Test failed at time %t: output of shift register does not match the value of the memory at the correspondong address. miso_pin: %b, memory: %b", $time, miso_pin, dut.dm.memory[0][7]);
 			$display("%b", dut.fsm.state);
 		end
-		
-
 
 
 
