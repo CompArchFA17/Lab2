@@ -8,7 +8,7 @@ module spiTest();
   wire miso_pin;
   reg mosi_pin;
   wire [3:0] leds;
-  wire q0;
+  wire [7:0]q0;
   wire q1;
   wire q2;
   
@@ -18,10 +18,10 @@ module spiTest();
   always #10 clk= !clk;    // 50MHz Clock
 
   
-  spiMemory dut(clk, sclk_pin, cs_pin, miso_pin, mosi_pin, leds, q0, q1, q2);
+  spiMemory dut(clk, sclk_pin, cs_pin, miso_pin, mosi_pin, leds, q0[7:0], q1, q2);
   initial begin
     $dumpfile("spimemory.vcd");
-    $dumpvars(0, clk, sclk_pin, cs_pin, miso_pin, mosi_pin, q0, q1, q2);
+    $dumpvars(0, clk, sclk_pin, cs_pin, miso_pin, mosi_pin, q0[7:0], q1, q2);
     
     // initial output
     cs_pin <= 1;
@@ -30,7 +30,7 @@ module spiTest();
     sclk_pin <= 1; #1000
     
     $display("sclk_pin | cs_pin | mosi_pin | miso_pin |");
-    $display("   %b     | %b      | %b        |   %b     |%b|%b|%b", sclk_pin, cs_pin, mosi_pin, miso_pin, q0, q1, q2);
+    $display("   %b     | %b      | %b        |   %b     |%b|%b|%b", sclk_pin, cs_pin, mosi_pin, miso_pin, q0[7:0], q1, q2);
     
     // write operation
     
@@ -45,14 +45,14 @@ module spiTest();
       end
       sclk_pin <= 0; #1000
       sclk_pin <= 1; #1000;
-      $display("   %b     | %b      | %b        |   %b     |%b|%b|%b", sclk_pin, cs_pin, mosi_pin, miso_pin, q0, q1, q2);
+      $display("   %b     | %b      | %b        |   %b     |%b|%b|%b", sclk_pin, cs_pin, mosi_pin, miso_pin, q0[7:0], q1, q2);
     end
     $display("Wrote 11111111 to address 1");
-		$display("   %b     | %b      | %b        |   %b     |%b|%b|%b", sclk_pin, cs_pin, mosi_pin, miso_pin, q0, q1, q2);
+		$display("   %b     | %b      | %b        |   %b     |%b|%b|%b", sclk_pin, cs_pin, mosi_pin, miso_pin, q0[7:0], q1, q2);
     cs_pin <= 1;
     mosi_pin <= 0;
     sclk_pin <= 0; #1000
-    sclk_pin <= 1; #1000
+    sclk_pin <= 1; #1000000
     //
     
     
@@ -64,7 +64,7 @@ module spiTest();
       if (counter == 0) begin //resetting mosi_pin to read from address 
         mosi_pin <= 0;
       end
-      else if(counter==6) begin
+      else if(counter==7) begin
         mosi_pin<=1;
       end
       sclk_pin <= 0; #1000
@@ -75,7 +75,7 @@ module spiTest();
     for (counter = 0; counter < 8; counter = counter + 1) begin
       sclk_pin <= 0; #1000
       sclk_pin <= 1; #1000
-      $display("   %b     | %b      | %b        |   %b     |%b|%b|%b", sclk_pin, cs_pin, mosi_pin, miso_pin, q0, q1, q2);
+      $display("   %b     | %b      | %b        |   %b     |%b|%b|%b", sclk_pin, cs_pin, mosi_pin, miso_pin, q0[7:0], q1, q2);
     end
     cs_pin <= 1;
     sclk_pin <= 0; #1000

@@ -41,7 +41,7 @@ module spiMemory
     output          miso_pin,   // SPI master in slave out
     input           mosi_pin,   // SPI master out slave in
     output [3:0]    leds,        // LEDs for debugging
-    output DM_WE, output ADDR_WE, output SR_WE
+    output[7:0] shiftRegOutP, output D0, output Q0
 );
 wire [7:0] shiftRegOutP;
 wire [7:0] dataMemOut;
