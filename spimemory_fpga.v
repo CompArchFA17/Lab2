@@ -27,31 +27,31 @@
 
 module dff #(parameter W = 1)
 (
-	input trigger,
-	input enable,
-	input [W-1:0] d,
-	output reg [W-1:0] q
+  input trigger,
+  input enable,
+  input [W-1:0] d,
+  output reg [W-1:0] q
 );
-	always @ (posedge trigger) begin
-		if(enable) begin
-			q <=d;
-		end
-	end
+  always @ (posedge trigger) begin
+    if(enable) begin
+      q <=d;
+    end
+  end
 
 endmodule
 
 module dlatch 
 (
-	input [7:0] data ,
-	input clk,
-	input addr_we,
-	output reg [6:0] addr
+  input [7:0] data ,
+  input clk,
+  input addr_we,
+  output reg [6:0] addr
 );
 
 always @(posedge clk) begin
-	if(addr_we) begin
-		addr = data[7:1];
-	end 
+  if(addr_we) begin
+    addr = data[7:1];
+  end 
 end
 
 endmodule
@@ -292,25 +292,25 @@ endmodule
 module spiMemory(clk,sw,led);
     input clk;
     input [2:0] sw;
-	output reg [3:0] led;
+  output reg [3:0] led;
  
     wire[7:0] parallelData;   // ParallelData Out
-    wire[6:0] address; 		  // address
+    wire[6:0] address;      // address
     wire[7:0] shiftregister;  // Current Shift Register Values
     wire miso;                // current miso value
     wire res_sel;             // Select between display options
     wire parallelslc;         // select parallel input
     wire serialin;            // binary input for serial input
-	wire serialout;           // serial output of shift register
+  wire serialout;           // serial output of shift register
     wire posSCLK;             // clk edge for serial input
-    wire negSCLK;			  // 
-    wire CS ;				  // chip select
-    wire Flag; 				  // R/W flag
-    wire miso_buff;			  // miso_buff
-    wire dm_we;				  // dm_we
-    wire addr_we;			  // addr_we
-    wire sr_we;				  // sr_we
-	wire output_ff_out;        // output ff output
+    wire negSCLK;       // 
+    wire CS ;         // chip select
+    wire Flag;          // R/W flag
+    wire miso_buff;       // miso_buff
+    wire dm_we;         // dm_we
+    wire addr_we;       // addr_we
+    wire sr_we;         // sr_we
+  wire output_ff_out;        // output ff output
     
 
     //Map to input conditioners
@@ -319,15 +319,15 @@ module spiMemory(clk,sw,led);
     inputconditioner CS_conditioner(.noisysignal(sw[2]),.clk(clk),.conditioned(CS));
 
     //finite statemachine
-    fsm fsm(.POS_EDGE(posSCLK),.CS(sw[2]),.shiftRegOutP0(Flag),.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(sr_we),.SR_WE(sr_we));
+    fsm finite_statemachine(.clk(clk),.POS_EDGE(posSCLK),.CS(sw[2]),.shiftRegOutP0(Flag),.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(sr_we),.SR_WE(sr_we));
 
     //Address Latch 
     dlatch addr_latch(.data(parallelData),.clk(clk),.addr_we(addr_we),.addr(address));
 
-	dff output_ff(.trigger(clk),.enable(negSCLK),.d(serialout),.q(output_ff_out));
-	
-	tristatebuffer outbuffer(.out(miso),.in(output_ff_out),.en(miso_buff));
-
+    dff output_ff(.trigger(clk),.enable(negSCLK),.d(serialout),.q(output_ff_out));
+  
+    tristatebuffer outbuffer(.out(miso),.in(output_ff_out),.en(miso_buff));
+ 
 
     shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(parallelslc),.parallelDataIn(parallelData),.serialDataIn(serialin),.parallelDataOut(shiftregister));
 
@@ -343,4 +343,3 @@ module spiMemory(clk,sw,led);
         end
     end
 endmodule
-   
