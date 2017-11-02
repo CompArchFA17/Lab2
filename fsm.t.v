@@ -38,7 +38,7 @@ module fsmTest();
     // test for read
     CS = 0; shiftRegOut = 1;
       
-    for (counter = 0; counter < 17; counter = counter + 1)
+    for (counter = 0; counter < 18; counter = counter + 1)
           begin 
         sclk = 0; #10
             sclk = 1; #10
@@ -47,11 +47,11 @@ module fsmTest();
     
     // test for write
     $display("Testing for write");
-    CS = 1; #50
+    CS = 1;
     sclk = 0; #10
     sclk = 1; #10
-    CS = 0; shiftRegOut = 0; #10
-    
+    CS = 0; shiftRegOut = 0;
+
     sclk = 0; #10
     sclk = 1; #10
     $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
@@ -103,7 +103,7 @@ module fsmTest();
     sclk = 1; #10
     // stop writing to DM
     $display(" %b        | %b   | %b       | %b     | %b       | %b", shiftRegOut, sclk, MISOBUFE, DM_WE, ADDR_WE, SR_WE);
-
+    CS = 1;
 
   #10000 
     $finish;

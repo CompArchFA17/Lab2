@@ -23,7 +23,7 @@ output reg		SR_WE         //Parallel Load
     
   always @(posedge clk) begin
     if (sclk) begin
-      if (CS) begin
+      if (CS == 1) begin
         currentState <= 0;
         MISOBUFE <= 0;
         DM_WE <= 0;
@@ -31,6 +31,7 @@ output reg		SR_WE         //Parallel Load
         SR_WE <=0;
         counter <= 0;
       end
+      else begin
       case(currentState) 
         0: begin // Default State
           if (CS == 0) begin
@@ -104,6 +105,7 @@ output reg		SR_WE         //Parallel Load
           currentState <= 0;
         end
       endcase
+      end
     end
   end
 endmodule
