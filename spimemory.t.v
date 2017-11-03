@@ -21,10 +21,18 @@ module testspimemory ();
 		sclk = 0; #1000
 		sclk = 1; #1000
 
+		if(dut.fsm.state != 6'b000001) begin
+			$displayb("Test failed: the state is expected to be start, state is actually %b at time %t", dut.fsm.state, $time);
+		end
+
 		// Start presenting address bits 7'b1010101
 		cs = 0;
 		sclk = 0; mosi_pin = 0; #1000
 		sclk = 1; #1000
+
+		if(dut.fsm.state != 6'b000010) begin
+			$displayb("Test failed: the state is expected to be receive, state is actually %b at time %t", dut.fsm.state, $time);
+		end
 
 		sclk = 0; mosi_pin = 0; #1000
 		sclk = 1; #1000
@@ -56,6 +64,10 @@ module testspimemory ();
 		sclk = 0; mosi_pin = 1; #1000
 		sclk = 1; #1000
 
+		if(dut.fsm.state != 6'b000100) begin
+			$displayb("Test failed: the state is expected to be write, state is actually %b at time %t", dut.fsm.state, $time);
+		end
+
 		sclk = 0; mosi_pin = 0; #1000
 		sclk = 1; #1000
 
@@ -81,9 +93,16 @@ module testspimemory ();
 			$display("Test case failed: the data written to the memory does not match the expected data.");
 		end
 
+		// $display("%t",$time);
+
+
 		// Chip select goes high.
 		sclk = 0; cs = 1; #1000
 		sclk = 1; #1000
+
+		if(dut.fsm.state != 6'b100000) begin
+			$display("Test failed: the state is expected to be end, state is actually %b at time %t", dut.fsm.state, $time);
+		end
 
 		sclk = 0; #1000
 		sclk = 1; #1000
@@ -102,10 +121,18 @@ module testspimemory ();
 
 		// Chip select goes low.
 		cs = 0;
+
+		if(dut.fsm.state != 6'b000001) begin
+			$display("Test failed: the state is expected to be start, state is actually %b at time %t", dut.fsm.state, $time);
+		end
 		
 		// Start presenting address bits '7b 1010101
 		sclk = 0; mosi_pin = 0; #1000
 		sclk = 1; #1000
+
+		if(dut.fsm.state != 6'b000010) begin
+			$display("Test failed: the state is expected to be receive, state is actually %b at time %t", dut.fsm.state, $time);
+		end
 
 		sclk = 0; mosi_pin = 0; #1000
 		sclk = 1; #1000
@@ -138,19 +165,26 @@ module testspimemory ();
 			$display("data: %b, mem: %b", dut.dataMemOut, dut.dm.memory[0]);
 		end
 
+
 		// Cycle through to push all data to serialOut
 		sclk = 0; #1000
 		sclk = 1; #1000
 		if (miso_pin != dut.dm.memory[0][0]) begin
 			$display("Test failed at time %t: output of shift register does not match the value of the memory at the correspondong address. miso_pin: %b, memory: %b", $time, miso_pin, dut.dm.memory[0][0]);
-			$display("%b", dut.fsm.state);
+		end
+
+		if(dut.fsm.state != 6'b001000) begin
+			$display("Test failed: the state is expected to be read0, state is actually %b at time %t", dut.fsm.state, $time);
 		end
 
 		sclk = 0; #1000
 		sclk = 1; #1000
 		if (miso_pin != dut.dm.memory[0][1]) begin
 			$display("Test failed at time %t: output of shift register does not match the value of the memory at the correspondong address. miso_pin: %b, memory: %b", $time, miso_pin, dut.dm.memory[0][1]);
-			$display("%b", dut.fsm.state);
+		end
+
+		if(dut.fsm.state != 6'b010000) begin
+			$display("Test failed: the state is expected to be read1, state is actually %b at time %t", dut.fsm.state, $time);
 		end
 
 		sclk = 0; #1000
