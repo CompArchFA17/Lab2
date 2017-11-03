@@ -1,0 +1,8 @@
+Input Conditioning implementation: 1hr
+Input conditioning test bench: 1hr
+Shift Register implementation: 2hr
+Mid point deliverable (FPGA, report): 2hr 
+SPI memory implementation: 4hr
+SPI testing: 2hr
+Final report: 1hr
+Total: 13hr
