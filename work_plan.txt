@@ -1,0 +1,6 @@
+Input Conditioner (10/23) (1.5 hrs)
+Shift Register (10/24) (2 hrs)
+FPGA (10/24) (3 hrs)
+Midpoint Checkin (10/25)
+SPI Memory Integration (10/31) (5 hrs)
+Writeup (11/1) (4 - 5 hrs)
