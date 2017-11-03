@@ -1,5 +1,8 @@
 //------------------------------------------------------------------------
 // SPI Memory
+// 		Memory operations happen when chip select is low.
+//		Memory can be both read from and written to using
+//		standard spi protocol.
 //------------------------------------------------------------------------
 
 `include "inputconditioner.v"
@@ -16,7 +19,6 @@ module spimemory
     input           cs_pin,     // SPI chip select
     output          miso_pin,   // SPI master in slave out
     input           mosi_pin//,   // SPI master out slave in
-   // output [3:0]    leds        // LEDs for debugging
 );
 
 	// mosi input conditioner wires
@@ -74,7 +76,6 @@ module spimemory
 	// finite state machine
 
 	fsm fsm(sclk_ic_positiveedge, cs_ic_conditioned, sr_parallelDataOut[0], miso_buff, dm_we, addr_we, sr_we);
-	// fsm fsm(clk, cs_ic_conditioned, sr_parallelDataOut[0], miso_buff, dm_we, addr_we, sr_we);
 
 
 	// data memory

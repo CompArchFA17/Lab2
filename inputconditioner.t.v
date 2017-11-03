@@ -1,6 +1,10 @@
 
 //------------------------------------------------------------------------
 // Input Conditioner test bench
+//    Test the functions of the input condidtioner
+//      - Input Synchronization
+//      - Input Debouncing
+//      - Edge Detection   
 //------------------------------------------------------------------------
 
 `include "inputconditioner.v"
