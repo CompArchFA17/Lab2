@@ -1,4 +1,3 @@
-
 `include "fsm.v"
 `include "datamemory.v"
 
@@ -28,8 +27,6 @@
 //     Note: Buttons, switches, and LEDs have the least-significant (0) position
 //     on the right.      
 //--------------------------------------------------------------------------------
-
-`timescale 1ns / 1ps
 
 //--------------------------------------------------------------------------------
 // Basic building block modules
@@ -208,13 +205,21 @@ endmodule
 //   Write: 
 //--------------------------------------------------------------------------------
 
-module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
+module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds,serialin,posSCLK,CS,miso_buff,shiftRegOutP,parallelOut,parallelData,sr_we);
     input clk;
     input sclk_pin;
     input cs_pin;
     output miso_pin;
     input mosi_pin;
     output [3:0] leds;
+    output serialin;
+    output posSCLK;
+    output CS;
+    output miso_buff;
+    output shiftRegOutP;
+    output [7:0] parallelOut;
+    output [7:0] parallelData;
+    output sr_we;
  
     wire[7:0] parallelData;   // ParallelData Out
     wire[6:0] address;        // address
@@ -233,6 +238,9 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
     wire sr_we;               // sr_we
     wire output_ff_out;       // output ff output
     wire filler;              // filler wire
+    wire shiftRegOutP;
+    
+    assign shiftRegOutP = parallelOut[0];
     
     //Map to input conditioners
     //(clk,noisysignal,conditioned,positiveedge,negativeedge);
@@ -242,7 +250,7 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds);
 
     //finite statemachine
     //(MISO_BUFF,DM_WE,ADDR_WE,SR_WE,POS_EDGE,CS,shiftRegOutP0,clk)
-    fsm fsm_process(.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(addr_we),.SR_WE(sr_we),.POS_EDGE(posSCLK),.CS(CS),.shiftRegOutP0(parallelOut[0]),.clk(clk));
+    fsm fsm_process(.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(addr_we),.SR_WE(sr_we),.POS_EDGE(posSCLK),.CS(CS),.shiftRegOutP0(parallelOut[0]));
 
     //Address Latch 
     dlatch addr_latch(.data(parallelOut),.clk(clk),.addr_we(addr_we),.addr(address));
