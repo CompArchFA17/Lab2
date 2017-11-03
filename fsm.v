@@ -30,6 +30,7 @@ output reg    SR_WE         //Parallel Load
         counter <= 0;
       end
       else begin
+      
       case(currentState) 
         0: begin // Default State
           if (CS == 0) begin
@@ -62,7 +63,7 @@ output reg    SR_WE         //Parallel Load
           end
           else begin
             DM_WE <= 1;
-            currentState <= 6;
+            currentState <= 5;
           end
         end
         
@@ -86,7 +87,7 @@ output reg    SR_WE         //Parallel Load
         5: begin // allowing shift register to accept 8 bits of data
           if (counter == 8) begin
             DM_WE <= 0;
-            currentState <= 6;
+            currentState <= 0;
             counter <= 0;
           end
           else begin
@@ -94,6 +95,8 @@ output reg    SR_WE         //Parallel Load
           end
         end
       endcase
+
+
       end
     end
   end
