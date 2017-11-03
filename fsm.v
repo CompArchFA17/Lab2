@@ -91,7 +91,9 @@ module fsm
 				end
 
 				STATE_END: begin
-					state <= STATE_START;
+					if (chip_sel == 1) begin
+						state <= STATE_START;
+					end
 				end
 
 			endcase
