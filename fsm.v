@@ -12,14 +12,12 @@ output reg    SR_WE         //Parallel Load
   reg[3:0] counter = 0;
   reg[5:0] currentState = 0;
   // states:
-  // 0 - default
-  // 1 - accepting address- ADDR_WE is enabled
-  // 2 - accepting r/w bit- ADDR_WE is disabled
-  // 3 - first reading state: setting WE high
-  // 4 - second reading state: setting WE low
-  // 5 - final reading state: output to buffer
-  // 6 - first write state: accepting data - need to accept 8 more data bits
-  // 7 - writing to DM: sets everything to zero once writing is done
+  // 0 - Default
+  // 1 - Accepting address- ADDR_WE is enabled
+  // 2 - Accepting r/w bit- ADDR_WE is disabled
+  // 3 - First reading state: setting WE high
+  // 4 - Second reading state: output to buffer
+  // 5 - Write state: accepting data - need to accept 8 more data bits
     
   always @(posedge clk) begin
     if (sclk) begin
@@ -71,15 +69,10 @@ output reg    SR_WE         //Parallel Load
         3: begin // First read state
           SR_WE <= 0;
           MISOBUFE <= 1;
-          currentState <= 5; 
+          currentState <= 4; 
         end
         
-        // 4: begin // Second read state
-        //   currentState <= 5;
-        //   MISOBUFE <= 1;
-        // end
-        
-        5: begin 
+        4: begin 
           if (counter == 7) begin
             currentState <= 0;
             counter <= 0;
@@ -90,20 +83,15 @@ output reg    SR_WE         //Parallel Load
           end
         end
         
-        6: begin // allowing shift register to accept 8 bits of data
+        5: begin // allowing shift register to accept 8 bits of data
           if (counter == 8) begin
             DM_WE <= 0;
-            currentState <= 0;
+            currentState <= 6;
             counter <= 0;
           end
           else begin
             counter <= counter + 1;
           end
-        end
-        
-        7: begin // writing to DM for one clock cycle (DM is already high by the time this is reached)
-          DM_WE <= 0;
-          currentState <= 0;
         end
       endcase
       end
