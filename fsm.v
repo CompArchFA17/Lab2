@@ -18,7 +18,7 @@ module fsm(MISO_BUFF,DM_WE,ADDR_WE,SR_WE,POS_EDGE,CS,shiftRegOutP0);
    parameter counter_num_bits = 4;
    reg[counter_num_bits-1:0] counter = 0;
 
-   assign next_state = fsm_function(state,CS,shiftRegOutP0);   
+    
 
    function [1:0] fsm_function;
       input [1:0] state;
@@ -44,7 +44,7 @@ module fsm(MISO_BUFF,DM_WE,ADDR_WE,SR_WE,POS_EDGE,CS,shiftRegOutP0);
    endfunction
 
    always @ (posedge POS_EDGE) begin
-      state <= next_state;
+	  next_state <= fsm_function(state,CS,shiftRegOutP0); 
       if (next_state == 2'b00) begin
          MISO_BUFF <= 0;
          DM_WE <= 0;
