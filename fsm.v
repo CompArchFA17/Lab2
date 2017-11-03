@@ -14,7 +14,7 @@ module fsm(MISO_BUFF,DM_WE,ADDR_WE,SR_WE,POS_EDGE,CS,shiftRegOutP0);
 
    reg [1:0] state;
    reg MISO_BUFF,DM_WE,ADDR_WE,SR_WE;
-   wire [1:0] next_state;
+   reg [1:0] next_state;
    parameter counter_num_bits = 4;
    reg[counter_num_bits-1:0] counter = 0;
 
