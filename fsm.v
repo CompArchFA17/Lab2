@@ -1,13 +1,13 @@
 module fsm
 (
-input 	     shiftRegOut,   //defines the state (read or write)
-input	        CS,						//chip select
-input 		    sclk,    			//serial clock
+input        shiftRegOut,   //defines the state (read or write)
+input         CS,           //chip select
+input         sclk,         //serial clock
 input         clk,          // system clock
-output reg	  MISOBUFE,     // controls output to MISO
-output reg 	  DM_WE,        // Write enable data memory
+output reg    MISOBUFE,     // controls output to MISO
+output reg    DM_WE,        // Write enable data memory
 output reg    ADDR_WE,      //  address write enable
-output reg		SR_WE         //Parallel Load
+output reg    SR_WE         //Parallel Load
 );
   reg[3:0] counter = 0;
   reg[5:0] currentState = 0;
@@ -51,7 +51,7 @@ output reg		SR_WE         //Parallel Load
         1: begin // Accepting Address
           counter <= counter + 1;
           if(counter == 6) begin
-          	currentState <= 2;
+            currentState <= 2;
             counter <= 0; //reset counter
             ADDR_WE <= 0;
           end
@@ -60,11 +60,11 @@ output reg		SR_WE         //Parallel Load
         2: begin // Accepting Read/Write Bit
           if (shiftRegOut == 1) begin
             SR_WE <= 1;
-          	currentState <= 3;
+            currentState <= 3;
           end
           else begin
             DM_WE <= 1;
-          	currentState <= 6;
+            currentState <= 6;
           end
         end
         
