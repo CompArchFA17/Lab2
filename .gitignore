@@ -1,0 +1,12 @@
+# Ignore compiled binaries
+*
+!/**/
+!*.*
+!makefile
+
+# Ignore gtkwave files
+*.vcd
+
+# Ignore vivado-related files and directories
+midpoint_testing
+*vivado*
