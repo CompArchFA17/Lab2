@@ -49,8 +49,11 @@ module testConditioner();
     #10
     $display("%b        %d         %b                      %b           %b          %b", pin, 10'd170, conditioned, clk, rising, falling);
 
+    #13
+    $display("%b        %d         %b                      %b           %b          %b", pin, 10'd200, conditioned, clk, rising, falling);
+
     pin = 0;
-    #120
+    #90
     $display("%b        %d         %b                      %b           %b          %b", pin, 10'd290, conditioned, clk, rising, falling);
 
     #2
