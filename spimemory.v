@@ -58,7 +58,7 @@ end
 always @(negedge sclk_pos) begin
   if(!cs) begin
     if(state == `READ_ADDRESS) begin
-      bitsTx = bitsTx + 1;
+      bitsTx <= bitsTx + 1;
       if(bitsTx == 7) begin
         state   <= `READ_WR;
         addressReg <= shift_pOut[6:0];
@@ -93,7 +93,7 @@ always @ (posedge sclk_neg) begin
   if(!cs) begin
     if(state == `WRITE_DATA) begin
       miso_pin <= shift_sOut;
-      bitsTx = bitsTx + 1;
+      bitsTx <= bitsTx + 1;
     end
   end
 end
