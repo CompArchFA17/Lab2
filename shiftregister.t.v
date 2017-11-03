@@ -71,13 +71,13 @@ module testshiftregister();
 
         // Test Case 0: the parallelDataOut port displays the entire contents of the shift register.
         if (parallelDataOut != dut.shiftregistermem) begin
-            $display("Test case 0 failed: parallelDataOut does not match the contents of the shift register.");
+            $display("Test Case 0 failed: parallelDataOut does not match the contents of the shift register.");
         end
 
         // Test Case 1: Serially load data into the shift register.
         // After 8 peripheral clock cycles, the shift register should contain the bits that were loaded in above.
         if (parallelDataOut != 8'b01010101) begin
-            $display("Test case 1 failed: parallelDataOut does not match the serial input sequence at time %t", $time);
+            $display("Test Case 1 failed: parallelDataOut does not match the serial input sequence at time %t", $time);
             $displayb("parallelDataOut: %b", parallelDataOut);
         end
 
@@ -89,7 +89,7 @@ module testshiftregister();
         // Test Case 2: at the peripheral clock edge, serialData in is loaded into the LSB of the shift register
         // and the rest of the bits shift over one position
         if (parallelDataOut != 8'b10101011) begin
-            $display("Test case 2 failed: parallelDataOut not shifted one position from the previous reading.");
+            $display("Test Case 2 failed: parallelDataOut not shifted one position from the previous reading.");
             $displayb("parallelDataOut: %b", parallelDataOut);
         end
 
@@ -105,7 +105,7 @@ module testshiftregister();
         // Test Case 3: Load parallel data.
         // ParallelDataIn should have been loaded into the shift register.
         if (parallelDataOut != parallelDataIn) begin
-            $display("Test case 3 failed: parallelDataIn does not match parallelDataOut despite enabled parallelLoad %t", $time);
+            $display("Test Case 3 failed: parallelDataIn does not match parallelDataOut despite enabled parallelLoad %t", $time);
             $displayb("parallelDataOut: %b", parallelDataOut);
         end
 
