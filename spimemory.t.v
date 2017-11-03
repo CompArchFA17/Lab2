@@ -227,16 +227,20 @@ module testspimemory ();
 
 		sclk = 0; #1000
 		sclk = 1; #1000
-		
+
 		// Chip select goes high again
 		cs = 1;
 		sclk = 0; #1000
 		sclk = 1; #1000
-		sclk = 0; #1000
-		sclk = 1; #1000
-		sclk = 0; #1000
-		sclk = 1; #1000
 
+		if(dut.fsm.state != 6'b100000) begin
+			$display("Test failed: the state is expected to be end, state is actually %b at time %t", dut.fsm.state, $time);
+		end
+
+		sclk = 0; #1000
+		sclk = 1; #1000
+		sclk = 0; #1000
+		sclk = 1; #1000
 
 
 		$finish();
