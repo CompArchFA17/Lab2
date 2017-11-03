@@ -50,7 +50,7 @@ module spiTest();
     mosi_pin <= 0;
     sclk_pin <= 0; #1000
     sclk_pin <= 1; #1000000
-    //
+    //long delay to help debug
     
     
     
@@ -173,13 +173,13 @@ module spiTest();
       sclk_pin <= 0; #1000
       sclk_pin <= 1; #1000
       if (counter == 8) begin
+      	cs_pin<=1;
         $display("reading 2 more just in case");
       end
-      $display("   %b     ",miso_pin);
+      $display("   %b     ",miso_pin); 
     end
 
 
-	cs_pin<=1; #1000;
 
 
 //read operation for address 0
@@ -205,7 +205,7 @@ module spiTest();
 
 
     // now output the bits that were read from address 1
-    $display("Reading data at address 0");
+    $display("Reading data at address 0 again");
     for (counter = 0; counter < 10; counter = counter + 1) begin
       sclk_pin <= 0; #1000
       sclk_pin <= 1; #1000
