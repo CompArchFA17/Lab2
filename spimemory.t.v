@@ -19,6 +19,7 @@ module testSPImem();
     reg[7:0] read_data;
     wire[7:0] cmd = {address, rw_select};
     reg[3:0] i = 0;
+    reg success = 1;
 
     spiMemory test(clk, spi_clk, chip_select, miso, mosi, leds);
 
@@ -30,13 +31,14 @@ module testSPImem();
     always #100 spi_clk = !spi_clk; //25 MHz clock
 
     initial
-        #20000 $finish;
+        #200000 $finish;
 
     initial begin
 	$dumpfile("spimemory.vcd");
 	$dumpvars();
 	$display("testing SPI memory");
-	$display("TEST 1: write to address 5 and read back");
+	
+// TEST 1: write data and read it back
 	// initialize values to write
 	address = 7'd5; // set address to 5
 	write_data = 8'd155; // set write data to 155
@@ -74,16 +76,18 @@ module testSPImem();
 	    @(posedge spi_clk);
 	    read_data[7-i]=miso;
 	end
-	$display("data returned is: %d", read_data);
-	
-	$display("TEST 2: write to a second address and read values from both");
+	if (read_data != 8'd155) begin
+	    $display("Test1: write data and read it back FAILED:");
+	    $display("data returned is: %d", read_data);
+	    success = 0;
+	end
 	
 	// toggle chip select
 	@(negedge spi_clk);
 	chip_select = 1;
 	@(negedge spi_clk);
 	chip_select = 0;
-
+// TEST 2: write to second address, read back from both
 	// initialize values to write
 	address = 7'd120; // set address to 120
 	write_data = 8'd3; // set write data to 3
@@ -118,7 +122,13 @@ module testSPImem();
 	    @(posedge spi_clk);
 	    read_data[7-i]=miso;
 	end
-	$display("data returned from first address: %d", read_data);
+	
+	if (read_data != 8'd155) begin
+	    $display("Test2: write to second address, read back both FAILED:");
+	    $display("data returned is: %d", read_data);
+	    $display("original data has changed");
+	    success = 0;
+	end
 	
 	// toggle chip select
 	@(negedge spi_clk);
@@ -139,7 +149,66 @@ module testSPImem();
 	    @(posedge spi_clk);
 	    read_data[7-i]=miso;
 	end
-	$display("data returned from second address: %d", read_data);
+	
+	if (read_data != 8'd3) begin
+	    $display("Test2: write to second address, read back both FAILED:");
+	    $display("data returned is: %d", read_data);
+	    $display("new address write/read back failed");
+	    success = 0;
+	end
+
+	// toggle chip select
+	@(negedge spi_clk);
+	chip_select = 1;
+	@(negedge spi_clk);
+	chip_select = 1;
+
+// TEST 3: write new value to original address with cs disabled
+	// initialize values to write
+	address = 7'd5; // set address to 5
+	write_data = 8'd12; // set write data to 12
+	rw_select = 0; // write
+	// start with a normal write opperation
+	for (i=0; i<7; i=i+1) begin
+	    mosi = address[6-i];
+	    @(negedge spi_clk);
+	end
+	mosi = rw_select;
+	for (i=0; i<8; i=i+1) begin
+	    @(negedge spi_clk);
+	    mosi = write_data[7-i];
+	end
+
+	// toggle chip select
+	@(negedge spi_clk);
+	chip_select = 1;
+	@(negedge spi_clk);
+	chip_select = 0;
+	
+	// read back data
+	address = 7'd5; // set address to 5
+	rw_select = 1; // read
+	for (i=0; i<7; i=i+1) begin
+	    mosi = address[6-i];
+	    @(negedge spi_clk);
+	end
+	mosi = rw_select;
+	@(negedge spi_clk);
+	for (i=0; i<8; i=i+1) begin
+	    @(posedge spi_clk);
+	    read_data[7-i]=miso;
+	end
+	
+	if (read_data != 8'd155) begin
+	    $display("Test3: write to original addrss with chip disabled FAILED");
+	    $display("data returned is: %d", read_data);
+	    $display("original data has changed");
+	    success = 0;
+	end
+
+	if (success==1) begin
+	    $display("All Tests Passed!");
+	end
     end
 	
 endmodule

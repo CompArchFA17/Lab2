@@ -27,22 +27,19 @@ output reg             serialDataOut       // Positive edge synchronized
     //wire negativeedge;
     //inputconditioner inputc(clk, peripheralClkEdge, conditioned, positiveedge, negativeedge);
 
-    always @(posedge parallelLoad) begin
-	shiftregistermem <= parallelDataIn;
-    end
 
     always @(posedge clk) begin
         // Parallel load will happen if parallel load is high.
         // this takes priority over the serial shift
-       // if (parallelLoad) begin // Parallel
-         //   shiftregistermem <= parallelDataIn;
-        //end
+        if (parallelLoad) begin // Parallel
+            shiftregistermem <= parallelDataIn;
+        end
         //the shift register advances one position: serialDataIn is loaded into the LSB (Least Significant Bit), and the rest of the bits shift up by one
-        //else begin
+        else begin
             if (peripheralClkEdge) begin
         	shiftregistermem <= {{shiftregistermem[width-2:0]}, {serialDataIn}};
             end
-        //end
+        end
 
 
         //serialDataOut always presents the Most Significant Bit of the shift register.

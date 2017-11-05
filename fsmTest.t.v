@@ -5,20 +5,27 @@
 
 module testFSM();
     
-    reg clk;
+    reg clk, clk_fall;
     reg chipSelect;
     reg rw_select;
 
     wire MISObuff, memWE, addrWE, srWE;
 
-    fsm test(MISObuff, memWE, addrWE, srWE, clk, chipSelect, rw_select);
+    wire csFalling;
+    not(csFalling, chipSelect);
+    initial chipSelect = 1;
+    fsm test(MISObuff, memWE, addrWE, srWE, clk, clk_fall, csFalling, rw_select);
 
     // generate clock
     initial clk = 0;
-    always #10 clk = !clk; //50 MHz clock
+    always begin
+	#10;
+	clk = !clk; //50 MHz clock
+	clk_fall = !clk;
+    end
 
     initial
-	#1000 $finish;
+	#10000 $finish;
 
     initial begin
 	$dumpfile("fsm.vcd");

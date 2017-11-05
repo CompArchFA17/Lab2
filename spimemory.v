@@ -6,11 +6,10 @@
 
 module bufferSwitch
 (
+    output buff_out,
     input buff_in,
-    input buff_enable,
-    output buff_out
+    input buff_enable
 );
-    wire buff_out;
     and bufenable(buff_out, buff_enable, buff_in);
 endmodule
 
@@ -65,7 +64,7 @@ module spiMemory
     wire MISObuff, memWE, addrWE, srWE;
 	wire miso_pin_pre_buffer;
 	
-    //and buffswitch0(miso_pin, miso_pin_pre_buffer, MISObuff);
+    bufferSwitch buffswitch0(miso_pin, miso_pin_pre_buffer, MISObuff);
 
 	inputconditioner mosiIC(clk, mosi_pin, mosi_conditioned, mosi_rising, mosi_falling);
 	inputconditioner csIC(clk, cs_pin, cs_conditioned, cs_rising, cs_falling);
@@ -75,7 +74,7 @@ module spiMemory
 
     datamemory memory1(clk, parallelMemToSR, address, memWE, parallelSRtoMem);
 	
-	dff dff1(serialOut, sclk_falling, miso_pin);
+	dff dff1(serialOut, sclk_falling, miso_pin_pre_buffer);
     dff7Bit dff2(parallelSRtoMem[6:0], addrWE, address);
 
     fsm fsm1( MISObuff, memWE, addrWE, srWE, sclk_rising, sclk_falling, cs_falling, mosi_conditioned);
