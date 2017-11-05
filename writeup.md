@@ -25,3 +25,8 @@ The waveform from the SPI test for writing to the second memory address, then re
 ![waveform of SPI memory](writeRead2.png)
 
 The top trace is the spi clock, followed by the value in the shift register, the state (from the state machine), the memory address from the memory block, dataOut of the memory block, chip select, MOSI, and MISO. The first action is a write action, where the value 3 is written to address 78. Next, we read the value from address 5 (value is 9B), and finally, we read back the value from address 78.
+
+### Analysis and Reflection
+Aside from logistical problems, I think this is a good lab, The SPI memory appears to work, and I think we have a good understanding of all of the parts of the system. We spent a lot of time before the midpoint deliverable understanding how the shift register worked and what all of the inputs meant, so I think we had a good idea of how the overall memory should work based on that. The only other part that was difficult from an understanding perspective was the timing of the actual SPI protocol. The picture in the lab description was very useful, and we pretty much used that as a reference to compare with GTKwave outputs.
+
+I think that the only thing we underestimated on our work plan was how long we would need to debug small problems in verilog relating to timing and overdriven variables. There were a few hours of just looking at GTKwave and finding timing bugs or unexpected outputs which we didn't account for.
