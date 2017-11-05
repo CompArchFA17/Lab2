@@ -13,8 +13,9 @@ module fsm
     output reg srWE,
 	
     //input posclkedge,
-    input negclkedge,
-    input cs,
+    input spi_clk,
+    input spi_falling,
+    input cs_falling,
     input rw_select
 );
     reg [3:0] count;
@@ -27,14 +28,14 @@ module fsm
     initial addrWE = 0;
     initial srWE = 0;
 
-    always @(negedge cs) begin
+    always @(posedge cs_falling) begin
 	state <= `READADDRESS;
     end
-    always @(posedge cs) begin
-	state <= `WAIT;
-    end
+    //always @(posedge cs) begin
+//	state <= `WAIT;
+  //  end
 
-    always @(posedge negclkedge) begin
+    always @(posedge spi_clk) begin
         case (state)
             `WAIT: begin
                 MISObuff <= 0;
@@ -48,6 +49,9 @@ module fsm
                     state <= `READORWRITE;
                     addrWE <= 1;
                     count <= 0;
+		    @(posedge spi_falling) begin
+			addrWE <= 0;
+		    end
                 end
                 else
                     count = count + 1;
@@ -55,7 +59,6 @@ module fsm
             end
 
             `READORWRITE: begin
-		addrWE <= 0;
                 if (rw_select == 0) begin
                     state <= `WRITE;
                 end
@@ -63,6 +66,9 @@ module fsm
 		    srWE <= 1;
 		    MISObuff <= 1;
 		    state <= `READ;
+		    @(posedge spi_falling) begin
+			srWE <= 0;
+		    end
 		end
             end
 
@@ -71,6 +77,9 @@ module fsm
                     count <= 0;
                     memWE <= 1;
                     state <= `WAIT;
+		    @(posedge spi_falling) begin
+			memWE <= 0;
+		    end
                 end
                 else
                     count <= count + 1;
@@ -80,7 +89,6 @@ module fsm
             `READ: begin
 		srWE <= 0;
                 if (count == 4'd7) begin
-		    MISObuff <= 0;
                     count <= 0;
                     state <= `WAIT;
                 end
