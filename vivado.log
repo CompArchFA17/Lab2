@@ -1,0 +1,144 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:10 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Wed Oct 25 21:01:35 2017
+# Process ID: 4769
+# Current directory: /home/jspear/Development/School/Comp_Arc/Lab2
+# Command line: vivado
+# Log file: /home/jspear/Development/School/Comp_Arc/Lab2/vivado.log
+# Journal file: /home/jspear/Development/School/Comp_Arc/Lab2/vivado.jou
+#-----------------------------------------------------------
+start_gui
+create_project sim /home/jspear/Development/School/Comp_Arc/Lab2/sim -part xc7z010clg400-1
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2017.2/data/ip'.
+add_files -fileset constrs_1 -norecurse /home/jspear/Development/School/Comp_Arc/Lab2/ZYBO_Master.xdc
+add_files -norecurse /home/jspear/Development/School/Comp_Arc/Lab2/midpoint.v
+update_compile_order -fileset sources_1
+launch_runs synth_1 -jobs 2
+[Wed Oct 25 21:26:20 2017] Launched synth_1...
+Run output will be captured here: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/synth_1/runme.log
+launch_runs impl_1 -jobs 2
+[Wed Oct 25 21:27:06 2017] Launched impl_1...
+Run output will be captured here: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/impl_1/runme.log
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+[Wed Oct 25 21:30:59 2017] Launched synth_1...
+Run output will be captured here: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/synth_1/runme.log
+launch_runs impl_1 -jobs 2
+[Wed Oct 25 21:31:45 2017] Launched impl_1...
+Run output will be captured here: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/impl_1/runme.log
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+[Wed Oct 25 21:32:38 2017] Launched synth_1...
+Run output will be captured here: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/synth_1/runme.log
+launch_runs impl_1 -jobs 2
+[Wed Oct 25 21:33:23 2017] Launched impl_1...
+Run output will be captured here: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/impl_1/runme.log
+open_run impl_1
+INFO: [Netlist 29-17] Analyzing 2 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2017.2
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/home/jspear/Development/School/Comp_Arc/Lab2/.Xil/Vivado-4769-Kreyshawn/dcp13/midpoint.xdc]
+Finished Parsing XDC File [/home/jspear/Development/School/Comp_Arc/Lab2/.Xil/Vivado-4769-Kreyshawn/dcp13/midpoint.xdc]
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF File: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 6292.703 ; gain = 0.000 ; free physical = 11413 ; free virtual = 21611
+Restored from archive | CPU: 0.020000 secs | Memory: 0.043633 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 6292.703 ; gain = 0.000 ; free physical = 11413 ; free virtual = 21611
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+open_run: Time (s): cpu = 00:00:12 ; elapsed = 00:00:07 . Memory (MB): peak = 6439.301 ; gain = 331.160 ; free physical = 11332 ; free virtual = 21531
+WARNING: [Timing 38-313] There are no user specified timing constraints. Timing constraints are needed for proper timing analysis.
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+[Wed Oct 25 21:34:19 2017] Launched impl_1...
+Run output will be captured here: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/impl_1/runme.log
+open_hw
+connect_hw_server
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+INFO: [Labtools 27-2222] Launching hw_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+****** Xilinx hw_server v2017.2
+  **** Build date : Jun 15 2017-18:45:18
+    ** Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+
+
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210279651540A
+set_property PROGRAM.FILE {/home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/impl_1/midpoint.bit} [get_hw_devices xc7z010_1]
+current_hw_device [get_hw_devices xc7z010_1]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7z010_1] 0]
+INFO: [Labtools 27-1434] Device xc7z010 (JTAG device index = 1) is programmed with a design that has no supported debug core(s) in it.
+WARNING: [Labtools 27-3361] The debug hub core was not detected.
+Resolution: 
+1. Make sure the clock connected to the debug hub (dbg_hub) core is a free running clock and is active.
+2. Make sure the BSCAN_SWITCH_USER_MASK device property in Vivado Hardware Manager reflects the user scan chain setting in the design and refresh the device.  To determine the user scan chain setting in the design, open the implemented design and use 'get_property C_USER_SCAN_CHAIN [get_debug_cores dbg_hub]'.
+For more details on setting the scan chain property, consult the Vivado Debug and Programming User Guide (UG908).
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Digilent/210279651540A
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210279651540A
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+INFO: [Labtools 27-1434] Device xc7z010 (JTAG device index = 1) is programmed with a design that has no supported debug core(s) in it.
+WARNING: [Labtools 27-3361] The debug hub core was not detected.
+Resolution: 
+1. Make sure the clock connected to the debug hub (dbg_hub) core is a free running clock and is active.
+2. Make sure the BSCAN_SWITCH_USER_MASK device property in Vivado Hardware Manager reflects the user scan chain setting in the design and refresh the device.  To determine the user scan chain setting in the design, open the implemented design and use 'get_property C_USER_SCAN_CHAIN [get_debug_cores dbg_hub]'.
+For more details on setting the scan chain property, consult the Vivado Debug and Programming User Guide (UG908).
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+set_property PROBES.FILE {} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7z010_1]
+set_property PROGRAM.FILE {/home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/impl_1/midpoint.bit} [get_hw_devices xc7z010_1]
+program_hw_devices [get_hw_devices xc7z010_1]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+INFO: [Labtools 27-1434] Device xc7z010 (JTAG device index = 1) is programmed with a design that has no supported debug core(s) in it.
+WARNING: [Labtools 27-3361] The debug hub core was not detected.
+Resolution: 
+1. Make sure the clock connected to the debug hub (dbg_hub) core is a free running clock and is active.
+2. Make sure the BSCAN_SWITCH_USER_MASK device property in Vivado Hardware Manager reflects the user scan chain setting in the design and refresh the device.  To determine the user scan chain setting in the design, open the implemented design and use 'get_property C_USER_SCAN_CHAIN [get_debug_cores dbg_hub]'.
+For more details on setting the scan chain property, consult the Vivado Debug and Programming User Guide (UG908).
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+[Wed Oct 25 21:39:45 2017] Launched synth_1...
+Run output will be captured here: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/synth_1/runme.log
+launch_runs impl_1 -jobs 2
+[Wed Oct 25 21:40:17 2017] Launched impl_1...
+Run output will be captured here: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/impl_1/runme.log
+refresh_design
+INFO: [Netlist 29-17] Analyzing 4 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2017.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/home/jspear/Development/School/Comp_Arc/Lab2/.Xil/Vivado-4769-Kreyshawn/dcp19/midpoint.xdc]
+Finished Parsing XDC File [/home/jspear/Development/School/Comp_Arc/Lab2/.Xil/Vivado-4769-Kreyshawn/dcp19/midpoint.xdc]
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF File: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 6960.090 ; gain = 0.000 ; free physical = 10718 ; free virtual = 20958
+Restored from archive | CPU: 0.010000 secs | Memory: 0.048988 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 6960.090 ; gain = 0.000 ; free physical = 10718 ; free virtual = 20958
+WARNING: [Timing 38-313] There are no user specified timing constraints. Timing constraints are needed for proper timing analysis.
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+[Wed Oct 25 21:41:47 2017] Launched impl_1...
+Run output will be captured here: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/impl_1/runme.log
+set_property PROBES.FILE {} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7z010_1]
+set_property PROGRAM.FILE {/home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/impl_1/midpoint.bit} [get_hw_devices xc7z010_1]
+program_hw_devices [get_hw_devices xc7z010_1]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+INFO: [Labtools 27-1434] Device xc7z010 (JTAG device index = 1) is programmed with a design that has no supported debug core(s) in it.
+WARNING: [Labtools 27-3361] The debug hub core was not detected.
+Resolution: 
+1. Make sure the clock connected to the debug hub (dbg_hub) core is a free running clock and is active.
+2. Make sure the BSCAN_SWITCH_USER_MASK device property in Vivado Hardware Manager reflects the user scan chain setting in the design and refresh the device.  To determine the user scan chain setting in the design, open the implemented design and use 'get_property C_USER_SCAN_CHAIN [get_debug_cores dbg_hub]'.
+For more details on setting the scan chain property, consult the Vivado Debug and Programming User Guide (UG908).
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Digilent/210279651540A
+exit
+INFO: [Common 17-206] Exiting Vivado at Thu Oct 26 09:36:40 2017...

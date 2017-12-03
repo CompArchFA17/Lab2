@@ -1,0 +1,36 @@
+Work Plan Lab 2
+
+Jonah Spear and David Papp
+
+Input Conditioning: do 10/24
+Implementation: 1 hours
+Test Bench: 2 hours
+Composing deliverables: 0.5 hours
+
+
+Shift Register: do 10/24
+Implementation: 1 hours
+Test bench: 2 hours
+Composing deliverables: 0.25 hours
+
+
+Midpoint check in due 10/25:
+Implementation: 1 hour
+Deliverables: 1 hour
+
+
+SPI Memory do 10/29
+Implementation: 1 hour
+Testing: 1.5 hours
+
+
+Inconveniences/debugging do 10/29
+2 hours
+
+
+Lab write up do 10/29
+1 hour
+
+
+Total: 
+14.5 Hours

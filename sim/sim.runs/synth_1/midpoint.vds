@@ -1,0 +1,289 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:10 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Wed Oct 25 21:39:45 2017
+# Process ID: 5002
+# Current directory: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/synth_1
+# Command line: vivado -log midpoint.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source midpoint.tcl
+# Log file: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/synth_1/midpoint.vds
+# Journal file: /home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source midpoint.tcl -notrace
+Command: synth_design -top midpoint -part xc7z010clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010-clg400'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010-clg400'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 5151 
+WARNING: [Synth 8-2292] literal value truncated to fit in 2 bits [/home/jspear/Development/School/Comp_Arc/Lab2/midpoint.v:18]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1147.863 ; gain = 46.246 ; free physical = 10484 ; free virtual = 20716
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'midpoint' [/home/jspear/Development/School/Comp_Arc/Lab2/midpoint.v:6]
+INFO: [Synth 8-638] synthesizing module 'inputconditioner' [/home/jspear/Development/School/Comp_Arc/Lab2/inputconditioner.v:8]
+	Parameter wait_time bound to: 3 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'inputconditioner' (1#1) [/home/jspear/Development/School/Comp_Arc/Lab2/inputconditioner.v:8]
+INFO: [Synth 8-638] synthesizing module 'shiftregister' [/home/jspear/Development/School/Comp_Arc/Lab2/shiftregister.v:9]
+	Parameter width bound to: 8 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'shiftregister' (2#1) [/home/jspear/Development/School/Comp_Arc/Lab2/shiftregister.v:9]
+INFO: [Synth 8-256] done synthesizing module 'midpoint' (3#1) [/home/jspear/Development/School/Comp_Arc/Lab2/midpoint.v:6]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1172.121 ; gain = 70.504 ; free physical = 10501 ; free virtual = 20733
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1172.121 ; gain = 70.504 ; free physical = 10501 ; free virtual = 20733
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/jspear/Development/School/Comp_Arc/Lab2/ZYBO_Master.xdc]
+Finished Parsing XDC File [/home/jspear/Development/School/Comp_Arc/Lab2/ZYBO_Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/jspear/Development/School/Comp_Arc/Lab2/ZYBO_Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/midpoint_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/midpoint_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1486.371 ; gain = 0.000 ; free physical = 10264 ; free virtual = 20497
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1486.375 ; gain = 384.758 ; free physical = 10337 ; free virtual = 20569
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1486.375 ; gain = 384.758 ; free physical = 10337 ; free virtual = 20569
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1486.375 ; gain = 384.758 ; free physical = 10338 ; free virtual = 20571
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5544] ROM "positiveedge" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "conditioned" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1486.375 ; gain = 384.758 ; free physical = 10331 ; free virtual = 20564
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	                8 Bit    Registers := 1     
+	                3 Bit    Registers := 3     
+	                1 Bit    Registers := 9     
++---Muxes : 
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 16    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module inputconditioner 
+Detailed RTL Component Info : 
++---Registers : 
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 3     
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 5     
+Module shiftregister 
+Detailed RTL Component Info : 
++---Registers : 
+	                8 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-6014] Unused sequential element i1/positiveedge_reg was removed.  [/home/jspear/Development/School/Comp_Arc/Lab2/inputconditioner.v:24]
+WARNING: [Synth 8-6014] Unused sequential element i2/positiveedge_reg was removed.  [/home/jspear/Development/School/Comp_Arc/Lab2/inputconditioner.v:24]
+WARNING: [Synth 8-6014] Unused sequential element i2/negativeedge_reg was removed.  [/home/jspear/Development/School/Comp_Arc/Lab2/inputconditioner.v:34]
+WARNING: [Synth 8-6014] Unused sequential element i3/negativeedge_reg was removed.  [/home/jspear/Development/School/Comp_Arc/Lab2/inputconditioner.v:34]
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1486.375 ; gain = 384.758 ; free physical = 10321 ; free virtual = 20554
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1486.375 ; gain = 384.758 ; free physical = 10195 ; free virtual = 20426
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1486.375 ; gain = 384.758 ; free physical = 10195 ; free virtual = 20426
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1494.379 ; gain = 392.762 ; free physical = 10194 ; free virtual = 20424
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1494.379 ; gain = 392.762 ; free physical = 10194 ; free virtual = 20424
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1494.379 ; gain = 392.762 ; free physical = 10194 ; free virtual = 20424
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1494.379 ; gain = 392.762 ; free physical = 10194 ; free virtual = 20424
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1494.379 ; gain = 392.762 ; free physical = 10194 ; free virtual = 20424
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1494.379 ; gain = 392.762 ; free physical = 10194 ; free virtual = 20424
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1494.379 ; gain = 392.762 ; free physical = 10194 ; free virtual = 20424
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |BUFG |     1|
+|2     |LUT2 |     1|
+|3     |LUT4 |     4|
+|4     |LUT5 |     2|
+|5     |FDRE |    22|
+|6     |IBUF |     4|
+|7     |OBUF |     8|
++------+-----+------+
+
+Report Instance Areas: 
++------+---------+-------------------+------+
+|      |Instance |Module             |Cells |
++------+---------+-------------------+------+
+|1     |top      |                   |    42|
+|2     |  i1     |inputconditioner   |     8|
+|3     |  i2     |inputconditioner_0 |     5|
+|4     |  i3     |inputconditioner_1 |     7|
+|5     |  shft   |shiftregister      |     9|
++------+---------+-------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1494.379 ; gain = 392.762 ; free physical = 10194 ; free virtual = 20424
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 4 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1494.379 ; gain = 78.512 ; free physical = 10254 ; free virtual = 20484
+Synthesis Optimization Complete : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1494.387 ; gain = 392.762 ; free physical = 10254 ; free virtual = 20484
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 4 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+19 Infos, 5 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:19 ; elapsed = 00:00:19 . Memory (MB): peak = 1494.387 ; gain = 405.352 ; free physical = 10222 ; free virtual = 20453
+INFO: [Common 17-1381] The checkpoint '/home/jspear/Development/School/Comp_Arc/Lab2/sim/sim.runs/synth_1/midpoint.dcp' has been generated.
+report_utilization: Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.10 . Memory (MB): peak = 1518.395 ; gain = 0.000 ; free physical = 10223 ; free virtual = 20454
+INFO: [Common 17-206] Exiting Vivado at Wed Oct 25 21:40:12 2017...
