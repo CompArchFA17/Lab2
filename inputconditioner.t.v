@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------
 // Input Conditioner test bench
 //------------------------------------------------------------------------
+`include "inputconditioner.v"
 
 module testConditioner();
 
-    reg clk;
+    reg clk = 0;
     reg pin;
     wire conditioned;
     wire rising;
@@ -14,16 +15,23 @@ module testConditioner();
     			 .noisysignal(pin),
 			 .conditioned(conditioned),
 			 .positiveedge(rising),
-			 .negativeedge(falling))
-
+			 .negativeedge(falling));
 
     // Generate clock (50MHz)
-    initial clk=0;
-    always #10 clk=!clk;    // 50MHz Clock
+    initial begin
+       forever begin
+          clk = !clk; #10;
+       end
+    end
     
     initial begin
-    // Your Test Code
-    // Be sure to test each of the three conditioner functions:
-    // Synchronization, Debouncing, Edge Detection
+       pin = 0; #50;
+       pin = 1; #100;
+       pin = 0; #100;
+       pin = 1; #150;
+       pin = 0; #30;
+       pin = 1; #60;
+       pin = 0; #30;
+    end
     
 endmodule
