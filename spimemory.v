@@ -1,4 +1,3 @@
-
 `include "fsm.v"
 `include "datamemory.v"
 
@@ -230,7 +229,15 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds,buffered_serialin,po
 	output [1:0] relevant_shiftRegOutP0;
 	output [6:0] address;
 	output [5:0] clk_counter;
-	
+    output serialin;
+    output posSCLK;
+    output CS;
+    output miso_buff;
+    output shiftRegOutP;
+    output [7:0] parallelOut;
+    output [7:0] parallelData;
+    output sr_we;
+
     wire[7:0] parallelData;   // ParallelData Out
     wire[6:0] address;        // address
     wire[7:0] parallelOut;    // Current Shift Register Values
@@ -254,12 +261,13 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds,buffered_serialin,po
 	wire [4:0] counter;
     wire buffered_serialin;
 	wire buffered_posSCLK;
-	assign shiftRegOutP = parallelOut[0];
 	wire [1:0] relevant_shiftRegOutP0;
 	wire miso_buff_d2,miso_buff_d1,dm_we_d2,dm_we_d1,addr_we_d2,addr_we_d1,sr_we_d2,sr_we_d1;
 	wire [5:0] clk_counter;
 	wire clk;
-	
+    
+    assign shiftRegOutP = parallelOut[0];
+    
     //Map to input conditioners
     //(clk,noisysignal,conditioned,positiveedge,negativeedge);
     inputconditioner MOSI_conditioner(.clk(clk),.noisysignal(mosi_pin),.conditioned(serialin),.positiveedge(filler),.negativeedge(filler));
