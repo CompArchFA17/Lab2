@@ -205,12 +205,13 @@ endmodule
 //   Write: 
 //--------------------------------------------------------------------------------
 
-module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds,buffered_serialin,posSCLK,CS,miso_buff,shiftRegOutP,parallelOut,parallelData,sr_we,dm_we,state,conditioned_clk,counter,output_ff_out,addr_we,relevant_shiftRegOutP0,address,clk_counter);
+module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds,buffered_serialin,posSCLK,CS,miso_buff,shiftRegOutP,parallelOut,parallelData,sr_we,dm_we,state,conditioned_clk,counter,output_ff_out,addr_we,relevant_shiftRegOutP0,address,clk_counter,serialin);
     input clk;
     input sclk_pin;
     input cs_pin;
     output miso_pin;
     input mosi_pin;
+	output serialin;
     output [3:0] leds;
 	output buffered_serialin;
 	output posSCLK;
@@ -229,7 +230,6 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds,buffered_serialin,po
 	output [1:0] relevant_shiftRegOutP0;
 	output [6:0] address;
 	output [5:0] clk_counter;
-    output serialin;
     output posSCLK;
     output CS;
     output miso_buff;
