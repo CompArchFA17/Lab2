@@ -100,7 +100,7 @@ module dlatch
 
 always @(posedge clk) begin
     if(addr_we) begin
-        addr = data[7:1];
+        addr <= data[7:1];
     end 
 end
 
@@ -117,7 +117,7 @@ module inputconditioner
 (clk,noisysignal,conditioned,positiveedge,negativeedge);
 
     parameter counterwidth = 3; // Counter size, in bits, >= log2(waittime)
-    parameter waittime = 3;     // Debounce delay, in clock cycles
+    parameter waittime = 1;     // Debounce delay, in clock cycles
 
     input clk;
     input noisysignal;
@@ -131,27 +131,27 @@ module inputconditioner
     reg conditioned1 = 0;
     
     always @(posedge clk ) begin
-    if(conditioned == 0 && conditioned1 == 1) begin
-        negativeedge = 1;
-    end else if (conditioned == 1 && conditioned1 == 0) begin
-        positiveedge = 1;
+		if(conditioned1 == 0 && conditioned == 1) begin
+			negativeedge = 1;
+		end else if (conditioned1 == 1 && conditioned == 0) begin
+			positiveedge = 1;
         end else if (positiveedge == 1 || negativeedge == 1) begin
             positiveedge = 0;
             negativeedge = 0;
         end
-        if(conditioned == synchronizer1)
+        if(conditioned1 == synchronizer1)
             counter <= 0;
         else begin
             if( counter == waittime) begin
                 counter <= 0;
-                conditioned <= synchronizer1;
+                conditioned1 <= synchronizer1;
             end
             else 
                 counter <= counter+1;
         end
         synchronizer0 <= noisysignal;
         synchronizer1 <= synchronizer0;
-    conditioned1 <= conditioned;
+		conditioned <= conditioned1;
     end
 endmodule
 
@@ -206,14 +206,14 @@ endmodule
 //   Write: 
 //--------------------------------------------------------------------------------
 
-module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds,serialin,posSCLK,CS,miso_buff,shiftRegOutP,parallelOut,parallelData,sr_we);
+module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds,buffered_serialin,posSCLK,CS,miso_buff,shiftRegOutP,parallelOut,parallelData,sr_we,dm_we,state,conditioned_clk,counter,output_ff_out,addr_we,relevant_shiftRegOutP0,address,clk_counter);
     input clk;
     input sclk_pin;
     input cs_pin;
     output miso_pin;
     input mosi_pin;
     output [3:0] leds;
-	output serialin;
+	output buffered_serialin;
 	output posSCLK;
 	output CS;
 	output miso_buff;
@@ -221,7 +221,16 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds,serialin,posSCLK,CS,
 	output [7:0] parallelOut;
 	output [7:0] parallelData;
 	output sr_we;
- 
+	output dm_we;
+	output [1:0] state;
+	output conditioned_clk;
+	output [4:0] counter;
+	output output_ff_out;
+	output addr_we;
+	output [1:0] relevant_shiftRegOutP0;
+	output [6:0] address;
+	output [5:0] clk_counter;
+	
     wire[7:0] parallelData;   // ParallelData Out
     wire[6:0] address;        // address
     wire[7:0] parallelOut;    // Current Shift Register Values
@@ -240,19 +249,40 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds,serialin,posSCLK,CS,
     wire output_ff_out;       // output ff output
     wire filler;              // filler wire
 	wire shiftRegOutP;
-    
+	wire [1:0] state;
+	wire conditioned_clk;
+	wire [4:0] counter;
+    wire buffered_serialin;
+	wire buffered_posSCLK;
 	assign shiftRegOutP = parallelOut[0];
+	wire [1:0] relevant_shiftRegOutP0;
+	wire miso_buff_d2,miso_buff_d1,dm_we_d2,dm_we_d1,addr_we_d2,addr_we_d1,sr_we_d2,sr_we_d1;
+	wire [5:0] clk_counter;
+	wire clk;
 	
     //Map to input conditioners
     //(clk,noisysignal,conditioned,positiveedge,negativeedge);
     inputconditioner MOSI_conditioner(.clk(clk),.noisysignal(mosi_pin),.conditioned(serialin),.positiveedge(filler),.negativeedge(filler));
-    inputconditioner SCLK(.clk(clk),.noisysignal(sclk_pin),.conditioned(filler),.positiveedge(posSCLK),.negativeedge(negSCLK));
+    inputconditioner SCLK(.clk(clk),.noisysignal(sclk_pin),.conditioned(conditioned_clk),.positiveedge(posSCLK),.negativeedge(negSCLK));
     inputconditioner CS_conditioner(.clk(clk),.noisysignal(cs_pin),.conditioned(CS),.positiveedge(filler),.negativeedge(filler));
 
     //finite statemachine
     //(MISO_BUFF,DM_WE,ADDR_WE,SR_WE,POS_EDGE,CS,shiftRegOutP0,clk)
-    fsm fsm_process(.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(addr_we),.SR_WE(sr_we),.POS_EDGE(posSCLK),.CS(CS),.shiftRegOutP0(parallelOut[0]));
+    fsm fsm_process(.MISO_BUFF(miso_buff),.DM_WE(dm_we),.ADDR_WE(addr_we),.SR_WE(sr_we),.POS_EDGE(posSCLK),.CS(CS),.shiftRegOutP0(parallelOut[0]),.clk(clk),.state(state),.counter(counter),.relevant_shiftRegOutP0(relevant_shiftRegOutP0),.clk_counter(clk_counter));
 
+	//dff miso_buff_buffer2(.trigger(clk),.enable(1'b1),.d(miso_buff_d2),.q(miso_buff_d1));
+	//dff mis_buff_buffer1(.trigger(clk),.enable(1'b1),.d(miso_buff_d1),.q(miso_buff));
+	
+	//dff dm_we_buffer2(.trigger(clk),.enable(1'b1),.d(dm_we_d2),.q(dm_we_d1));
+	//dff dm_we_buffer1(.trigger(clk),.enable(1'b1),.d(dm_we_d1),.q(dm_we));
+	
+	//dff addr_we_buffer2(.trigger(clk),.enable(1'b1),.d(addr_we_d2),.q(addr_we_d1));
+	//dff addr_we_buffer1(.trigger(clk),.enable(1'b1),.d(addr_we_d1),.q(addr_we));
+	
+	//dff sr_we_buffer2(.trigger(clk),.enable(1'b1),.d(sr_we_d2),.q(sr_we_d1));
+	//dff sr_we_buffer1(.trigger(clk),.enable(1'b1),.d(sr_we_d1),.q(sr_we));
+	
+	dff serialin_buffer(.trigger(posSCLK),.enable(1'b1),.d(serialin),.q(buffered_serialin));
     //Address Latch 
     dlatch addr_latch(.data(parallelOut),.clk(clk),.addr_we(addr_we),.addr(address));
 
@@ -261,7 +291,7 @@ module spiMemory(clk,sclk_pin,cs_pin,miso_pin,mosi_pin,leds,serialin,posSCLK,CS,
     tristatebuffer outbuffer(.out(miso_pin),.in(output_ff_out),.en(miso_buff));
 
     //(clk,peripheralClkEdge,parallelLoad,parallelDataIn,serialDataIn,parallelDataOut,serialDataOut)
-    shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(sr_we),.parallelDataIn(parallelData),.serialDataIn(serialin),.parallelDataOut(parallelOut),.serialDataOut(serialout));
+    shiftregister shifted(.clk(clk),.peripheralClkEdge(posSCLK),.parallelLoad(sr_we),.parallelDataIn(parallelData),.serialDataIn(buffered_serialin),.parallelDataOut(parallelOut),.serialDataOut(serialout));
 
     //data memory
     //clk,dataOut,address,writeEnable,dataIn
